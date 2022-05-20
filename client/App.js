@@ -1,78 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, ActivityIndicator, Button } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  ActivityIndicator,
+  Button,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from "react-native";
+import LoadingScreen from "./components/LoadingScreen";
+import GameScreen from "./components/GameScreen";
+import LinearGradient from "react-native-linear-gradient";
 
-const RANDURL = "https://random-words-api.vercel.app/word";
-const MWURL1 =
-  "https://www.dictionaryapi.com/api/v3/references/collegiate/json/";
-const MWURL2 = "?key=a2d218bc-85bb-481b-aa42-1f04c84aa4a8";
+const dummyUser = {
+  id: 1,
+  name: "Noah Reece",
+};
 
 const App = () => {
-  const [word, setWord] = useState(null);
-  const [def, setDef] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setWord(null);
-    setDef(null);
-    getNewRandWord();
+    setUser(dummyUser);
+    setIsLoading(false);
   }, []);
 
-  const getNewRandWord = () => {
-    fetch(RANDURL)
-      .then((res) => res.json())
-      .then((randWord) => {
-        const word = randWord[0].word
-          ? randWord[0].word.toLowerCase()
-          : randWord[0].toLowerCase();
-        searchMW(word);
-      })
-      .catch((error) => console.log(error.message));
-  };
-
-  const searchMW = (word) => {
-    fetch(MWURL1 + word + MWURL2)
-      .then((res) => res.json())
-      .then((data) => {
-        if (!!data[0].shortdef) {
-          console.log("MW:", data);
-          setWord(word);
-          setDef(data[0].shortdef[0]);
-          // setDef(data[0].shortdef[0]);
-        } else {
-          getNewRandWord();
-          console.log("MW:", data);
-        }
-      })
-      .catch((error) => console.log(error.message));
-  };
-
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text style={{ fontSize: 20, margin: 10 }}>
-        {word || <ActivityIndicator />}
-      </Text>
-      <View
-        style={{
-          // flex: 1,
-          width: 200,
-          height: 200,
-          backgroundColor: "pink",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+    <View style={styles.fullScreen}>
+      <LinearGradient
+        colors={["#FFFFFF", "#FFE2CD"]}
+        // colors={["red", "green"]}
+        style={styles.fullScreen}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       >
-        <Text style={{ fontSize: 16 }}>{def || <ActivityIndicator />}</Text>
-      </View>
-      <View style={{ margin: 10 }}>
-        <Button title={"Reload"} onPress={() => getNewRandWord()} />
-      </View>
+        {/* <SafeAreaView style={styles.safeContainer}> */}
+        {isLoading ? <LoadingScreen /> : <GameScreen user={user} />}
+        {/* </SafeAreaView> */}
+      </LinearGradient>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  fullScreen: {
+    flex: 1,
+  },
+  safeContainer: {
+    flex: 1,
+    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+});
 
 export default App;
