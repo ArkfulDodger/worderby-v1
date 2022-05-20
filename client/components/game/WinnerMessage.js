@@ -1,19 +1,28 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import ApMediumText from "../tools/ApMediumText";
 
-const WinnerMessage = ({ game }) => {
+const WinnerMessage = ({ game, user }) => {
   const isTie = game.player1_score === game.player2_score;
   const winner =
     game.player1_score > game.player2_score ? game.player1 : game.player2;
+  const isPlayerWinner = winner.id === user.id;
 
   return (
     <View style={styles.container}>
       {isTie ? (
-        <Text>Tied Game!</Text>
+        <ApMediumText style={{ fontSize: 43 }}>Tied Game!</ApMediumText>
       ) : (
         <>
-          <Text>{winner.name}</Text>
-          <Text>wins!</Text>
+          <ApMediumText
+            style={{
+              fontSize: 43,
+              color: isPlayerWinner ? "#DB00FF" : "#CA7900",
+            }}
+          >
+            {winner.name}
+          </ApMediumText>
+          <ApMediumText style={{ fontSize: 43 }}>wins!</ApMediumText>
         </>
       )}
     </View>

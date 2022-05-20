@@ -26,7 +26,7 @@ const dummyPrompt = {
   text: "chicken",
   p_num: null,
   score: null,
-  is_first_word: true,
+  is_first_word: false,
 };
 
 const dummyGame = {

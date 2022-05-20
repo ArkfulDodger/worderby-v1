@@ -5,7 +5,7 @@ import WinnerMessage from "./WinnerMessage";
 const ResultsFrame = ({ game, user }) => {
   return (
     <View style={styles.container}>
-      <WinnerMessage game={game} />
+      <WinnerMessage game={game} user={user} />
     </View>
   );
 };

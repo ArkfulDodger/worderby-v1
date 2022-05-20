@@ -20,8 +20,16 @@ const GameHeader = ({ game, user }) => {
     <LinearGradient colors={["#FFF6F0", "#FFD9BE"]}>
       <SafeAreaView>
         <View style={styles.header}>
-          <HeaderPlayerInfo name={player.name} score={playerScore} />
-          <HeaderPlayerInfo name={opponent.name} score={opponentScore} />
+          <HeaderPlayerInfo
+            isPlayer={true}
+            name={player.name}
+            score={playerScore}
+          />
+          <HeaderPlayerInfo
+            isPlayer={false}
+            name={opponent.name}
+            score={opponentScore}
+          />
         </View>
       </SafeAreaView>
     </LinearGradient>
@@ -33,7 +41,6 @@ const styles = {
     height: 80,
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10,
     borderBottomColor: "#606060",
     borderBottomWidth: 1,
   },

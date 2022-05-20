@@ -3,10 +3,16 @@ import { View, Text } from "react-native";
 import PlayerScore from "./PlayerScore";
 import PlayerName from "./PlayerName";
 
-const HeaderPlayerInfo = ({ name, score }) => {
+const HeaderPlayerInfo = ({ isPlayer, name, score }) => {
   return (
-    <View style={{ alignItems: "center", justifyContent: "space-between" }}>
-      <PlayerScore score={score} />
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "flex-end",
+        paddingHorizontal: 10,
+      }}
+    >
+      <PlayerScore flex={1} isPlayer={isPlayer} score={score} />
       <PlayerName name={name} />
     </View>
   );

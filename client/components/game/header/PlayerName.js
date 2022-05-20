@@ -5,7 +5,7 @@ import GText from "../../tools/GText.js";
 const PlayerName = ({ name }) => {
   return (
     <View>
-      <GText>{name}</GText>
+      <GText style={{ fontWeight: "bold" }}>{name}</GText>
     </View>
   );
 };

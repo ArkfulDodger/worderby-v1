@@ -24,7 +24,9 @@ const App = () => {
 
   useEffect(() => {
     setUser(dummyUser);
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
   }, []);
 
   return (

@@ -1,10 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import ApExtraLightText from "./tools/ApExtraLightText";
+import ApMediumText from "./tools/ApMediumText";
 
 const LoadingScreen = (props) => {
   return (
     <View style={styles.centered}>
-      <Text style={styles.title}>worderby</Text>
+      <View style={styles.row}>
+        <ApExtraLightText style={[styles.title, styles.pink]}>
+          wor
+        </ApExtraLightText>
+        <ApMediumText style={[styles.title, styles.pink]}>d</ApMediumText>
+        <ApMediumText style={[styles.title]}>erby</ApMediumText>
+      </View>
       <ActivityIndicator />
     </View>
   );
@@ -16,8 +24,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  row: {
+    flexDirection: "row",
+    marginVertical: 50,
+  },
   title: {
-    fontSize: 20,
+    fontSize: 68,
+  },
+  pink: {
+    color: "#DB00FF",
   },
 });
 

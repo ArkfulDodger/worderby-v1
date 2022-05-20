@@ -3,14 +3,14 @@
 import React, { Component } from "react";
 import { Text } from "react-native";
 
-export default class GText extends Component {
+export default class ApMediumText extends Component {
   constructor(props) {
     super(props);
     // Put your default font styles here.
     this.style = [
       {
-        fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
-        fontSize: 17,
+        fontFamily: "AppareoMedium",
+        fontSize: 35,
         color: "black",
       },
     ];

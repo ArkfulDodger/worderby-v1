@@ -3,13 +3,13 @@
 import React, { Component } from "react";
 import { Text } from "react-native";
 
-export default class GText extends Component {
+export default class NumText extends Component {
   constructor(props) {
     super(props);
     // Put your default font styles here.
     this.style = [
       {
-        fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+        fontFamily: "Teko-Bold",
         fontSize: 17,
         color: "black",
       },

@@ -14,6 +14,20 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-client-clientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-client-clientTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E4B81E25675A49918E71273E /* AppareoBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC958DE448E34105AF09F1F7 /* AppareoBlack.ttf */; };
+		EB2AE69AD7244376B5FB0F3A /* AppareoExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DBF6CBBDF3A4D77A03986EC /* AppareoExtraLight.ttf */; };
+		12864E5F6DAB42D2975334A2 /* AppareoLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B31122BCCAC46ADB6AC92A7 /* AppareoLight.ttf */; };
+		3C600E5C176C4A7C9D824D77 /* AppareoMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C34B81B3B01403BAE7C8282 /* AppareoMedium.ttf */; };
+		2EDA9D393F3443E58058208E /* Teko-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44142F38615E454CAC75A40D /* Teko-Bold.ttf */; };
+		78CD87FC031F4AB298F31231 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C02E26588A4A45FFB2DE3187 /* Ubuntu-Bold.ttf */; };
+		BFF0AC6333B3499896FA40C7 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AEF4023BA9641488E810995 /* Ubuntu-BoldItalic.ttf */; };
+		33B5F4EE378A4399985DC0BD /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38108627D1AD4CE2929FCC63 /* Ubuntu-Italic.ttf */; };
+		66DDD8DBED4E4656BDCD2D7F /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CB595EE9CCF46A993F58303 /* Ubuntu-Light.ttf */; };
+		F67675B1D8084ACABFEBD75E /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB0DD08171644458BCDA2EF8 /* Ubuntu-LightItalic.ttf */; };
+		9ACC04AB18EA4262854F84EB /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FD66853323E402182D9A340 /* Ubuntu-Medium.ttf */; };
+		C2AB25ACE578488EB1DE60FD /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C12BF86B9D0B4C498EF775FB /* Ubuntu-MediumItalic.ttf */; };
+		3E90A2A35D72480BA6B884CA /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E73129A2C0F442D6BE448A87 /* Ubuntu-Regular.ttf */; };
+		78DE362F345E427BB48DECF3 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB75533FF08544C0A2ACF4F9 /* Teko-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +58,20 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = client/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-client-clientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-clientTests.release.xcconfig"; path = "Target Support Files/Pods-client-clientTests/Pods-client-clientTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		BC958DE448E34105AF09F1F7 /* AppareoBlack.ttf */ = {isa = PBXFileReference; name = "AppareoBlack.ttf"; path = "../assets/fonts/AppareoBlack.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9DBF6CBBDF3A4D77A03986EC /* AppareoExtraLight.ttf */ = {isa = PBXFileReference; name = "AppareoExtraLight.ttf"; path = "../assets/fonts/AppareoExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0B31122BCCAC46ADB6AC92A7 /* AppareoLight.ttf */ = {isa = PBXFileReference; name = "AppareoLight.ttf"; path = "../assets/fonts/AppareoLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0C34B81B3B01403BAE7C8282 /* AppareoMedium.ttf */ = {isa = PBXFileReference; name = "AppareoMedium.ttf"; path = "../assets/fonts/AppareoMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		44142F38615E454CAC75A40D /* Teko-Bold.ttf */ = {isa = PBXFileReference; name = "Teko-Bold.ttf"; path = "../assets/fonts/Teko-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C02E26588A4A45FFB2DE3187 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Bold.ttf"; path = "../assets/fonts/Ubuntu-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9AEF4023BA9641488E810995 /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-BoldItalic.ttf"; path = "../assets/fonts/Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		38108627D1AD4CE2929FCC63 /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Italic.ttf"; path = "../assets/fonts/Ubuntu-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2CB595EE9CCF46A993F58303 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Light.ttf"; path = "../assets/fonts/Ubuntu-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BB0DD08171644458BCDA2EF8 /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-LightItalic.ttf"; path = "../assets/fonts/Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2FD66853323E402182D9A340 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Medium.ttf"; path = "../assets/fonts/Ubuntu-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C12BF86B9D0B4C498EF775FB /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-MediumItalic.ttf"; path = "../assets/fonts/Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E73129A2C0F442D6BE448A87 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Regular.ttf"; path = "../assets/fonts/Ubuntu-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CB75533FF08544C0A2ACF4F9 /* Teko-Regular.ttf */ = {isa = PBXFileReference; name = "Teko-Regular.ttf"; path = "../assets/fonts/Teko-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +150,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				251CBDDC942140F8B3BD757C /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +176,28 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		251CBDDC942140F8B3BD757C /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				BC958DE448E34105AF09F1F7 /* AppareoBlack.ttf */,
+				9DBF6CBBDF3A4D77A03986EC /* AppareoExtraLight.ttf */,
+				0B31122BCCAC46ADB6AC92A7 /* AppareoLight.ttf */,
+				0C34B81B3B01403BAE7C8282 /* AppareoMedium.ttf */,
+				44142F38615E454CAC75A40D /* Teko-Bold.ttf */,
+				C02E26588A4A45FFB2DE3187 /* Ubuntu-Bold.ttf */,
+				9AEF4023BA9641488E810995 /* Ubuntu-BoldItalic.ttf */,
+				38108627D1AD4CE2929FCC63 /* Ubuntu-Italic.ttf */,
+				2CB595EE9CCF46A993F58303 /* Ubuntu-Light.ttf */,
+				BB0DD08171644458BCDA2EF8 /* Ubuntu-LightItalic.ttf */,
+				2FD66853323E402182D9A340 /* Ubuntu-Medium.ttf */,
+				C12BF86B9D0B4C498EF775FB /* Ubuntu-MediumItalic.ttf */,
+				E73129A2C0F442D6BE448A87 /* Ubuntu-Regular.ttf */,
+				CB75533FF08544C0A2ACF4F9 /* Teko-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +295,20 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E4B81E25675A49918E71273E /* AppareoBlack.ttf in Resources */,
+				EB2AE69AD7244376B5FB0F3A /* AppareoExtraLight.ttf in Resources */,
+				12864E5F6DAB42D2975334A2 /* AppareoLight.ttf in Resources */,
+				3C600E5C176C4A7C9D824D77 /* AppareoMedium.ttf in Resources */,
+				2EDA9D393F3443E58058208E /* Teko-Bold.ttf in Resources */,
+				78CD87FC031F4AB298F31231 /* Ubuntu-Bold.ttf in Resources */,
+				BFF0AC6333B3499896FA40C7 /* Ubuntu-BoldItalic.ttf in Resources */,
+				33B5F4EE378A4399985DC0BD /* Ubuntu-Italic.ttf in Resources */,
+				66DDD8DBED4E4656BDCD2D7F /* Ubuntu-Light.ttf in Resources */,
+				F67675B1D8084ACABFEBD75E /* Ubuntu-LightItalic.ttf in Resources */,
+				9ACC04AB18EA4262854F84EB /* Ubuntu-Medium.ttf in Resources */,
+				C2AB25ACE578488EB1DE60FD /* Ubuntu-MediumItalic.ttf in Resources */,
+				3E90A2A35D72480BA6B884CA /* Ubuntu-Regular.ttf in Resources */,
+				78DE362F345E427BB48DECF3 /* Teko-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
