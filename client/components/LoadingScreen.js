@@ -7,7 +7,7 @@ const LoadingScreen = (props) => {
   return (
     <View style={styles.centered}>
       <View style={styles.row}>
-        <ApExtraLightText style={[styles.title, styles.pink]}>
+        <ApExtraLightText style={[styles.title, styles.pinkFade]}>
           wor
         </ApExtraLightText>
         <ApMediumText style={[styles.title, styles.pink]}>d</ApMediumText>
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
   },
   pink: {
     color: "#DB00FF",
+  },
+  pinkFade: {
+    color: "#DB00FFB3",
   },
 });
 
