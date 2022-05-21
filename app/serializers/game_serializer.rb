@@ -1,12 +1,15 @@
 class GameSerializer < ActiveModel::Serializer
   attributes :id,
-             :player1_id,
-             :player2_id,
+             :player1_score,
+             :player2_score,
+             :prompt,
              :is_over,
              :num_rounds,
              :round,
              :turn,
-             :player1_score,
-             :player2_score,
              :is_single_player
+
+  belongs_to :player1
+  belongs_to :player2
+  has_many :words
 end

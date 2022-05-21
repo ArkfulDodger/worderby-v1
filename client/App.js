@@ -12,17 +12,19 @@ import {
 import LoadingScreen from "./components/LoadingScreen";
 import GameScreen from "./components/GameScreen";
 import LinearGradient from "react-native-linear-gradient";
+import useURL from "./components/hooks/useURL";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const URL = useURL();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/me")
+    fetch(`${URL}/me`)
       .then((r) =>
         r.ok
           ? r.json().then((userData) => {
-              console.log(Platform.OS, "success:", userData);
+              console.log(Platform.OS, "user:", userData);
               setUser(userData);
               setIsLoading(false);
             })
