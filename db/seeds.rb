@@ -1,8 +1,8 @@
 puts '🌱 Seeding..... 🌱'
 
 puts 'Creating users...'
-p1 = User.create(name: 'Noah R')
-p2 = User.create(name: 'Worderbot')
+p1 = User.create(username: 'Noah R', password: '1234')
+p2 = User.create(username: 'Worderbot', password: '1234')
 
 puts 'Creating game...'
 game =

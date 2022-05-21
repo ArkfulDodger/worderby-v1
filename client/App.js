@@ -13,20 +13,22 @@ import LoadingScreen from "./components/LoadingScreen";
 import GameScreen from "./components/GameScreen";
 import LinearGradient from "react-native-linear-gradient";
 
-const dummyUser = {
-  id: 1,
-  name: "Noah Reece",
-};
-
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setUser(dummyUser);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    fetch("http://127.0.0.1:3000/me")
+      .then((r) =>
+        r.ok
+          ? r.json().then((userData) => {
+              console.log(Platform.OS, "success:", userData);
+              setUser(userData);
+              setIsLoading(false);
+            })
+          : console.log("couldn't log in")
+      )
+      .catch((error) => console.error(Platform.OS, "error:", error));
   }, []);
 
   return (
