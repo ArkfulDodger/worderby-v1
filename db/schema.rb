@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_18_180804) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_21_031516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_180804) do
     t.integer "num_rounds"
     t.integer "round"
     t.integer "turn"
-    t.string "prompt"
     t.integer "player1_score"
     t.integer "player2_score"
     t.boolean "is_single_player"
@@ -42,11 +41,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_180804) do
     t.integer "user_id"
     t.string "text"
     t.string "prompt_text"
-    t.string "prompt_letters_substring"
-    t.string "input_letters_substring"
-    t.integer "total_score"
+    t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_first_word"
+    t.integer "p_num"
   end
 
 end
