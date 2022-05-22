@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # resources :users
   resources :words
 
-  # resources :games
+  resources :games, only: %i[update]
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

@@ -22,12 +22,12 @@ const GameHeader = ({ game, user }) => {
         <View style={styles.header}>
           <HeaderPlayerInfo
             isPlayer={true}
-            name={player.name}
+            name={player.username}
             score={playerScore}
           />
           <HeaderPlayerInfo
             isPlayer={false}
-            name={opponent.name}
+            name={opponent.username}
             score={opponentScore}
           />
         </View>

@@ -27,14 +27,18 @@ const PlayerTurnFrame = ({
 
   return (
     <View style={styles.container}>
-      <View></View>
-      <PlayerInput
-        prompt={prompt}
-        pNum={pNum}
-        playerInput={playerInput}
-        setPlayerInput={setPlayerInput}
-      />
-      <PlayerPrompt prompt={prompt} pNum={pNum} setPNum={setPNum} />
+      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <PlayerInput
+          prompt={prompt}
+          pNum={pNum}
+          playerInput={playerInput}
+          setPlayerInput={setPlayerInput}
+        />
+      </View>
+      <View style={{ flex: 1 }}>
+        <PlayerPrompt prompt={prompt} pNum={pNum} setPNum={setPNum} />
+      </View>
     </View>
   );
 };
@@ -42,9 +46,7 @@ const PlayerTurnFrame = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-    margin: 30,
+    // margin: 30,
   },
 });
 

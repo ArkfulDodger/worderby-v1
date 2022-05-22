@@ -15,40 +15,14 @@ import LoadingScreen from "./LoadingScreen";
 import useURL from "./hooks/useURL";
 
 const GameScreen = ({ user }) => {
-  const dummyP1 = {
-    id: user.id,
-    name: user.username,
-  };
-  const dummyP2 = {
-    id: 2,
-    name: "Worderbot",
-  };
-  const dummyPrompt = {
-    id: 1,
-    text: "chicken",
-    p_num: null,
-    score: null,
-    is_first_word: false,
-  };
-
-  const dummyGame = {
-    id: 1,
-    player1: dummyP1,
-    player2: dummyP2,
-    player1_score: 0,
-    player2_score: 0,
-    prompt: dummyPrompt,
-    is_over: false,
-    num_rounds: 3,
-    round: 1,
-    turn: 1,
-    is_single_player: true,
-    words: [],
-  };
-
   const [isLoading, setIsLoading] = useState(true);
-  const [game, setGame] = useState(dummyGame);
-  const { is_over: isOver, turn, player1, player2 } = game;
+  const [game, setGame] = useState({});
+  const {
+    is_over: isOver = false,
+    turn = 1,
+    player1 = {},
+    player2 = {},
+  } = game;
   const URL = useURL();
 
   const isOdd = (num) => !!(num % 2);
@@ -63,11 +37,11 @@ const GameScreen = ({ user }) => {
   useEffect(() => {
     fetch(URL + "/games/current")
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((gameData) => {
+        setGame(gameData);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error.message));
-
-    setGame(dummyGame);
-    setIsLoading(false);
   }, []);
 
   if (isLoading) {

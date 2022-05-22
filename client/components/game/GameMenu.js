@@ -12,7 +12,7 @@ const GameMenu = ({ game, user, isPlayerTurn }) => {
           {game.is_over ? (
             <NewGameButton />
           ) : isPlayerTurn ? (
-            <SubmitWordButton />
+            <SubmitWordButton game={game} />
           ) : (
             <ContinueButton />
           )}
