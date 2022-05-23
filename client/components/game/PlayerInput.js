@@ -46,6 +46,7 @@ const PlayerInput = ({
     <View style={styles.inputContainer}>
       <ApMediumText style={styles.prompt}>{promptLetters}</ApMediumText>
       <TextInput
+        autoFocus={true}
         style={styles.input}
         onChangeText={onInputChange}
         value={playerInput}
