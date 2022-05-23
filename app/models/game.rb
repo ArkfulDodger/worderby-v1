@@ -25,4 +25,18 @@ class Game < ApplicationRecord
       is_first_word: prompt_word.is_first_word
     }
   end
+
+  def score_and_progress(word_score)
+    if turn == 1
+      update(player1_score: player1_score + word_score, turn: 2)
+    else
+      update(player2_score: player2_score + word_score)
+
+      if round == num_rounds
+        update(is_over: true)
+      else
+        update(round: round + 1, turn: 1)
+      end
+    end
+  end
 end

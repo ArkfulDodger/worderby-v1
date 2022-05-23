@@ -19,7 +19,7 @@ import GText from "./tools/GText";
 const GameScreen = ({ user }) => {
   //#region STATE & Variables
   const [isLoading, setIsLoading] = useState(true);
-  const [alertMessage, setAlertMessage] = useState("oops");
+  const [alertMessage, setAlertMessage] = useState("");
   const [game, setGame] = useState({});
   const {
     is_over: isOver = false,

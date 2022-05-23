@@ -5,7 +5,7 @@ import GText from "../tools/GText";
 const OpponentActivityMessage = ({ opponent }) => {
   return (
     <View>
-      <GText style={styles.message}>{opponent.name}'s turn...</GText>
+      <GText style={styles.message}>{opponent.username}'s turn...</GText>
     </View>
   );
 };

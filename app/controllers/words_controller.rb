@@ -3,19 +3,20 @@ class WordsController < ApplicationController
   def create
     new_word = Word.create!(word_params)
     game = new_word.game
+    game.score_and_progress(new_word.score)
 
     # update score and increment round/turn
-    if game.turn == 1
-      game.update(player1_score: game.player1_score + new_word.score, turn: 2)
-    else
-      game.update(player2_score: game.player2_score + new_word.score)
+    # if game.turn == 1
+    #   game.update(player1_score: game.player1_score + new_word.score, turn: 2)
+    # else
+    #   game.update(player2_score: game.player2_score + new_word.score)
 
-      if game.round == game.num_rounds
-        game.update(is_over: true)
-      else
-        game.update(round: game.round + 1, turn: 1)
-      end
-    end
+    #   if game.round == game.num_rounds
+    #     game.update(is_over: true)
+    #   else
+    #     game.update(round: game.round + 1, turn: 1)
+    #   end
+    # end
 
     render json: game, status: :created
   end
