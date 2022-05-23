@@ -6,6 +6,14 @@ class GamesController < ApplicationController
   #   render json: @game
   # end
 
+  # POST /games
+  def create
+    new_game = Game.create!(game_params)
+    rand_word = Randword.get_random_word
+    new_game.words.create!(text: rand_word, is_first_word: true)
+    render json: new_game, status: :created
+  end
+
   # PATCH /games/:id
   def update
     @game.update!(game_params)

@@ -164,6 +164,34 @@ const GameScreen = ({ user }) => {
     }
   };
 
+  const onNewGame = () => {
+    fetch(URL + "/games", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        player1_id: game.player2.id,
+        player2_id: game.player1.id,
+        is_over: false,
+        num_rounds: game.num_rounds,
+        round: 1,
+        turn: 1,
+        player1_score: 0,
+        player2_score: 0,
+        is_single_player: game.is_single_player,
+      }),
+    })
+      .then((res) => res.json())
+      .then((newGameData) => {
+        console.log("newGameData:", newGameData);
+        setGame(newGameData);
+        setAlertMessage("");
+      })
+      .catch((error) => console.log(error.message));
+  };
+
   //#endregion
 
   if (isLoading) {
@@ -205,6 +233,7 @@ const GameScreen = ({ user }) => {
             isPlayerTurn={isPlayerTurn}
             onWordSubmit={onWordSubmit}
             onContinueGame={onContinueGame}
+            onNewGame={onNewGame}
           />
         </View>
       </View>

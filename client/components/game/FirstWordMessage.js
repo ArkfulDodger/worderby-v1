@@ -6,7 +6,9 @@ import ApMediumText from "../tools/ApMediumText";
 const FirstWordMessage = ({ opponent, prompt }) => {
   return (
     <View style={styles.container}>
-      <GText style={[styles.margin]}>{opponent.name}'s starting word is:</GText>
+      <GText style={[styles.margin]}>
+        {opponent.username}'s starting word is:
+      </GText>
       <ApMediumText style={[styles.margin, styles.alt]}>
         {prompt.text}
       </ApMediumText>
