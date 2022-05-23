@@ -11,7 +11,7 @@ import ApExtraLightText from "../tools/ApExtraLightText";
 import ApLightText from "../tools/ApLightText";
 import ApMediumText from "../tools/ApMediumText";
 
-const PlayerPrompt = ({ prompt, pNum, setPNum }) => {
+const PlayerPrompt = ({ prompt, pNum, setPNum, setAlertMessage }) => {
   const [onFirstLetter, setOnFirstLetter] = useState(false);
   const dimensions = useWindowDimensions();
   const clamp = (num, min, max) => {
@@ -22,8 +22,10 @@ const PlayerPrompt = ({ prompt, pNum, setPNum }) => {
     const pPosition = Math.ceil(perc * prompt.text.length);
     if (pPosition === prompt.text.length && !onFirstLetter) {
       setOnFirstLetter(true);
+      setAlertMessage("Cannot select the entire prompt!");
     } else if (pPosition !== prompt.text.length && onFirstLetter) {
       setOnFirstLetter(false);
+      setAlertMessage("");
     }
     const pNumCalc = clamp(pPosition, 1, prompt.text.length - 1);
     if (pNumCalc !== pNum) {
@@ -34,11 +36,15 @@ const PlayerPrompt = ({ prompt, pNum, setPNum }) => {
   return (
     <View
       onStartShouldSetResponder={(e) => {
+        setAlertMessage("");
         onPNumChange(e);
         return true;
       }}
       onResponderMove={onPNumChange}
-      onResponderRelease={() => setOnFirstLetter(false)}
+      onResponderRelease={() => {
+        setOnFirstLetter(false);
+        setAlertMessage("");
+      }}
       style={{
         flex: 1,
         alignItems: "center",

@@ -4,7 +4,7 @@ import SubmitWordButton from "./menu/SubmitWordButton";
 import ContinueButton from "./menu/ContinueButton";
 import NewGameButton from "./menu/NewGameButton";
 
-const GameMenu = ({ game, user, isPlayerTurn }) => {
+const GameMenu = ({ game, user, isPlayerTurn, onWordSubmit }) => {
   return (
     <SafeAreaView style={styles.menuArea}>
       <View style={styles.menu}>
@@ -12,7 +12,7 @@ const GameMenu = ({ game, user, isPlayerTurn }) => {
           {game.is_over ? (
             <NewGameButton />
           ) : isPlayerTurn ? (
-            <SubmitWordButton game={game} />
+            <SubmitWordButton game={game} onWordSubmit={onWordSubmit} />
           ) : (
             <ContinueButton />
           )}

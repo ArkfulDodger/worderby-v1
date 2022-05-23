@@ -13,9 +13,13 @@ import ResultsFrame from "./game/ResultsFrame";
 import GameMenu from "./game/GameMenu";
 import LoadingScreen from "./LoadingScreen";
 import useURL from "./hooks/useURL";
+import useMWAPI from "./hooks/useMWAPI";
+import GText from "./tools/GText";
 
 const GameScreen = ({ user }) => {
+  //#region STATE & Variables
   const [isLoading, setIsLoading] = useState(true);
+  const [alertMessage, setAlertMessage] = useState("oops");
   const [game, setGame] = useState({});
   const {
     is_over: isOver = false,
@@ -24,6 +28,7 @@ const GameScreen = ({ user }) => {
     player2 = {},
   } = game;
   const URL = useURL();
+  const mwURL = useMWAPI;
 
   const isOdd = (num) => !!(num % 2);
   const isPlayerTurn =
@@ -32,6 +37,63 @@ const GameScreen = ({ user }) => {
 
   const [playerInput, setPlayerInput] = useState("");
   const [pNum, setPNum] = useState(1);
+  //#endregion
+
+  //#region Game Actions
+  const getWordToSubmit = () => {
+    return game.prompt.text.slice(-pNum) + playerInput;
+  };
+
+  const isWordEntry = (data) => {
+    return !!data[0].meta;
+  };
+
+  const getDataWordString = (data) => {
+    return data[0].meta.id.match(/([^:]*)/)[0].toLowerCase();
+  };
+
+  const isPlayableWordResponse = (data) => {
+    if (isWordEntry(data) && getDataWordString(data) === getWordToSubmit()) {
+      return true;
+    } else {
+      setAlertMessage(
+        <>
+          <GText>Oops! </GText>
+          <GText style={{ fontWeight: "bold" }}>"{getWordToSubmit()}"</GText>
+          <GText> was not found in our dictionary! Try another word.</GText>
+        </>
+      );
+      return false;
+    }
+  };
+
+  const checkWordInDictionary = async (word) => {
+    return fetch(mwURL(word))
+      .then((res) => res.json())
+      .then((data) => isPlayableWordResponse(data))
+      .catch((error) => console.log(error.message));
+  };
+
+  const playWord = (word) => {
+    setAlertMessage("Success! Playing word...");
+    console.log("playing word:", word);
+  };
+
+  const onWordSubmit = async () => {
+    setAlertMessage("");
+    if (playerInput.length === 0) {
+      setAlertMessage("Must add at least one letter to play a word!");
+      return;
+    }
+    const word = getWordToSubmit();
+    const valid = await checkWordInDictionary(word);
+
+    if (valid) {
+      playWord(word);
+    }
+  };
+
+  //#endregion
 
   // load the game, and set loading to false after success
   useEffect(() => {
@@ -69,13 +131,20 @@ const GameScreen = ({ user }) => {
               setPlayerInput={setPlayerInput}
               pNum={pNum}
               setPNum={setPNum}
+              alertMessage={alertMessage}
+              setAlertMessage={setAlertMessage}
             />
           ) : (
             <OpponentTurnFrame game={game} user={user} />
           )}
         </View>
         <View>
-          <GameMenu game={game} user={user} isPlayerTurn={isPlayerTurn} />
+          <GameMenu
+            game={game}
+            user={user}
+            isPlayerTurn={isPlayerTurn}
+            onWordSubmit={onWordSubmit}
+          />
         </View>
       </View>
     </KeyboardAvoidingView>

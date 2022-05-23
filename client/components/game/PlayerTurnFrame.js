@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import PlayerPrompt from "./PlayerPrompt";
 import PlayerInput from "./PlayerInput";
+import AlertMessage from "./AlertMessage";
 
 const PlayerTurnFrame = ({
   game,
@@ -17,6 +18,8 @@ const PlayerTurnFrame = ({
   setPNum,
   playerInput,
   setPlayerInput,
+  alertMessage,
+  setAlertMessage,
 }) => {
   const { prompt } = game;
 
@@ -27,17 +30,25 @@ const PlayerTurnFrame = ({
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1 }}>
+        <AlertMessage alertMessage={alertMessage} />
+      </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <PlayerInput
           prompt={prompt}
           pNum={pNum}
           playerInput={playerInput}
           setPlayerInput={setPlayerInput}
+          setAlertMessage={setAlertMessage}
         />
       </View>
       <View style={{ flex: 1 }}>
-        <PlayerPrompt prompt={prompt} pNum={pNum} setPNum={setPNum} />
+        <PlayerPrompt
+          prompt={prompt}
+          pNum={pNum}
+          setPNum={setPNum}
+          setAlertMessage={setAlertMessage}
+        />
       </View>
     </View>
   );
