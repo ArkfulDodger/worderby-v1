@@ -13,24 +13,35 @@ import LoadingScreen from "./components/LoadingScreen";
 import GameScreen from "./components/GameScreen";
 import LinearGradient from "react-native-linear-gradient";
 import useURL from "./components/hooks/useURL";
+import useEmulator from "./components/hooks/useEmulator";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isEmulator, setIsEmulator] = useState(true);
   const [user, setUser] = useState(null);
-  const URL = useURL();
+  const getEmulator = useEmulator;
+  const getURL = useURL;
 
   useEffect(() => {
-    fetch(`${URL}/me`)
-      .then((r) =>
-        r.ok
-          ? r.json().then((userData) => {
-              console.log(Platform.OS, "user:", userData);
-              setUser(userData);
-              setIsLoading(false);
-            })
-          : console.log("couldn't log in")
-      )
-      .catch((error) => console.error(Platform.OS, "error:", error));
+    getEmulator()
+      .then((emulatorBool) => {
+        setIsEmulator(emulatorBool);
+        return getURL(emulatorBool);
+      })
+      .then((URL) => {
+        console.log("URL:", URL);
+        fetch(`${URL}/me`)
+          .then((r) =>
+            r.ok
+              ? r.json().then((userData) => {
+                  console.log(Platform.OS, "user:", userData);
+                  setUser(userData);
+                  setIsLoading(false);
+                })
+              : console.log(r)
+          )
+          .catch((error) => console.error(Platform.OS, "error:", error));
+      });
   }, []);
 
   return (
@@ -43,7 +54,11 @@ const App = () => {
         end={{ x: 1, y: 1 }}
       >
         {/* <SafeAreaView style={styles.safeContainer}> */}
-        {isLoading ? <LoadingScreen /> : <GameScreen user={user} />}
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <GameScreen user={user} isEmulator={isEmulator} />
+        )}
         {/* </SafeAreaView> */}
       </LinearGradient>
     </View>

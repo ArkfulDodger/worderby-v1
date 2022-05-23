@@ -71,7 +71,7 @@ class WordsController < ApplicationController
   end
 
   def is_word_in_stems?(data, word)
-    data[0]['meta']['stems'].include?(word)
+    data[0]['meta']['stems'].any? { |s| s.casecmp(word) == 0 }
   end
 
   def is_word_playable?(word)

@@ -16,7 +16,7 @@ import useURL from "./hooks/useURL";
 import useMWAPI from "./hooks/useMWAPI";
 import GText from "./tools/GText";
 
-const GameScreen = ({ user }) => {
+const GameScreen = ({ user, isEmulator }) => {
   //#region STATE & Variables
   const [isLoading, setIsLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState("");
@@ -27,7 +27,7 @@ const GameScreen = ({ user }) => {
     player1 = {},
     player2 = {},
   } = game;
-  const URL = useURL();
+  const URL = useURL(isEmulator);
   const mwURL = useMWAPI;
 
   const isOdd = (num) => !!(num % 2);
@@ -60,7 +60,9 @@ const GameScreen = ({ user }) => {
   };
 
   const isWordInStems = (data, word) => {
-    return data[0].meta.stems.includes(word);
+    return data[0].meta.stems.find(
+      (s) => s.toLowerCase() === word.toLowerCase()
+    );
   };
 
   const isPlayableWordResponse = (data) => {
