@@ -39,6 +39,17 @@ const GameScreen = ({ user }) => {
   const [pNum, setPNum] = useState(1);
   //#endregion
 
+  // load the game, and set loading to false after success
+  useEffect(() => {
+    fetch(URL + "/games/current")
+      .then((res) => res.json())
+      .then((gameData) => {
+        setGame(gameData);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error.message));
+  }, []);
+
   //#region Game Actions
   const getWordToSubmit = () => {
     return game.prompt.text.slice(-pNum) + playerInput;
@@ -74,9 +85,36 @@ const GameScreen = ({ user }) => {
       .catch((error) => console.log(error.message));
   };
 
+  const getWordScore = () => {
+    return pNum * 10 + playerInput.length;
+  };
+
   const playWord = (word) => {
     setAlertMessage("Success! Playing word...");
-    console.log("playing word:", word);
+    fetch(URL + "/words", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        game_id: game.id,
+        round_played: game.round,
+        turn_played: game.turn,
+        user_id: user.id,
+        text: word,
+        prompt_text: game.prompt.text,
+        p_num: pNum,
+        score: getWordScore(),
+        is_first_word: false,
+      }),
+    })
+      .then((res) => res.json())
+      .then((updatedGameData) => {
+        console.log(updatedGameData);
+        setGame(updatedGameData);
+      })
+      .catch((error) => console.log(error.message));
   };
 
   const onWordSubmit = async () => {
@@ -94,17 +132,6 @@ const GameScreen = ({ user }) => {
   };
 
   //#endregion
-
-  // load the game, and set loading to false after success
-  useEffect(() => {
-    fetch(URL + "/games/current")
-      .then((res) => res.json())
-      .then((gameData) => {
-        setGame(gameData);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error.message));
-  }, []);
 
   if (isLoading) {
     return <LoadingScreen />;

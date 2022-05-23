@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # resources :users
-  resources :words
+  resources :words, only: %i[create]
 
   resources :games, only: %i[update]
 
