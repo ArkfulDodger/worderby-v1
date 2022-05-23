@@ -13,7 +13,7 @@ class Game < ApplicationRecord
         if turn === 2
           words.find_by(round_played: round, turn_played: 1)
         else
-          words.find_by(round_played: round - 1, turn_played: 2)
+          words.find_by(round_played: (round - 1), turn_played: 2)
         end
       end
 

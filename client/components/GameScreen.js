@@ -59,12 +59,12 @@ const GameScreen = ({ user }) => {
     return !!data[0].meta;
   };
 
-  const getDataWordString = (data) => {
-    return data[0].meta.id.match(/([^:]*)/)[0].toLowerCase();
+  const isWordInStems = (data, word) => {
+    return data[0].meta.stems.includes(word);
   };
 
   const isPlayableWordResponse = (data) => {
-    if (isWordEntry(data) && getDataWordString(data) === getWordToSubmit()) {
+    if (isWordEntry(data) && isWordInStems(data, getWordToSubmit())) {
       return true;
     } else {
       setAlertMessage(
@@ -131,6 +131,39 @@ const GameScreen = ({ user }) => {
     }
   };
 
+  const playBotTurn = () => {
+    fetch(URL + "/words/bot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        game_id: game.id,
+        round_played: game.round,
+        turn_played: game.turn,
+        user_id: player1.id === user.id ? player1.id : player2.id,
+        prompt_text: game.prompt.text,
+        is_first_word: false,
+      }),
+    })
+      .then((res) => res.json())
+      .then((updateGameData) => {
+        console.log(updateGameData);
+        setGame(updatedGameData);
+        setAlertMessage("");
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+  const onContinueGame = () => {
+    if (game.is_single_player) {
+      playBotTurn();
+    } else {
+      console.log("TODO: progress game for multiplayer");
+    }
+  };
+
   //#endregion
 
   if (isLoading) {
@@ -171,6 +204,7 @@ const GameScreen = ({ user }) => {
             user={user}
             isPlayerTurn={isPlayerTurn}
             onWordSubmit={onWordSubmit}
+            onContinueGame={onContinueGame}
           />
         </View>
       </View>

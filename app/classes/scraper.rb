@@ -2,9 +2,9 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-URL = 'https://www.thefreedictionary.com/words-that-start-with-'
-
 class Scraper
+  @@scrape_url = 'https://www.thefreedictionary.com/words-that-start-with-'
+
   def self.get_playable_words(prompt)
     words_list = {}
     webpage = get_webpage(prompt)
@@ -24,7 +24,7 @@ class Scraper
 
   def self.get_webpage(prompt)
     begin
-      Nokogiri.HTML(URI.open(URL + prompt))
+      Nokogiri.HTML(URI.open(@@scrape_url + prompt))
     rescue OpenURI::HTTPError => ex
       nil
     end
