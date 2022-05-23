@@ -6,7 +6,7 @@ class Game < ApplicationRecord
   def prompt
     prompt_word =
       if (is_over)
-        nil
+        return nil
       elsif (round === 1 && turn === 1)
         words.find_by(is_first_word: true)
       else

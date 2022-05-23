@@ -148,8 +148,8 @@ const GameScreen = ({ user }) => {
       }),
     })
       .then((res) => res.json())
-      .then((updateGameData) => {
-        console.log(updateGameData);
+      .then((updatedGameData) => {
+        console.log("RETURNED BOT GAME DATA:", updatedGameData);
         setGame(updatedGameData);
         setAlertMessage("");
       })

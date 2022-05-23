@@ -25,6 +25,7 @@ const PlayerTurnFrame = ({
 
   // set default selected prompt letters to all available on turn start
   useEffect(() => {
+    setPlayerInput("");
     setPNum(prompt.text.length - 1);
   }, []);
 
