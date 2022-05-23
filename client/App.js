@@ -14,6 +14,7 @@ import GameScreen from "./components/GameScreen";
 import LinearGradient from "react-native-linear-gradient";
 import useURL from "./components/hooks/useURL";
 import useEmulator from "./components/hooks/useEmulator";
+import LoginPage from "./components/LoginPage";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +37,7 @@ const App = () => {
               ? r.json().then((userData) => {
                   console.log(Platform.OS, "user:", userData);
                   setUser(userData);
-                  setIsLoading(false);
+                  setTimeout(() => setIsLoading(false), 1000);
                 })
               : console.log(r)
           )
@@ -57,6 +58,7 @@ const App = () => {
         {isLoading ? (
           <LoadingScreen />
         ) : (
+          // <LoginPage />
           <GameScreen user={user} isEmulator={isEmulator} />
         )}
         {/* </SafeAreaView> */}

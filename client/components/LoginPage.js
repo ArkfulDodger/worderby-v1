@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Title from "./tools/Title";
+import LoginForm from "./forms/LoginForm";
 
-const LoadingScreen = (props) => {
+const LoginPage = (props) => {
   return (
     <View style={styles.centered}>
       <Title />
-      <ActivityIndicator />
+      <LoginForm />
     </View>
   );
 };
@@ -19,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoadingScreen;
+export default LoginPage;

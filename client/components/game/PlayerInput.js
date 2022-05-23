@@ -47,6 +47,8 @@ const PlayerInput = ({
       <ApMediumText style={styles.prompt}>{promptLetters}</ApMediumText>
       <TextInput
         autoFocus={true}
+        spellCheck={false}
+        underlineColorAndroid={"transparent"}
         style={styles.input}
         onChangeText={onInputChange}
         value={playerInput}
