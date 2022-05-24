@@ -18,7 +18,7 @@ const Title = ({ size = 68 }) => {
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    marginVertical: 50,
+    marginVertical: 20,
   },
   pink: {
     color: "#DB00FF",

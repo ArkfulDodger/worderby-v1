@@ -14,7 +14,33 @@ import GameScreen from "./components/GameScreen";
 import LinearGradient from "react-native-linear-gradient";
 import useURL from "./components/hooks/useURL";
 import useEmulator from "./components/hooks/useEmulator";
-import LoginPage from "./components/LoginPage";
+import LoginScreen from "./components/LoginScreen";
+import RegistrationScreen from "./components/RegistrationScreen";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+
+const authScreens = {
+  Login: LoginScreen,
+  Signup: RegistrationScreen,
+};
+
+const appScreens = {
+  Game: GameScreen,
+};
+
+// NAVIGATION
+const navigator = createStackNavigator(
+  {
+    Login: LoginScreen,
+  },
+  {
+    initialRouteName: "Login",
+    defaultNavigationOptions: {
+      title: "Log In Screen",
+      headerShown: false,
+    },
+  }
+);
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +84,8 @@ const App = () => {
         {isLoading ? (
           <LoadingScreen />
         ) : (
-          // <LoginPage />
+          // <LoginScreen />
+          // <RegistrationScreen />
           <GameScreen user={user} isEmulator={isEmulator} />
         )}
         {/* </SafeAreaView> */}
@@ -78,3 +105,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+// export default createAppContainer(navigator);

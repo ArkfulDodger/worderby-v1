@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import Title from "./tools/Title";
 import LoginForm from "./forms/LoginForm";
 
-const LoginPage = (props) => {
+const LoginScreen = (props) => {
   return (
     <View style={styles.centered}>
       <Title />
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginPage;
+export default LoginScreen;
