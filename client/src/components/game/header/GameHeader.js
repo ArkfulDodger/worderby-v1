@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
-import HeaderPlayerInfo from "./header/HeaderPlayerInfo";
 import LinearGradient from "react-native-linear-gradient";
+import HeaderPlayerInfo from "./HeaderPlayerInfo";
 
 const GameHeader = ({ game, user }) => {
   const {

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import Title from "./tools/Title";
+import Title from "../components/Title";
 
 const LoadingScreen = (props) => {
   return (

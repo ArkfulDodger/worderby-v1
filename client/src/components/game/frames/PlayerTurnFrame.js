@@ -7,9 +7,9 @@ import {
   Platform,
   Keyboard,
 } from "react-native";
-import PlayerPrompt from "./PlayerPrompt";
-import PlayerInput from "./PlayerInput";
-import AlertMessage from "./AlertMessage";
+import PlayerPrompt from "../PlayerPrompt";
+import PlayerInput from "../PlayerInput";
+import AlertMessage from "../AlertMessage";
 
 const PlayerTurnFrame = ({
   game,

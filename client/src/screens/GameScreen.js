@@ -6,15 +6,15 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import GameHeader from "./game/GameHeader";
-import PlayerTurnFrame from "./game/PlayerTurnFrame";
-import OpponentTurnFrame from "./game/OpponentTurnFrame";
-import ResultsFrame from "./game/ResultsFrame";
-import GameMenu from "./game/GameMenu";
+import useURL from "../hooks/useURL";
+import useMWAPI from "../hooks/useMWAPI";
 import LoadingScreen from "./LoadingScreen";
-import useURL from "./hooks/useURL";
-import useMWAPI from "./hooks/useMWAPI";
-import GText from "./tools/GText";
+import GText from "../components/tools/GText";
+import PlayerTurnFrame from "../components/game/frames/PlayerTurnFrame";
+import OpponentTurnFrame from "../components/game/frames/OpponentTurnFrame";
+import ResultsFrame from "../components/game/frames/ResultsFrame";
+import GameHeader from "../components/game/header/GameHeader";
+import GameMenu from "../components/game/menu/GameMenu";
 
 const GameScreen = ({ user, isEmulator }) => {
   //#region STATE & Variables

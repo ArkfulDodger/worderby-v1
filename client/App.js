@@ -9,15 +9,15 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import LoadingScreen from "./components/LoadingScreen";
-import GameScreen from "./components/GameScreen";
-import LinearGradient from "react-native-linear-gradient";
-import useURL from "./components/hooks/useURL";
-import useEmulator from "./components/hooks/useEmulator";
-import LoginScreen from "./components/LoginScreen";
-import RegistrationScreen from "./components/RegistrationScreen";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import LinearGradient from "react-native-linear-gradient";
+import useURL from "./src/hooks/useURL";
+import useEmulator from "./src/hooks/useEmulator";
+import LoginScreen from "./src/screens/LoginScreen";
+import LoadingScreen from "./src/screens/LoadingScreen";
+import GameScreen from "./src/screens/GameScreen";
+import RegistrationScreen from "./src/screens/RegistrationScreen";
 
 const authScreens = {
   Login: LoginScreen,

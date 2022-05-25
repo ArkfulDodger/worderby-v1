@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-import SubmitWordButton from "./menu/SubmitWordButton";
-import ContinueButton from "./menu/ContinueButton";
-import NewGameButton from "./menu/NewGameButton";
+import SubmitWordButton from "./SubmitWordButton";
+import ContinueButton from "./ContinueButton";
+import NewGameButton from "./NewGameButton";
 
 const GameMenu = ({
   game,

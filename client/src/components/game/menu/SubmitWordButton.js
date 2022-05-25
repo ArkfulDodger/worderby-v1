@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-native";
-import useURL from "../../hooks/useURL";
-import useMWAPI from "../../hooks/useMWAPI";
+import useURL from "../../../hooks/useURL";
+import useMWAPI from "../../../hooks/useMWAPI";
 
 const SubmitWordButton = ({ game, onWordSubmit }) => {
   const URL = useURL();

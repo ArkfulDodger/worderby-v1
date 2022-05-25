@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import ApExtraLightText from "./ApExtraLightText";
-import ApMediumText from "./ApMediumText";
+import ApExtraLightText from "../components/tools/ApExtraLightText";
+import ApMediumText from "../components/tools/ApMediumText";
 
 const Title = ({ size = 68 }) => {
   return (

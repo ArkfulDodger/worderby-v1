@@ -7,9 +7,9 @@ import {
   StatusBar,
   ScrollView,
 } from "react-native";
-import Title from "./tools/Title";
-import RegistrationForm from "./forms/RegistrationForm";
-import GText from "./tools/GText";
+import Title from "../components/Title";
+import RegistrationForm from "../components/forms/RegistrationForm";
+import GText from "../components/tools/GText";
 
 const RegistrationScreen = (props) => {
   return (

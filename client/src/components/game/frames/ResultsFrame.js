@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import WinnerMessage from "./WinnerMessage";
+import WinnerMessage from "../WinnerMessage";
 
 const ResultsFrame = ({ game, user }) => {
   return (

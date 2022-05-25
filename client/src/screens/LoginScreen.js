@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Title from "./tools/Title";
-import LoginForm from "./forms/LoginForm";
+import Title from "../components/Title";
+import LoginForm from "../components/forms/LoginForm";
 
 const LoginScreen = (props) => {
   return (

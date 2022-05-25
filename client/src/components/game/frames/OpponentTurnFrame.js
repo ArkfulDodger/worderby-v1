@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import OpponentActivityMessage from "./OpponentActivityMessage";
-import WordScore from "./WordScore";
-import FirstWordMessage from "./FirstWordMessage";
+import OpponentActivityMessage from "../OpponentActivityMessage";
+import WordScore from "../WordScore";
+import FirstWordMessage from "../FirstWordMessage";
 
 const OpponentTurnFrame = ({ game, user }) => {
   const { player1, player2, prompt } = game;
