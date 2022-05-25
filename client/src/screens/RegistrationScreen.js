@@ -21,12 +21,12 @@ const RegistrationScreen = (props) => {
       style={styles.keyboardContainer}
     >
       <ScrollView
-        style={{ flex: 1 }}
+        // style={{ flex: 1 }}
         centerContent={true}
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       >
         <View style={styles.container}>
-          <Title />
+          {/* <Title /> */}
           <View>
             <GText>Create Account</GText>
           </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 });

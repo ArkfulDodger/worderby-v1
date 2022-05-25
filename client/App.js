@@ -10,7 +10,6 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import LinearGradient from "react-native-linear-gradient";
 import useURL from "./src/hooks/useURL";
@@ -20,29 +19,10 @@ import LoadingScreen from "./src/screens/LoadingScreen";
 import GameScreen from "./src/screens/GameScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import AuthStack from "./src/navigators/AuthStack";
+import HomeStack from "./src/navigators/HomeStack";
 
-// const authScreens = {
-//   Login: LoginScreen,
-//   Signup: RegistrationScreen,
-// };
-
-// const appScreens = {
-//   Game: GameScreen,
-// };
-
-// // NAVIGATION
-// const navigator = createStackNavigator(
-//   {
-//     Login: LoginScreen,
-//   },
-//   {
-//     initialRouteName: "Login",
-//     defaultNavigationOptions: {
-//       title: "Log In Screen",
-//       headerShown: false,
-//     },
-//   }
-// );
+export const UserContext = React.createContext();
+export const EmulatorContext = React.createContext();
 
 const App = () => {
   const [isEmulator, setIsEmulator] = useState(true);
@@ -65,7 +45,7 @@ const App = () => {
             r.ok
               ? r.json().then((userData) => {
                   console.log(Platform.OS, "user:", userData);
-                  setUser(userData);
+                  // setUser(userData);
                   setTimeout(() => setIsLoading(false), 1000);
                 })
               : console.log(r)
@@ -75,23 +55,31 @@ const App = () => {
   }, []);
 
   return (
-    <View style={styles.fullScreen}>
-      <LinearGradient
-        colors={["#FFFFFF", "#FFE2CD"]}
-        style={styles.fullScreen}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
-          // <LoginScreen />
-          // <RegistrationScreen />
-          // <GameScreen user={user} isEmulator={isEmulator} />
-          <AuthStack />
-        )}
-      </LinearGradient>
-    </View>
+    <EmulatorContext.Provider value={isEmulator}>
+      <UserContext.Provider value={user}>
+        <View style={styles.fullScreen}>
+          <LinearGradient
+            colors={["#FFFFFF", "#FFE2CD"]}
+            style={styles.fullScreen}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          >
+            {
+              isLoading ? (
+                <LoadingScreen />
+              ) : user ? (
+                <HomeStack />
+              ) : (
+                <AuthStack />
+              )
+              // <LoginScreen />
+              // <RegistrationScreen />
+              // <GameScreen user={user} isEmulator={isEmulator} />
+            }
+          </LinearGradient>
+        </View>
+      </UserContext.Provider>
+    </EmulatorContext.Provider>
   );
 };
 

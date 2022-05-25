@@ -8,8 +8,10 @@ import {
   KeyboardAvoidingView,
   StatusBar,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const RegistrationForm = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TextInput
@@ -61,7 +63,7 @@ const RegistrationForm = (props) => {
         <Button
           style={styles.button}
           title={"Return to Login"}
-          onPress={() => console.log("Return to Login Pressed")}
+          onPress={() => navigation.goBack()}
         />
       </View>
     </View>
@@ -70,7 +72,7 @@ const RegistrationForm = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 250,
+    width: 350,
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
@@ -78,9 +80,9 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#FFFFFFB3",
-    padding: 5,
+    padding: 10,
     margin: 5,
-    width: 250,
+    width: 350,
     fontSize: 17,
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },

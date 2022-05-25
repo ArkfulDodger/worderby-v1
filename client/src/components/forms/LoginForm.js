@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, StyleSheet, Platform, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TextInput
@@ -30,7 +32,7 @@ const LoginForm = (props) => {
         <Button
           style={styles.button}
           title={"Create New Account"}
-          onPress={() => console.log("Create New Pressed")}
+          onPress={() => navigation.navigate("Registration")}
         />
       </View>
     </View>
@@ -39,7 +41,7 @@ const LoginForm = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 250,
+    width: 350,
     justifyContent: "center",
     alignItems: "center",
     // backgroundColor: "red",
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFFB3",
     padding: 10,
     margin: 5,
-    width: 250,
+    width: 350,
     fontSize: 17,
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },

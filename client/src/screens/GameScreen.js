@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -15,8 +15,13 @@ import OpponentTurnFrame from "../components/game/frames/OpponentTurnFrame";
 import ResultsFrame from "../components/game/frames/ResultsFrame";
 import GameHeader from "../components/game/header/GameHeader";
 import GameMenu from "../components/game/menu/GameMenu";
+import { UserContext, EmulatorContext } from "../../App";
 
-const GameScreen = ({ user, isEmulator }) => {
+const GameScreen = (props) => {
+  // context variables
+  const user = useContext(UserContext);
+  const isEmulator = useContext(EmulatorContext);
+
   //#region STATE & Variables
   const [isLoading, setIsLoading] = useState(true);
   const [alertMessage, setAlertMessage] = useState("");
