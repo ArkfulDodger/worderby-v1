@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
 import {
   Text,
@@ -18,36 +19,38 @@ import LoginScreen from "./src/screens/LoginScreen";
 import LoadingScreen from "./src/screens/LoadingScreen";
 import GameScreen from "./src/screens/GameScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
+import AuthStack from "./src/navigators/AuthStack";
 
-const authScreens = {
-  Login: LoginScreen,
-  Signup: RegistrationScreen,
-};
+// const authScreens = {
+//   Login: LoginScreen,
+//   Signup: RegistrationScreen,
+// };
 
-const appScreens = {
-  Game: GameScreen,
-};
+// const appScreens = {
+//   Game: GameScreen,
+// };
 
-// NAVIGATION
-const navigator = createStackNavigator(
-  {
-    Login: LoginScreen,
-  },
-  {
-    initialRouteName: "Login",
-    defaultNavigationOptions: {
-      title: "Log In Screen",
-      headerShown: false,
-    },
-  }
-);
+// // NAVIGATION
+// const navigator = createStackNavigator(
+//   {
+//     Login: LoginScreen,
+//   },
+//   {
+//     initialRouteName: "Login",
+//     defaultNavigationOptions: {
+//       title: "Log In Screen",
+//       headerShown: false,
+//     },
+//   }
+// );
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [isEmulator, setIsEmulator] = useState(true);
-  const [user, setUser] = useState(null);
   const getEmulator = useEmulator;
   const getURL = useURL;
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     getEmulator()
@@ -75,20 +78,18 @@ const App = () => {
     <View style={styles.fullScreen}>
       <LinearGradient
         colors={["#FFFFFF", "#FFE2CD"]}
-        // colors={["red", "green"]}
         style={styles.fullScreen}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        {/* <SafeAreaView style={styles.safeContainer}> */}
         {isLoading ? (
           <LoadingScreen />
         ) : (
           // <LoginScreen />
           // <RegistrationScreen />
-          <GameScreen user={user} isEmulator={isEmulator} />
+          // <GameScreen user={user} isEmulator={isEmulator} />
+          <AuthStack />
         )}
-        {/* </SafeAreaView> */}
       </LinearGradient>
     </View>
   );
@@ -97,10 +98,6 @@ const App = () => {
 const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
-  },
-  safeContainer: {
-    flex: 1,
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
 
