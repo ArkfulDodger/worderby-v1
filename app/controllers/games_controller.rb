@@ -1,10 +1,18 @@
 class GamesController < ApplicationController
-  before_action :find_game, only: %i[update]
+  # TODO: remove index from skip before
+  skip_before_action :authorize, only: %i[index]
+  before_action :find_game, only: %i[update show]
+
+  # GET /games
+  def index
+    games = Game.all
+    render json: games
+  end
 
   # GET /games/:id
-  # def show
-  #   render json: @game
-  # end
+  def show
+    render json: @game
+  end
 
   # POST /games
   def create

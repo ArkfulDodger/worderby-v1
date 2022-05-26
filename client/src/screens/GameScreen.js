@@ -6,7 +6,7 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import useURL from "../hooks/useURL";
+// import useURL from "../hooks/useURL";
 import useMWAPI from "../hooks/useMWAPI";
 import LoadingScreen from "./LoadingScreen";
 import GText from "../components/tools/GText";
@@ -15,45 +15,55 @@ import OpponentTurnFrame from "../components/game/frames/OpponentTurnFrame";
 import ResultsFrame from "../components/game/frames/ResultsFrame";
 import GameHeader from "../components/game/header/GameHeader";
 import GameMenu from "../components/game/menu/GameMenu";
-import { UserContext, EmulatorContext } from "../../App";
+import { UserContext, UrlContext } from "../../App";
 
-const GameScreen = (props) => {
+const GameScreen = ({
+  route: {
+    params: { gameData },
+  },
+}) => {
+  console.log("gameData:", gameData);
   // context variables
-  const user = useContext(UserContext);
-  const isEmulator = useContext(EmulatorContext);
+  const { user, setUser } = useContext(UserContext);
+  const URL = useContext(UrlContext);
+  console.log("user:", user);
 
   //#region STATE & Variables
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState(gameData);
+  console.log("game:", game);
   const {
     is_over: isOver = false,
     turn = 1,
     player1 = {},
     player2 = {},
   } = game;
-  const URL = useURL(isEmulator);
   const mwURL = useMWAPI;
 
   const isOdd = (num) => !!(num % 2);
-  const isPlayerTurn =
-    (player1.id === user.id && isOdd(turn)) ||
-    (player2.id === user.id && !isOdd(turn));
+  const isPlayerTurn = () => {
+    return (
+      (player1.id === user.id && isOdd(turn)) ||
+      (player2.id === user.id && !isOdd(turn))
+    );
+  };
 
   const [playerInput, setPlayerInput] = useState("");
   const [pNum, setPNum] = useState(1);
   //#endregion
 
   // load the game, and set loading to false after success
-  useEffect(() => {
-    fetch(URL + "/games/current")
-      .then((res) => res.json())
-      .then((gameData) => {
-        setGame(gameData);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error.message));
-  }, []);
+  // useEffect(() => {
+  //   fetch(URL + `/games/${gameId ? gameId : "current"}`)
+  //     .then((res) => res.json())
+  //     .then((gameData) => {
+  //       console.log("got game data");
+  //       setGame(gameData);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => console.log(error.message));
+  // }, []);
 
   //#region Game Actions
   const getWordToSubmit = () => {

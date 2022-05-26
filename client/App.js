@@ -24,40 +24,50 @@ import HomeStack from "./src/navigators/HomeStack";
 
 export const UserContext = React.createContext();
 export const EmulatorContext = React.createContext();
+export const UrlContext = React.createContext();
 
 const App = () => {
-  const [isEmulator, setIsEmulator] = useState(true);
+  // const [isEmulator, setIsEmulator] = useState(true);
   const getEmulator = useEmulator;
   const getURL = useURL;
 
+  const [urlState, setUrlState] = useState("http://localhost:3000");
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     getEmulator()
       .then((emulatorBool) => {
-        setIsEmulator(emulatorBool);
-        return getURL(emulatorBool);
+        // setIsEmulator(emulatorBool);
+        urlToUse = getURL(emulatorBool);
+        setUrlState(urlToUse);
+        return { urlToUse, emulatorBool };
       })
-      .then((URL) => {
-        console.log("URL:", URL);
+      .then(({ urlToUse: URL, emulatorBool: isEmulator }) => {
+        console.log(
+          `${Platform.OS} (${isEmulator ? "emulator" : "device"}) URL: ${URL}`
+        );
         fetch(`${URL}/me`)
-          .then((r) =>
-            r.ok
-              ? r.json().then((userData) => {
-                  console.log(Platform.OS, "user:", userData);
-                  setUser(userData);
-                  setTimeout(() => setIsLoading(false), 1000);
-                })
-              : console.log(r)
-          )
+          .then((r) => {
+            if (r.ok) {
+              r.json().then((userData) => {
+                console.log(Platform.OS, "user:", userData);
+                setUser(userData);
+                setTimeout(() => setIsLoading(false), 1000);
+              });
+            } else {
+              console.log("user not logged in");
+              setUser(null);
+              setTimeout(() => setIsLoading(false), 1000);
+            }
+          })
           .catch((error) => console.error(Platform.OS, "error:", error));
       });
   }, []);
 
   return (
-    <EmulatorContext.Provider value={isEmulator}>
-      <UserContext.Provider value={user}>
+    <UrlContext.Provider value={urlState}>
+      <UserContext.Provider value={{ user, setUser }}>
         <SafeAreaProvider>
           <View style={styles.fullScreen}>
             <LinearGradient
@@ -77,7 +87,7 @@ const App = () => {
           </View>
         </SafeAreaProvider>
       </UserContext.Provider>
-    </EmulatorContext.Provider>
+    </UrlContext.Provider>
   );
 };
 
