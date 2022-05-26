@@ -45,7 +45,7 @@ const GameCard = ({ game: { item: game } }) => {
           ? game.turn === 1
             ? "Your"
             : game.player2.username + "'s"
-          : game.turn === 1
+          : game.turn === 2
           ? "Your"
           : game.player1.username + "'s"}{" "}
         Turn

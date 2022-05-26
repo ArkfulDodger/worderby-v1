@@ -22,7 +22,7 @@ const GameScreen = ({
     params: { gameData },
   },
 }) => {
-  console.log("gameData:", gameData);
+  // console.log("gameData:", gameData);
   // context variables
   const { user, setUser } = useContext(UserContext);
   const URL = useContext(UrlContext);
@@ -33,37 +33,17 @@ const GameScreen = ({
   const [alertMessage, setAlertMessage] = useState("");
   const [game, setGame] = useState(gameData);
   console.log("game:", game);
-  const {
-    is_over: isOver = false,
-    turn = 1,
-    player1 = {},
-    player2 = {},
-  } = game;
+  const { is_over: isOver, turn, player1, player2 } = game;
   const mwURL = useMWAPI;
 
   const isOdd = (num) => !!(num % 2);
-  const isPlayerTurn = () => {
-    return (
-      (player1.id === user.id && isOdd(turn)) ||
-      (player2.id === user.id && !isOdd(turn))
-    );
-  };
+  const isPlayerTurn =
+    (player1.id === user.id && isOdd(turn)) ||
+    (player2.id === user.id && !isOdd(turn));
 
   const [playerInput, setPlayerInput] = useState("");
   const [pNum, setPNum] = useState(1);
   //#endregion
-
-  // load the game, and set loading to false after success
-  // useEffect(() => {
-  //   fetch(URL + `/games/${gameId ? gameId : "current"}`)
-  //     .then((res) => res.json())
-  //     .then((gameData) => {
-  //       console.log("got game data");
-  //       setGame(gameData);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => console.log(error.message));
-  // }, []);
 
   //#region Game Actions
   const getWordToSubmit = () => {
