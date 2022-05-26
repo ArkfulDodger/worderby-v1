@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 
 const FriendRankingsScreen = (props) => {
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Friend Rankings</Text>
     </View>
   );
