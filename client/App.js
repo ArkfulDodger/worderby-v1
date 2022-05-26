@@ -11,6 +11,7 @@ import {
   StatusBar,
 } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import LinearGradient from "react-native-linear-gradient";
 import useURL from "./src/hooks/useURL";
 import useEmulator from "./src/hooks/useEmulator";
@@ -45,7 +46,7 @@ const App = () => {
             r.ok
               ? r.json().then((userData) => {
                   console.log(Platform.OS, "user:", userData);
-                  // setUser(userData);
+                  setUser(userData);
                   setTimeout(() => setIsLoading(false), 1000);
                 })
               : console.log(r)
@@ -57,27 +58,29 @@ const App = () => {
   return (
     <EmulatorContext.Provider value={isEmulator}>
       <UserContext.Provider value={user}>
-        <View style={styles.fullScreen}>
-          <LinearGradient
-            colors={["#FFFFFF", "#FFE2CD"]}
-            style={styles.fullScreen}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-          >
-            {
-              isLoading ? (
-                <LoadingScreen />
-              ) : user ? (
-                <HomeStack />
-              ) : (
-                <AuthStack />
-              )
-              // <LoginScreen />
-              // <RegistrationScreen />
-              // <GameScreen user={user} isEmulator={isEmulator} />
-            }
-          </LinearGradient>
-        </View>
+        <SafeAreaProvider>
+          <View style={styles.fullScreen}>
+            <LinearGradient
+              colors={["#FFFFFF", "#FFE2CD"]}
+              style={styles.fullScreen}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+            >
+              {
+                isLoading ? (
+                  <LoadingScreen />
+                ) : user ? (
+                  <HomeStack />
+                ) : (
+                  <AuthStack />
+                )
+                // <LoginScreen />
+                // <RegistrationScreen />
+                // <GameScreen user={user} isEmulator={isEmulator} />
+              }
+            </LinearGradient>
+          </View>
+        </SafeAreaProvider>
       </UserContext.Provider>
     </EmulatorContext.Provider>
   );
