@@ -14,13 +14,13 @@ const HomeTabsScreen = (props) => {
     <Tab.Navigator
       initialRouteName="YourRankings"
       screenOptions={{
-        swipeEnabled: false,
+        // swipeEnabled: false,
         lazy: true,
       }}
     >
-      <Tab.Screen name="YourRankings" component={YourRankingsScreen} />
-      <Tab.Screen name="FriendRankings" component={FriendRankingsScreen} />
       <Tab.Screen name="GlobalRankings" component={GlobalRankingsScreen} />
+      <Tab.Screen name="FriendRankings" component={FriendRankingsScreen} />
+      <Tab.Screen name="YourRankings" component={YourRankingsScreen} />
     </Tab.Navigator>
     // </SafeAreaView>
   );

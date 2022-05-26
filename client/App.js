@@ -66,18 +66,13 @@ const App = () => {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
             >
-              {
-                isLoading ? (
-                  <LoadingScreen />
-                ) : user ? (
-                  <HomeStack />
-                ) : (
-                  <AuthStack />
-                )
-                // <LoginScreen />
-                // <RegistrationScreen />
-                // <GameScreen user={user} isEmulator={isEmulator} />
-              }
+              {isLoading ? (
+                <LoadingScreen />
+              ) : user ? (
+                <HomeStack />
+              ) : (
+                <AuthStack />
+              )}
             </LinearGradient>
           </View>
         </SafeAreaProvider>
