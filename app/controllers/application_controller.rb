@@ -10,9 +10,11 @@ class ApplicationController < ActionController::API
 
   def authorize
     #temporarily always authorize user to first user for dev testing
-    @current_user = User.first
+    # @current_user = User.first
 
-    # @current_user = User.find_by(id: session[:user_id])
+    @current_user = User.find_by(id: session[:user_id])
+
+    # byebug
 
     unless @current_user
       render json: { error: 'Not authorized' }, status: :unauthorized
