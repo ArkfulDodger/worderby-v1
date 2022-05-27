@@ -5,7 +5,7 @@ import { UserContext, UrlContext } from "../../../App";
 import GText from "../tools/GText";
 
 const GameCard = ({ game: { item: game } }) => {
-  console.log("game", game);
+  // console.log("game", game);
 
   const URL = useContext(UrlContext);
   const navigation = useNavigation();

@@ -4,16 +4,24 @@ import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../App";
 import GText from "../components/tools/GText";
 import GameCard from "../components/home/GameCard";
+import {
+  useActionCable,
+  useChannel,
+} from "@aersoftware/react-use-action-cable";
 
 const HomeScreen = (props) => {
   const navigation = useNavigation();
+
   const { user, setUser } = useContext(UserContext);
+  // console.log("home screen user:", user);
+
   const URL = useContext(UrlContext);
-  console.log("url to log out:", URL);
-  console.log("home screen user:", user);
+
+  const { actionCable } = useActionCable(URL + "/cable");
+  const { subscribe, unsubscribe, send } = useChannel(actionCable);
 
   const renderGameCard = (game) => {
-    console.log("rendered game:", game.item.player1.id);
+    // console.log("rendered game:", game.item.player1.id);
     return <GameCard game={game} />;
   };
 

@@ -3,7 +3,7 @@ import { Platform } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
 function useURL(isEmulator = true) {
-  console.log("ISEMULATOR:", isEmulator);
+  // console.log("ISEMULATOR:", isEmulator);
   if (isEmulator) {
     return Platform.OS === "ios"
       ? "http://localhost:3000"
