@@ -15,6 +15,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import LinearGradient from "react-native-linear-gradient";
 import useURL from "./src/hooks/useURL";
 import useEmulator from "./src/hooks/useEmulator";
+import useActionCable from "./src/hooks/useActionCable";
+import useChannel from "./src/hooks/useChannel";
 import LoginScreen from "./src/screens/LoginScreen";
 import LoadingScreen from "./src/screens/LoadingScreen";
 import GameScreen from "./src/screens/GameScreen";
