@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :messages, only: %i[index create]
+  # resources :messages, only: %i[index create]
+  # resources :channels
   mount ActionCable.server => '/cable'
   resources :users, only: %i[index]
   resources :words, only: %i[create]

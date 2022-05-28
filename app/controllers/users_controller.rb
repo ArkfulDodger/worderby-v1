@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # TODO: remove index from skip before
   skip_before_action :authorize, only: %i[create index]
+
   # before_action :find_user, only: %i[show]
 
   # GET /users
@@ -13,6 +14,7 @@ class UsersController < ApplicationController
   def create
     new_user = User.create!(user_params)
     session[:user_id] = new_user.id
+    cookies.signed[:user_id] = new_user.id
     render json: new_user, status: :created
   end
 

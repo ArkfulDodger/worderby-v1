@@ -4,24 +4,35 @@ import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../App";
 import GText from "../components/tools/GText";
 import GameCard from "../components/home/GameCard";
-import {
-  useActionCable,
-  useChannel,
-} from "@aersoftware/react-use-action-cable";
+// import {
+//   useActionCable,
+//   useChannel,
+// } from "@aersoftware/react-use-action-cable";
 
 const HomeScreen = (props) => {
   const navigation = useNavigation();
-
   const { user, setUser } = useContext(UserContext);
-  // console.log("home screen user:", user);
-
   const URL = useContext(UrlContext);
+  // const WSURL = URL.replace(/https?:\/\//, "ws://");
+  // const { actionCable } = useActionCable(WSURL + "/cable", true);
+  // const { subscribe, unsubscribe, send } = useChannel(actionCable, true);
 
-  const { actionCable } = useActionCable(URL + "/cable");
-  const { subscribe, unsubscribe, send } = useChannel(actionCable);
+  // useEffect(() => {
+  //   subscribe(
+  //     {
+  //       channel: "TurnChannel",
+  //     },
+  //     {
+  //       received: (data) => console.log(data),
+  //       // Custom callbacks can be added for 'initialized', 'connected', and 'disconnected'
+  //     }
+  //   );
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   const renderGameCard = (game) => {
-    // console.log("rendered game:", game.item.player1.id);
     return <GameCard game={game} />;
   };
 
@@ -40,6 +51,15 @@ const HomeScreen = (props) => {
       .catch((error) => alert(error.message));
   };
 
+  const onSendPress = () => {
+    console.log("Send Press Clicked");
+    // send({
+    //   action: "ping",
+    //   payload: { test: "Hello my dear" },
+    //   useQueue: false,
+    // });
+  };
+
   return (
     <View
       style={{
@@ -50,6 +70,7 @@ const HomeScreen = (props) => {
       }}
     >
       <Text>Home Games</Text>
+      <Button title="Send Ping" onPress={onSendPress} />
       <Button
         title="StartNewGame"
         onPress={() => navigation.navigate("StartNewGame")}

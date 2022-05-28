@@ -10,6 +10,7 @@ gem 'open-uri'
 
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# gem 'knock', '~> 2.1.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
