@@ -3,6 +3,8 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
+      puts '------------connect fired--------------'
+      puts 'connections: ' + ActionCable.server.connections.length.to_s
       self.current_user = find_verified_user
     end
 
