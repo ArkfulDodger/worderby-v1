@@ -7,9 +7,14 @@ class TurnChannel < ApplicationCable::Channel
     # Message.create(content: data['content'])
   end
 
-  def shoutout
+  def shoutout(args)
     puts '---------------Shoutout Invoked---------------'
-    puts params
+    puts 'params: ' + params.to_s
+    puts 'args: ' + args.to_s
+    ActionCable.server.broadcast(
+      "turn_channel_#{current_user.id}",
+      { body: args['text'] }
+    )
   end
 
   def unsubscribed
