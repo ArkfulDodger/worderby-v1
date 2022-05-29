@@ -7,7 +7,8 @@ class GameSerializer < ActiveModel::Serializer
              :num_rounds,
              :round,
              :turn,
-             :is_single_player
+             :is_single_player,
+             :is_word_played_this_turn
 
   belongs_to :player1
   belongs_to :player2

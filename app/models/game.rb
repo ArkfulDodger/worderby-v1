@@ -26,6 +26,10 @@ class Game < ApplicationRecord
     }
   end
 
+  def is_word_played_this_turn
+    words.last.round_played == round && words.last.turn_played == turn
+  end
+
   def score(word_score)
     if turn == 1
       update(player1_score: player1_score + word_score)

@@ -136,10 +136,9 @@ const GameScreen = ({
   };
 
   const isOtherTurnPlayedMessage = (message) => {
-    console.log(Platform.OS + ": " + "message:", message);
-    console.log(Platform.OS + " isPlayerTurn:" + isPlayerTurn);
-    console.log(Platform.OS + " message player:" + message.message.player);
-    console.log(Platform.OS + " user.id:" + user.id);
+    // console.log(Platform.OS + ": " + "message:", message);
+    // console.log(Platform.OS + " message player:" + message.message.player);
+    // console.log(Platform.OS + " user.id:" + user.id);
     if (
       message.message.body === "turn played" &&
       message.message.player !== user.id
@@ -154,8 +153,6 @@ const GameScreen = ({
     const wordThisRound = game.words.find(
       (word) => word.round_played === round && word.turn_played === turn
     );
-    console.log("word this round:", wordThisRound);
-    console.log("last game word:", game.words[game.words.length - 1]);
 
     return !!wordThisRound;
   }
