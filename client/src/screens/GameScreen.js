@@ -67,13 +67,17 @@ const GameScreen = ({
     // const serverMessagesList = [];
 
     wsInit.onopen = () => {
-      console.log("--------WebSocketServer is Connected--------");
+      console.log(
+        Platform.OS + ": " + "--------WebSocketServer is Connected--------"
+      );
       setIsServerConnected(true);
       // setDisableButton(false);
     };
 
     wsInit.onclose = (e) => {
-      console.log("--------WebSocket Server Disconnected--------");
+      console.log(
+        Platform.OS + ": " + "--------WebSocket Server Disconnected--------"
+      );
       setIsServerConnected(false);
       // setDisableButton(true);
     };
@@ -87,11 +91,12 @@ const GameScreen = ({
       if (isPing(JSON.parse(e.data))) {
         // console.log("received ping");
       } else if (JSON.parse(e.data).type === "welcome") {
-        console.log("Successfully Connected");
+        console.log(Platform.OS + ": " + "Successfully Connected");
       } else if (JSON.parse(e.data).type === "confirm_subscription") {
-        console.log("Successfully Subscribed");
+        console.log(Platform.OS + ": " + "Successfully Subscribed");
       } else if (isOtherTurnPlayedMessage(JSON.parse(e.data))) {
-        console.log("instigating game refresh");
+        refreshGame();
+        console.log(Platform.OS + ": " + "instigating game refresh");
       }
       // serverMessagesList.push(e.data);
       // setServerMessages([...serverMessagesList]);
@@ -99,17 +104,17 @@ const GameScreen = ({
 
     setTimeout(() => {
       subscribe();
-    }, 100);
+    }, 500);
 
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    console.log("GAME UPDATED:", game);
+    console.log(Platform.OS + ": " + "GAME UPDATED:", game);
   }, [game]);
 
   useEffect(() => {
-    console.log("USER UPDATED:", user);
+    console.log(Platform.OS + ": " + "USER UPDATED:", user);
   }, [user]);
 
   const isPing = (message) => {
@@ -128,9 +133,11 @@ const GameScreen = ({
   };
 
   const isOtherTurnPlayedMessage = (message) => {
-    console.log("message:", message);
+    console.log(Platform.OS + ": " + "message:", message);
+    console.log(Platform.OS + " isPlayerTurn:" + isPlayerTurn);
+    console.log(Platform.OS + " message player:" + message.message.player);
+    console.log(Platform.OS + " user.id:" + user.id);
     if (
-      !isPlayerTurn &&
       message.message.body === "turn played" &&
       message.message.player !== user.id
     ) {
@@ -167,8 +174,8 @@ const GameScreen = ({
   };
 
   const unsubscribe = () => {
-    console.log("Unsubscribing...");
-    console.log("ws:", ws);
+    console.log(Platform.OS + ": " + "Unsubscribing...");
+    console.log(Platform.OS + ": " + "ws:", ws);
 
     debugger;
 
@@ -198,6 +205,13 @@ const GameScreen = ({
     return data[0].meta.stems.find(
       (s) => s.toLowerCase() === word.toLowerCase()
     );
+  };
+
+  const refreshGame = () => {
+    fetch(URL + `/games/${game.id}`)
+      .then((res) => res.json())
+      .then((refreshedGameData) => setGame(refreshedGameData))
+      .catch((error) => console.log(error.message));
   };
 
   const isPlayableWordResponse = (data) => {
@@ -248,7 +262,6 @@ const GameScreen = ({
     })
       .then((res) => res.json())
       .then((updatedGameData) => {
-        console.log(updatedGameData);
         setGame(updatedGameData);
         submitWordPlayedMessage();
       })
@@ -287,7 +300,7 @@ const GameScreen = ({
     })
       .then((res) => res.json())
       .then((updatedGameData) => {
-        console.log("BOT GAME DATA RETURNED");
+        console.log(Platform.OS + ": " + "BOT GAME DATA RETURNED");
         setGame(updatedGameData);
         setAlertMessage("");
       })
@@ -323,7 +336,7 @@ const GameScreen = ({
     })
       .then((res) => res.json())
       .then((newGameData) => {
-        console.log("newGameData:", newGameData);
+        // console.log("newGameData:", newGameData);
         setGame(newGameData);
         setAlertMessage("");
       })

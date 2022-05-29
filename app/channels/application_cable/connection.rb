@@ -6,6 +6,7 @@ module ApplicationCable
       puts '------------connect fired--------------'
       puts 'connections: ' + ActionCable.server.connections.length.to_s
       self.current_user = find_verified_user
+      puts 'connection user: ' + self.current_user.username.to_s
     end
 
     private
