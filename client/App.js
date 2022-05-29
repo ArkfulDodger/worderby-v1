@@ -51,7 +51,7 @@ const App = () => {
           .then((r) => {
             if (r.ok) {
               r.json().then((userData) => {
-                console.log(Platform.OS, "user:", userData);
+                console.log(Platform.OS, "user:", userData.username);
                 setUser(userData);
                 setTimeout(() => setIsLoading(false), 1000);
               });

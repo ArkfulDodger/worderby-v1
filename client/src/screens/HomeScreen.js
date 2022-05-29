@@ -13,23 +13,19 @@ import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../App";
 import GText from "../components/tools/GText";
 import GameCard from "../components/home/GameCard";
-// import {
-//   useActionCable,
-//   useChannel,
-// } from "@aersoftware/react-use-action-cable";
 
 const HomeScreen = (props) => {
   const navigation = useNavigation();
   const { user, setUser } = useContext(UserContext);
   const URL = useContext(UrlContext);
-  const WSURL = URL.replace(/https?:\/\//, "ws://");
 
   //#region WebSocket
 
+  const WSURL = URL.replace(/https?:\/\//, "ws://");
   const [serverState, setServerState] = React.useState("Loading...");
-  const [messageText, setMessageText] = React.useState("");
-  const [disableButton, setDisableButton] = React.useState(true);
-  const [inputFieldEmpty, setInputFieldEmpty] = React.useState(true);
+  const [messageText, setMessageText] = useState("");
+  const [disableButton, setDisableButton] = useState(true);
+  const [inputFieldEmpty, setInputFieldEmpty] = useState(true);
   const [serverMessages, setServerMessages] = React.useState([]);
   const [ws, setWs] = useState();
   // var ws = useRef(null);
@@ -37,7 +33,7 @@ const HomeScreen = (props) => {
   useEffect(() => {
     wsInit = new WebSocket(WSURL + "/cable");
     setWs(wsInit);
-    console.log("ws", wsInit);
+    // console.log("ws", wsInit);
 
     const serverMessagesList = [];
 
@@ -59,6 +55,8 @@ const HomeScreen = (props) => {
       serverMessagesList.push(e.data);
       setServerMessages([...serverMessagesList]);
     };
+
+    // return () => unsubscribe();
   }, []);
 
   const submitMessage = () => {
@@ -72,13 +70,38 @@ const HomeScreen = (props) => {
     setInputFieldEmpty(true);
   };
 
-  //#endregion
+  const subscribe = () => {
+    console.log("Subscribe Clicked");
+    const subscription = {
+      command: "subscribe",
+      identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
+    };
+
+    ws.send(JSON.stringify(subscription));
+  };
+
+  const unsubscribe = () => {
+    console.log("Unsubscribing");
+
+    debugger;
+
+    const closeSubscription = {
+      command: "unsubscribe",
+      identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
+    };
+
+    ws.send(JSON.stringify(closeSubscription));
+  };
+
+  // #endregion
 
   const renderGameCard = (game) => {
     return <GameCard game={game} />;
   };
 
   const onLogoutPress = () => {
+    unsubscribe();
+
     fetch(URL + "/logout", {
       method: "DELETE",
     })
@@ -91,16 +114,6 @@ const HomeScreen = (props) => {
         }
       })
       .catch((error) => alert(error.message));
-  };
-
-  const subscribe = () => {
-    console.log("Subscribe Clicked");
-    const subscription = {
-      command: "subscribe",
-      identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
-    };
-
-    ws.send(JSON.stringify(subscription));
   };
 
   return (
@@ -164,6 +177,7 @@ const HomeScreen = (props) => {
           title={"Subscribe"}
           // disabled={disableButton || inputFieldEmpty}
         />
+        <Button title="Logout" onPress={onLogoutPress} />
       </View>
     </View>
   );

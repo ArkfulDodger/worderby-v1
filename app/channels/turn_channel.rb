@@ -19,6 +19,7 @@ class TurnChannel < ApplicationCable::Channel
 
   def unsubscribed
     puts '---------------Unsubscribed---------------'
+    stop_stream_from "turn_channel_#{33}"
     # Any cleanup needed when channel is unsubscribed
   end
 end
