@@ -21,77 +21,77 @@ const HomeScreen = (props) => {
 
   //#region WebSocket
 
-  const WSURL = URL.replace(/https?:\/\//, "ws://");
-  const [serverState, setServerState] = React.useState("Loading...");
-  const [messageText, setMessageText] = useState("");
-  const [disableButton, setDisableButton] = useState(true);
-  const [inputFieldEmpty, setInputFieldEmpty] = useState(true);
-  const [serverMessages, setServerMessages] = React.useState([]);
-  const [ws, setWs] = useState();
-  // var ws = useRef(null);
+  // const WSURL = URL.replace(/https?:\/\//, "ws://");
+  // const [serverState, setServerState] = React.useState("Loading...");
+  // const [messageText, setMessageText] = useState("");
+  // const [disableButton, setDisableButton] = useState(true);
+  // const [inputFieldEmpty, setInputFieldEmpty] = useState(true);
+  // const [serverMessages, setServerMessages] = React.useState([]);
+  // const [ws, setWs] = useState();
+  // // var ws = useRef(null);
 
-  useEffect(() => {
-    wsInit = new WebSocket(WSURL + "/cable");
-    setWs(wsInit);
-    // console.log("ws", wsInit);
+  // useEffect(() => {
+  //   wsInit = new WebSocket(WSURL + "/cable");
+  //   setWs(wsInit);
+  //   // console.log("ws", wsInit);
 
-    const serverMessagesList = [];
+  //   const serverMessagesList = [];
 
-    wsInit.onopen = () => {
-      setServerState("Connected to the server");
-      setDisableButton(false);
-    };
+  //   wsInit.onopen = () => {
+  //     setServerState("Connected to the server");
+  //     setDisableButton(false);
+  //   };
 
-    wsInit.onclose = (e) => {
-      setServerState("Disconnected. Check internet or server.");
-      setDisableButton(true);
-    };
+  //   wsInit.onclose = (e) => {
+  //     setServerState("Disconnected. Check internet or server.");
+  //     setDisableButton(true);
+  //   };
 
-    wsInit.onerror = (e) => {
-      setServerState(e.message);
-    };
+  //   wsInit.onerror = (e) => {
+  //     setServerState(e.message);
+  //   };
 
-    wsInit.onmessage = (e) => {
-      serverMessagesList.push(e.data);
-      setServerMessages([...serverMessagesList]);
-    };
+  //   wsInit.onmessage = (e) => {
+  //     serverMessagesList.push(e.data);
+  //     setServerMessages([...serverMessagesList]);
+  //   };
 
-    // return () => unsubscribe();
-  }, []);
+  //   // return () => unsubscribe();
+  // }, []);
 
-  const submitMessage = () => {
-    const message = {
-      identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
-      command: "message",
-      data: JSON.stringify({ action: "shoutout", text: messageText }),
-    };
-    ws.send(JSON.stringify(message));
-    setMessageText("");
-    setInputFieldEmpty(true);
-  };
+  // const submitMessage = () => {
+  //   const message = {
+  //     identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
+  //     command: "message",
+  //     data: JSON.stringify({ action: "shoutout", text: messageText }),
+  //   };
+  //   ws.send(JSON.stringify(message));
+  //   setMessageText("");
+  //   setInputFieldEmpty(true);
+  // };
 
-  const subscribe = () => {
-    console.log("Subscribe Clicked");
-    const subscription = {
-      command: "subscribe",
-      identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
-    };
+  // const subscribe = () => {
+  //   console.log("Subscribe Clicked");
+  //   const subscription = {
+  //     command: "subscribe",
+  //     identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
+  //   };
 
-    ws.send(JSON.stringify(subscription));
-  };
+  //   ws.send(JSON.stringify(subscription));
+  // };
 
-  const unsubscribe = () => {
-    console.log("Unsubscribing");
+  // const unsubscribe = () => {
+  //   console.log("Unsubscribing");
 
-    debugger;
+  //   debugger;
 
-    const closeSubscription = {
-      command: "unsubscribe",
-      identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
-    };
+  //   const closeSubscription = {
+  //     command: "unsubscribe",
+  //     identifier: JSON.stringify({ channel: "TurnChannel", id: user.id }),
+  //   };
 
-    ws.send(JSON.stringify(closeSubscription));
-  };
+  //   ws.send(JSON.stringify(closeSubscription));
+  // };
 
   // #endregion
 
@@ -100,7 +100,7 @@ const HomeScreen = (props) => {
   };
 
   const onLogoutPress = () => {
-    unsubscribe();
+    // unsubscribe();
 
     fetch(URL + "/logout", {
       method: "DELETE",
@@ -116,103 +116,107 @@ const HomeScreen = (props) => {
       .catch((error) => alert(error.message));
   };
 
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          height: 30,
-          backgroundColor: "#eeceff",
-          padding: 5,
-        }}
-      >
-        <Text>{serverState}</Text>
-      </View>
-      <View
-        style={{
-          backgroundColor: "#ffeece",
-          padding: 5,
-          height: 500,
-        }}
-      >
-        <ScrollView>
-          {serverMessages.map((item, ind) => {
-            return <Text key={ind}>{item}</Text>;
-          })}
-        </ScrollView>
-      </View>
-      <View
-        style={{
-          height: 40,
-          flexDirection: "row",
-        }}
-      >
-        <TextInput
-          style={{
-            borderWidth: 1,
-            borderColor: "black",
-            flexGrow: 1,
-            padding: 5,
-          }}
-          placeholder={"Add Message"}
-          onChangeText={(text) => {
-            setMessageText(text);
-            setInputFieldEmpty(text.length > 0 ? false : true);
-          }}
-          value={messageText}
-        />
-        <Button
-          onPress={submitMessage}
-          title={"Submit"}
-          disabled={disableButton || inputFieldEmpty}
-        />
-      </View>
-      <View
-        style={{
-          height: 40,
-          flexDirection: "row",
-        }}
-      >
-        <Button
-          onPress={subscribe}
-          title={"Subscribe"}
-          // disabled={disableButton || inputFieldEmpty}
-        />
-        <Button title="Logout" onPress={onLogoutPress} />
-      </View>
-    </View>
-  );
+  //#region WebSocket Test Page
 
   // return (
-  //   <View
-  //     style={{
-  //       flex: 1,
-  //       justifyContent: "center",
-  //       alignItems: "center",
-  //       padding: 10,
-  //     }}
-  //   >
-  //     <Text>Home Games</Text>
-  //     <Button title="Send Ping" onPress={onSendPress} />
-  //     <Button
-  //       title="StartNewGame"
-  //       onPress={() => navigation.navigate("StartNewGame")}
-  //     />
-  //     <Button
-  //       title="UserProfile"
-  //       onPress={() => navigation.navigate("UserProfile")}
-  //     />
-  //     <Button
-  //       title="Settings"
-  //       onPress={() => navigation.navigate("Settings")}
-  //     />
-  //     <Button title="Logout" onPress={onLogoutPress} />
-  //     <FlatList
-  //       data={user.current_games}
-  //       renderItem={renderGameCard}
-  //       keyExtractor={(game) => game.id}
-  //     />
+  //   <View style={styles.container}>
+  //     <View
+  //       style={{
+  //         height: 30,
+  //         backgroundColor: "#eeceff",
+  //         padding: 5,
+  //       }}
+  //     >
+  //       <Text>{serverState}</Text>
+  //     </View>
+  //     <View
+  //       style={{
+  //         backgroundColor: "#ffeece",
+  //         padding: 5,
+  //         height: 500,
+  //       }}
+  //     >
+  //       <ScrollView>
+  //         {serverMessages.map((item, ind) => {
+  //           return <Text key={ind}>{item}</Text>;
+  //         })}
+  //       </ScrollView>
+  //     </View>
+  //     <View
+  //       style={{
+  //         height: 40,
+  //         flexDirection: "row",
+  //       }}
+  //     >
+  //       <TextInput
+  //         style={{
+  //           borderWidth: 1,
+  //           borderColor: "black",
+  //           flexGrow: 1,
+  //           padding: 5,
+  //         }}
+  //         placeholder={"Add Message"}
+  //         onChangeText={(text) => {
+  //           setMessageText(text);
+  //           setInputFieldEmpty(text.length > 0 ? false : true);
+  //         }}
+  //         value={messageText}
+  //       />
+  //       <Button
+  //         onPress={submitMessage}
+  //         title={"Submit"}
+  //         disabled={disableButton || inputFieldEmpty}
+  //       />
+  //     </View>
+  //     <View
+  //       style={{
+  //         height: 40,
+  //         flexDirection: "row",
+  //       }}
+  //     >
+  //       <Button
+  //         onPress={subscribe}
+  //         title={"Subscribe"}
+  //         // disabled={disableButton || inputFieldEmpty}
+  //       />
+  //       <Button title="Logout" onPress={onLogoutPress} />
+  //     </View>
   //   </View>
   // );
+
+  //#endregion
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 10,
+      }}
+    >
+      <Text>Home Games</Text>
+      {/* <Button title="Send Ping" onPress={onSendPress} /> */}
+      <Button
+        title="StartNewGame"
+        onPress={() => navigation.navigate("StartNewGame")}
+      />
+      <Button
+        title="UserProfile"
+        onPress={() => navigation.navigate("UserProfile")}
+      />
+      <Button
+        title="Settings"
+        onPress={() => navigation.navigate("Settings")}
+      />
+      <Button title="Logout" onPress={onLogoutPress} />
+      <FlatList
+        data={user.current_games}
+        renderItem={renderGameCard}
+        keyExtractor={(game) => game.id}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

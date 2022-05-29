@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -26,13 +26,13 @@ const GameScreen = ({
   // context variables
   const { user, setUser } = useContext(UserContext);
   const URL = useContext(UrlContext);
-  console.log("user:", user);
+  // console.log("CURRENT GAME user:", user);
 
   //#region STATE & Variables
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [game, setGame] = useState(gameData);
-  console.log("game:", game);
+
   const { is_over: isOver, turn, player1, player2 } = game;
   const mwURL = useMWAPI;
 
@@ -44,6 +44,146 @@ const GameScreen = ({
   const [playerInput, setPlayerInput] = useState("");
   const [pNum, setPNum] = useState(1);
   //#endregion
+
+  //#region WebSocket
+
+  const WSURL = URL.replace(/https?:\/\//, "ws://");
+  const [isServerConnected, setIsServerConnected] = useState(false);
+  // const [messageText, setMessageText] = useState("");
+  // const [disableButton, setDisableButton] = useState(true);
+  // const [inputFieldEmpty, setInputFieldEmpty] = useState(true);
+  // const [serverMessages, setServerMessages] = React.useState([]);
+  // const [ws, setWs] = useState();
+  var ws = useRef();
+
+  useEffect(() => {
+    // create web socket connection
+    wsInit = new WebSocket(WSURL + "/cable");
+
+    // set state to make it accessible
+    ws.current = wsInit;
+    // setWs(wsInit);
+
+    // const serverMessagesList = [];
+
+    wsInit.onopen = () => {
+      console.log("--------WebSocketServer is Connected--------");
+      setIsServerConnected(true);
+      // setDisableButton(false);
+    };
+
+    wsInit.onclose = (e) => {
+      console.log("--------WebSocket Server Disconnected--------");
+      setIsServerConnected(false);
+      // setDisableButton(true);
+    };
+
+    wsInit.onerror = (e) => {
+      console.error("WebSocket Error:", e.message);
+      // setIsServerConnected(e.message);
+    };
+
+    wsInit.onmessage = (e) => {
+      if (isPing(JSON.parse(e.data))) {
+        // console.log("received ping");
+      } else if (JSON.parse(e.data).type === "welcome") {
+        console.log("Successfully Connected");
+      } else if (JSON.parse(e.data).type === "confirm_subscription") {
+        console.log("Successfully Subscribed");
+      } else if (isOtherTurnPlayedMessage(JSON.parse(e.data))) {
+        console.log("instigating game refresh");
+      }
+      // serverMessagesList.push(e.data);
+      // setServerMessages([...serverMessagesList]);
+    };
+
+    setTimeout(() => {
+      subscribe();
+    }, 100);
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    console.log("GAME UPDATED:", game);
+  }, [game]);
+
+  useEffect(() => {
+    console.log("USER UPDATED:", user);
+  }, [user]);
+
+  const isPing = (message) => {
+    return message.type === "ping";
+  };
+
+  const getPairingId = () => {
+    const p1id = game.player1.id;
+    const p2id = game.player2.id;
+
+    if (p1id < p2id) {
+      return `${p1id}_${p2id}`;
+    } else {
+      return `${p2id}_${p1id}`;
+    }
+  };
+
+  const isOtherTurnPlayedMessage = (message) => {
+    console.log("message:", message);
+    if (
+      !isPlayerTurn &&
+      message.message.body === "turn played" &&
+      message.message.player !== user.id
+    ) {
+      return true;
+    }
+  };
+
+  const submitWordPlayedMessage = (action, messageObj) => {
+    const message = {
+      identifier: JSON.stringify({
+        channel: "TurnChannel",
+        id: getPairingId(),
+      }),
+      command: "message",
+      data: JSON.stringify({ action: "turn_played" }),
+    };
+    ws.current.send(JSON.stringify(message));
+    // setMessageText("");
+    // setInputFieldEmpty(true);
+  };
+
+  const subscribe = () => {
+    console.log("Subscribing...");
+    // console.log("game:", game);
+    const subscription = {
+      command: "subscribe",
+      identifier: JSON.stringify({
+        channel: "TurnChannel",
+        id: getPairingId(),
+      }),
+    };
+
+    ws.current.send(JSON.stringify(subscription));
+  };
+
+  const unsubscribe = () => {
+    console.log("Unsubscribing...");
+    console.log("ws:", ws);
+
+    debugger;
+
+    const closeSubscription = {
+      command: "unsubscribe",
+      identifier: JSON.stringify({
+        channel: "TurnChannel",
+        id: getPairingId(),
+      }),
+    };
+
+    ws.current.send(JSON.stringify(closeSubscription));
+  };
+
+  // #endregion
 
   //#region Game Actions
   const getWordToSubmit = () => {
@@ -110,6 +250,7 @@ const GameScreen = ({
       .then((updatedGameData) => {
         console.log(updatedGameData);
         setGame(updatedGameData);
+        submitWordPlayedMessage();
       })
       .catch((error) => console.log(error.message));
   };
@@ -146,7 +287,7 @@ const GameScreen = ({
     })
       .then((res) => res.json())
       .then((updatedGameData) => {
-        console.log("RETURNED BOT GAME DATA:", updatedGameData);
+        console.log("BOT GAME DATA RETURNED");
         setGame(updatedGameData);
         setAlertMessage("");
       })
