@@ -26,12 +26,20 @@ class Game < ApplicationRecord
     }
   end
 
-  def score_and_progress(word_score)
+  def score(word_score)
     if turn == 1
-      update(player1_score: player1_score + word_score, turn: 2)
+      update(player1_score: player1_score + word_score)
     else
       update(player2_score: player2_score + word_score)
+    end
+  end
 
+  def progress()
+    puts '!!!!!PROGRESS INVOKED!!!!!!!'
+
+    if turn == 1
+      update(turn: 2)
+    else
       if round == num_rounds
         update(is_over: true)
       else

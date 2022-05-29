@@ -8,6 +8,7 @@ const GameMenu = ({
   game,
   user,
   isPlayerTurn,
+  isReadyToContinue,
   onWordSubmit,
   onContinueGame,
   onNewGame,
@@ -18,10 +19,14 @@ const GameMenu = ({
         <View style={{ width: 100 }}>
           {game.is_over ? (
             <NewGameButton onNewGame={onNewGame} />
-          ) : isPlayerTurn ? (
+          ) : isPlayerTurn && !isReadyToContinue ? (
             <SubmitWordButton game={game} onWordSubmit={onWordSubmit} />
           ) : (
-            <ContinueButton onContinueGame={onContinueGame} />
+            <ContinueButton
+              onContinueGame={onContinueGame}
+              isPlayerTurn={isPlayerTurn}
+              isReadyToContinue={isReadyToContinue}
+            />
           )}
         </View>
       </View>

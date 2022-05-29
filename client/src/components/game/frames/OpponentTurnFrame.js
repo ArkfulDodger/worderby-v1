@@ -4,20 +4,28 @@ import OpponentActivityMessage from "../OpponentActivityMessage";
 import WordScore from "../WordScore";
 import FirstWordMessage from "../FirstWordMessage";
 
-const OpponentTurnFrame = ({ game, user }) => {
+const OpponentTurnFrame = ({ game, user, isPlayerTurn, isReadyToContinue }) => {
   const { player1, player2, prompt } = game;
   const opponent = player1.id === user.id ? player2 : player1;
+  const player = player1.id === user.id ? player1 : player2;
+  const playersWords = game.words.filter((word) => word.user_id === user.id);
+  const playerMostRecentWord = playersWords[playersWords.length - 1];
+  // TODO: fix this so it actually looks for word by round/turn, not just last in array
 
   return (
     <View style={styles.screenContainer}>
       <View style={styles.topRight}>
-        <OpponentActivityMessage opponent={opponent} />
+        <OpponentActivityMessage
+          opponent={opponent}
+          isPlayerTurn={isPlayerTurn}
+          isReadyToContinue={isReadyToContinue}
+        />
       </View>
       <View style={styles.centered}>
-        {prompt.is_first_word ? (
+        {!playerMostRecentWord ? (
           <FirstWordMessage opponent={opponent} prompt={prompt} />
         ) : (
-          <WordScore prompt={prompt} />
+          <WordScore prompt={playerMostRecentWord} />
         )}
       </View>
     </View>

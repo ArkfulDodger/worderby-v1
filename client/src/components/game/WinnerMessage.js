@@ -20,9 +20,11 @@ const WinnerMessage = ({ game, user }) => {
               color: isPlayerWinner ? "#DB00FF" : "#CA7900",
             }}
           >
-            {winner.username}
+            {isPlayerWinner ? "You win!" : winner.username}
           </ApMediumText>
-          <ApMediumText style={{ fontSize: 43 }}>wins!</ApMediumText>
+          <ApMediumText style={{ fontSize: 43 }}>
+            {isPlayerWinner ? "" : "wins!"}
+          </ApMediumText>
         </>
       )}
     </View>

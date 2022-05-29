@@ -41,6 +41,9 @@ const GameScreen = ({
     (player1.id === user.id && isOdd(turn)) ||
     (player2.id === user.id && !isOdd(turn));
 
+  const isReadyToContinue = isWordPlayedThisRound();
+  console.log("isReadyToContinue:", isReadyToContinue);
+
   const [playerInput, setPlayerInput] = useState("");
   const [pNum, setPNum] = useState(1);
   //#endregion
@@ -144,6 +147,18 @@ const GameScreen = ({
       return true;
     }
   };
+
+  function isWordPlayedThisRound() {
+    const round = game.round;
+    const turn = game.turn;
+    const wordThisRound = game.words.find(
+      (word) => word.round_played === round && word.turn_played === turn
+    );
+    console.log("word this round:", wordThisRound);
+    console.log("last game word:", game.words[game.words.length - 1]);
+
+    return !!wordThisRound;
+  }
 
   const submitWordPlayedMessage = (action, messageObj) => {
     const message = {
@@ -309,10 +324,35 @@ const GameScreen = ({
 
   const onContinueGame = () => {
     if (game.is_single_player) {
+      setAlertMessage("");
       playBotTurn();
     } else {
       console.log("TODO: progress game for multiplayer");
+      setAlertMessage("");
+      startYourTurn();
     }
+  };
+
+  const startYourTurn = () => {
+    const updates = {
+      turn: game.turn === 1 ? 2 : 1,
+      round: game.turn === 1 ? game.round : game.round + 1,
+    };
+
+    fetch(URL + `/games/${game.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(updates),
+    })
+      .then((res) => res.json())
+      .then((updatedGame) => {
+        setGame(updatedGame);
+        submitWordPlayedMessage();
+      })
+      .catch((error) => console.log(error.message));
   };
 
   const onNewGame = () => {
@@ -362,7 +402,7 @@ const GameScreen = ({
         <View style={{ flex: 1 }}>
           {isOver ? (
             <ResultsFrame game={game} user={user} />
-          ) : isPlayerTurn ? (
+          ) : isPlayerTurn && !isReadyToContinue ? (
             <PlayerTurnFrame
               game={game}
               user={user}
@@ -374,7 +414,12 @@ const GameScreen = ({
               setAlertMessage={setAlertMessage}
             />
           ) : (
-            <OpponentTurnFrame game={game} user={user} />
+            <OpponentTurnFrame
+              game={game}
+              user={user}
+              isPlayerTurn={isPlayerTurn}
+              isReadyToContinue={isReadyToContinue}
+            />
           )}
         </View>
         <View>
@@ -385,6 +430,7 @@ const GameScreen = ({
             onWordSubmit={onWordSubmit}
             onContinueGame={onContinueGame}
             onNewGame={onNewGame}
+            isReadyToContinue={isReadyToContinue}
           />
         </View>
       </View>
