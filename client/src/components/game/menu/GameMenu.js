@@ -12,13 +12,21 @@ const GameMenu = ({
   onWordSubmit,
   onContinueGame,
   onNewGame,
+  rematchOffered,
+  rematchGame,
+  onAcceptRematch,
 }) => {
   return (
     <SafeAreaView style={styles.menuArea}>
       <View style={styles.menu}>
         <View style={{ width: 100 }}>
           {game.is_over ? (
-            <NewGameButton onNewGame={onNewGame} />
+            <NewGameButton
+              onNewGame={onNewGame}
+              rematchOffered={rematchOffered}
+              rematchGame={rematchGame}
+              onAcceptRematch={onAcceptRematch}
+            />
           ) : isPlayerTurn && !isReadyToContinue ? (
             <SubmitWordButton game={game} onWordSubmit={onWordSubmit} />
           ) : (

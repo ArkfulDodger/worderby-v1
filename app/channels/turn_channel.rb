@@ -16,6 +16,32 @@ class TurnChannel < ApplicationCable::Channel
     )
   end
 
+  def rematch_offered(args)
+    puts '---------------Channel: Rematch Offered---------------'
+    puts 'params id: ' + params['id'].to_s
+    puts 'params:' + params.to_s
+    puts 'args:' + args.to_s
+
+    ActionCable.server.broadcast(
+      "turn_channel_#{params['id']}",
+      {
+        body: 'rematch offered',
+        player: current_user.id,
+        game_id: args['game_id']
+      }
+    )
+  end
+
+  def rematch_accepted
+    puts '---------------Channel: Rematch Accepted---------------'
+    puts 'params id: ' + params['id'].to_s
+
+    ActionCable.server.broadcast(
+      "turn_channel_#{params['id']}",
+      { body: 'rematch accepted', player: current_user.id }
+    )
+  end
+
   def unsubscribed
     puts '---------------Unsubscribed---------------'
     puts 'params id: ' + params['id'].to_s

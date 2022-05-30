@@ -1,12 +1,19 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import WinnerMessage from "../WinnerMessage";
+import AlertMessage from "../AlertMessage";
 
-const ResultsFrame = ({ game, user }) => {
+const ResultsFrame = ({ game, user, alertMessage }) => {
   return (
-    <View style={styles.container}>
-      <WinnerMessage game={game} user={user} />
-    </View>
+    <>
+      <View style={{ flex: 1 }}>
+        <AlertMessage alertMessage={alertMessage} />
+      </View>
+      <View style={styles.container}>
+        <WinnerMessage game={game} user={user} />
+      </View>
+      <View style={{ flex: 1 }}></View>
+    </>
   );
 };
 
