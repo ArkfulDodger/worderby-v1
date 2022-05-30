@@ -276,6 +276,11 @@ const GameScreen = ({
       .then((updatedGameData) => {
         setGame(updatedGameData);
         submitWordPlayedMessage();
+        // if (game.is_single_player) {
+        //   setTimeout(() => {
+        //     playBotTurn(updatedGameData);
+        //   }, 1000);
+        // }
       })
       .catch((error) => console.log(error.message));
   };
@@ -294,7 +299,8 @@ const GameScreen = ({
     }
   };
 
-  const playBotTurn = () => {
+  const playBotTurn = (gameData) => {
+    console.log("PLAY BOT TURN CALLED");
     fetch(URL + "/words/bot", {
       method: "POST",
       headers: {
@@ -302,11 +308,11 @@ const GameScreen = ({
         Accept: "application/json",
       },
       body: JSON.stringify({
-        game_id: game.id,
-        round_played: game.round,
-        turn_played: game.turn,
-        user_id: player1.id === user.id ? player1.id : player2.id,
-        prompt_text: game.prompt.text,
+        game_id: gameData.id,
+        round_played: gameData.round,
+        turn_played: gameData.turn,
+        user_id: player1.id === user.id ? player2.id : player1.id,
+        prompt_text: gameData.prompt.text,
         is_first_word: false,
       }),
     })
@@ -322,7 +328,8 @@ const GameScreen = ({
   const onContinueGame = () => {
     if (game.is_single_player) {
       setAlertMessage("");
-      playBotTurn();
+      startYourTurn();
+      // playBotTurn();
     } else {
       console.log("TODO: progress game for multiplayer");
       setAlertMessage("");
@@ -376,6 +383,12 @@ const GameScreen = ({
         // console.log("newGameData:", newGameData);
         setGame(newGameData);
         setAlertMessage("");
+        // if (game.is_single_player && newGameData.player2.id === user.id) {
+        //   console.log("Bot plays first!");
+        //   setTimeout(() => {
+        //     playBotTurn(newGameData);
+        //   }, 1000);
+        // }
       })
       .catch((error) => console.log(error.message));
   };
@@ -416,6 +429,7 @@ const GameScreen = ({
               user={user}
               isPlayerTurn={isPlayerTurn}
               isReadyToContinue={isReadyToContinue}
+              playBotTurn={playBotTurn}
             />
           )}
         </View>

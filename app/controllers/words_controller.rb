@@ -8,7 +8,10 @@ class WordsController < ApplicationController
     new_word = Word.create!(word_params)
     game = new_word.game
     game.score(new_word.score)
-    game.progress if game.round == game.num_rounds && game.turn == 2
+    if (game.round == game.num_rounds && game.turn == 2) ||
+         game.is_single_player
+      game.progress
+    end
 
     render json: game, status: :created
   end
@@ -40,7 +43,6 @@ class WordsController < ApplicationController
     game.progress if game.round == game.num_rounds && game.turn == 2
 
     render json: game, status: :created
-    # render json: { 'message': 'boop, beep' }, status: :created
   end
 
   private
