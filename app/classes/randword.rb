@@ -35,6 +35,11 @@ class Randword
   end
 
   def self.is_word_playable?(word)
+    if word =~ /[^a-z]/
+      puts 'boop bop... found non-standard character'
+      return false
+    end
+
     #confirm word is in dictionary
     uri =
       URI(

@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   # TODO: remove index from skip before
   skip_before_action :authorize, only: %i[index]
-  before_action :find_game, only: %i[update show]
+  before_action :find_game, only: %i[update show destroy]
 
   # GET /games
   def index
@@ -28,6 +28,14 @@ class GamesController < ApplicationController
     render json: @game, status: :accepted
   end
 
+  # DELETE /games/:id
+  def destroy
+    @game.destroy
+
+    head :no_content
+    # render json: @game, status: :accepted
+  end
+
   #temp route for MVP dev
   # GET /games/current
   def current
@@ -48,7 +56,10 @@ class GamesController < ApplicationController
       :turn,
       :player1_score,
       :player2_score,
-      :is_single_player
+      :is_single_player,
+      :is_accepted,
+      :challenger_id,
+      :challengee_id
     )
   end
 

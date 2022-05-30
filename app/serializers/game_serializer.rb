@@ -3,12 +3,15 @@ class GameSerializer < ActiveModel::Serializer
              :player1_score,
              :player2_score,
              :prompt,
+             :is_accepted,
              :is_over,
              :num_rounds,
              :round,
              :turn,
              :is_single_player,
-             :is_word_played_this_turn
+             :is_word_played_this_turn,
+             :challenger_id,
+             :challengee_id
 
   belongs_to :player1
   belongs_to :player2

@@ -19,7 +19,10 @@ class User < ApplicationRecord
           player1_score: game.player1_score,
           player2_score: game.player2_score,
           is_single_player: game.is_single_player,
-          is_word_played_this_turn: game.is_word_played_this_turn
+          is_word_played_this_turn: game.is_word_played_this_turn,
+          is_accepted: game.is_accepted,
+          challenger_id: game.challenger_id,
+          challengee_id: game.challengee_id
         }
       end
   end

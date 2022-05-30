@@ -46,7 +46,7 @@ const HomeScreen = (props) => {
   };
 
   const renderGameCard = (game) => {
-    return <GameCard game={game} />;
+    return <GameCard game={game} refresh={fetchData} />;
   };
 
   const onLogoutPress = () => {

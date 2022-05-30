@@ -1,9 +1,25 @@
 puts '🌱 Seeding..... 🌱'
 
 puts 'Creating users...'
-p1 = User.create(username: 'ArkfulDodger', password: '1234', first_name: 'Noah', last_name: 'Reece', email: 'noahfakeemail@gmail.com', phone: '(123) 456-7890')
+p1 =
+  User.create(
+    username: 'ArkfulDodger',
+    password: '1234',
+    first_name: 'Noah',
+    last_name: 'Reece',
+    email: 'noahfakeemail@gmail.com',
+    phone: '(123) 456-7890'
+  )
 p2 = User.create(username: 'Worderbot', password: '1234', is_bot: true)
-p3 = User.create(username: 'brewchetta', password: '1234', first_name: 'Chett', last_name: 'Tiller', email: 'notchettemail@gmail.com', phone: '(098) 765-4321')
+p3 =
+  User.create(
+    username: 'brewchetta',
+    password: '1234',
+    first_name: 'Chett',
+    last_name: 'Tiller',
+    email: 'notchettemail@gmail.com',
+    phone: '(098) 765-4321'
+  )
 
 puts 'Creating games...'
 game1 =
@@ -16,7 +32,10 @@ game1 =
     turn: 1,
     player1_score: 0,
     player2_score: 0,
-    is_single_player: true
+    is_single_player: true,
+    challenger: p1,
+    challengee: p2,
+    is_accepted: true
   )
 game2 =
   Game.create(
@@ -28,7 +47,10 @@ game2 =
     turn: 1,
     player1_score: 0,
     player2_score: 0,
-    is_single_player: false
+    is_single_player: false,
+    challenger: p1,
+    challengee: p3,
+    is_accepted: false
   )
 
 puts 'Creating prompts...'
