@@ -16,7 +16,16 @@ class GamesController < ApplicationController
 
   # POST /games
   def create
-    new_game = Game.create!(game_params)
+    used_params = game_params
+    puts 'used_params before:' + used_params.to_s
+    if used_params[:is_single_player] && !used_params[:player2_id]
+      bot = User.find_by(is_bot: true)
+      used_params[:player2_id] = bot[:id]
+      used_params[:challengee_id] = bot[:id]
+    end
+    puts 'used_params after:' + used_params.to_s
+
+    new_game = Game.create!(used_params)
     if new_game
       rand_word = Randword.get_random_word
       new_game.words.create!(text: rand_word, is_first_word: true)

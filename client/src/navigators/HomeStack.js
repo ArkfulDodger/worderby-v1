@@ -20,30 +20,41 @@ function HomeStack() {
 
   return (
     <NavigationContainer theme={{ colors: { background: "transparent" } }}>
-      <Stack.Navigator
-        initialRouteName="HomeTabs"
-        screenOptions={{ cardStyleInterpolator: forSlide }}
-      >
-        <Stack.Screen
-          name="HomeTabs"
-          component={HomeTabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Game"
-          component={GameScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="StartNewGame" component={StartNewGameScreen} />
-        <Stack.Screen name="UserProfile" component={UserProfileScreen} />
-        <Stack.Screen
-          name="EditUserProfile"
-          component={EditUserProfileScreen}
-        />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-        <Stack.Screen name="BlockList" component={BlockListScreen} />
-        <Stack.Screen name="FriendsList" component={FriendsListScreen} />
-        <Stack.Screen name="FriendProfile" component={FriendProfileScreen} />
+      <Stack.Navigator initialRouteName="HomeTabs">
+        <Stack.Group screenOptions={{ cardStyleInterpolator: forSlide }}>
+          <Stack.Screen
+            name="HomeTabs"
+            component={HomeTabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Game"
+            component={GameScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="UserProfile" component={UserProfileScreen} />
+          <Stack.Screen
+            name="EditUserProfile"
+            component={EditUserProfileScreen}
+          />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="BlockList" component={BlockListScreen} />
+          <Stack.Screen name="FriendsList" component={FriendsListScreen} />
+          <Stack.Screen name="FriendProfile" component={FriendProfileScreen} />
+        </Stack.Group>
+        <Stack.Group
+          screenOptions={{
+            headerShown: false,
+            cardOverlayEnabled: true,
+            presentation: "transparentModal",
+          }}
+        >
+          <Stack.Screen
+            name="StartNewGame"
+            component={StartNewGameScreen}
+            // options={{ presentation: "modal" }}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

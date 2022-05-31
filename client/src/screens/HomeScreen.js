@@ -66,6 +66,17 @@ const HomeScreen = (props) => {
       .catch((error) => alert(error.message));
   };
 
+  const currentSinglePlayerGame = () => {
+    // console.log("curGames:", user.current_games[0]);
+    for (let i = 0; i < user.current_games.length; i++) {
+      const game = user.current_games[i];
+      if (game.is_single_player) {
+        return game;
+      }
+    }
+    return null;
+  };
+
   return (
     <View
       style={{
@@ -79,7 +90,10 @@ const HomeScreen = (props) => {
       {/* <Button title="Send Ping" onPress={onSendPress} /> */}
       <Button
         title="StartNewGame"
-        onPress={() => navigation.navigate("StartNewGame")}
+        onPress={() => {
+          const spg = currentSinglePlayerGame();
+          navigation.navigate("StartNewGame", { currentSinglePlayerGame: spg });
+        }}
       />
       <Button
         title="UserProfile"
