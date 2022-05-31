@@ -17,9 +17,13 @@ class GamesController < ApplicationController
   # POST /games
   def create
     new_game = Game.create!(game_params)
-    rand_word = Randword.get_random_word
-    new_game.words.create!(text: rand_word, is_first_word: true)
-    render json: new_game, status: :created
+    if new_game
+      rand_word = Randword.get_random_word
+      new_game.words.create!(text: rand_word, is_first_word: true)
+      render json: new_game, status: :created
+    else
+      puts 'did we reach this?'
+    end
   end
 
   # PATCH /games/:id

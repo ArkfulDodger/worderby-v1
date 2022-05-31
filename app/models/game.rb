@@ -8,6 +8,25 @@ class Game < ApplicationRecord
              foreign_key: 'challengee_id',
              optional: true
 
+  validate :one_active_per_pairing, on: :create
+
+  def one_active_per_pairing
+    # byebug
+    if Game.find { |game| game.pairing === self.pairing && !game.is_over }
+      puts 'Stopped game from being created!'
+      errors.add(:is_over, 'This user pair already has an active game')
+    end
+  end
+
+  def pairing
+    pair_code =
+      if player1_id < player2_id
+        "#{player1_id}_#{player2_id}"
+      else
+        "#{player2_id}_#{player1_id}"
+      end
+  end
+
   def prompt
     prompt_word =
       if (is_over)

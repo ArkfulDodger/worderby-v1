@@ -39,6 +39,8 @@ const GameCard = ({ game: { item: game }, refresh }) => {
 
   const acceptChallenge = () => {
     console.log("accept challenge fired");
+    console.log("game:", game);
+    console.log("game id:", game.id);
 
     fetch(URL + `/games/${game.id}`, {
       method: "PATCH",
@@ -51,9 +53,10 @@ const GameCard = ({ game: { item: game }, refresh }) => {
       }),
     })
       .then((res) => res.json())
-      .then((updatedGame) =>
-        navigation.navigate("Game", { gameData: updatedGame })
-      )
+      .then((updatedGame) => {
+        console.log("updatedGame:", updatedGame);
+        navigation.navigate("Game", { gameData: updatedGame });
+      })
       .catch((error) => console.log(error.message));
   };
 
