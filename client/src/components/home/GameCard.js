@@ -93,7 +93,7 @@ const GameCard = ({ game: { item: game }, refresh }) => {
 
   return (
     <View
-      style={{ width: 300, margin: 10, padding: 5, backgroundColor: "white" }}
+      style={{ width: 350, margin: 10, padding: 5, backgroundColor: "white" }}
     >
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 1 }}>

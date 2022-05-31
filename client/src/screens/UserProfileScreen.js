@@ -29,10 +29,10 @@ const UserProfileScreen = (props) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ alignItems: "center", margin: 20 }}>
+      <View style={{ alignItems: "center", margin: 30 }}>
         <GText style={{ fontWeight: "bold", fontSize: 20 }}>Profile</GText>
       </View>
-      <View style={{ padding: 20 }}>
+      <View style={{ flex: 1, padding: 20 }}>
         <View style={{ flexDirection: "row", padding: 20 }}>
           <GText style={{ fontWeight: "bold" }}>Name: </GText>
           <GText>

@@ -83,7 +83,7 @@ const HomeScreen = (props) => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 10,
+        // padding: 10,
       }}
     >
       <View style={{ alignItems: "center", margin: 30 }}>
@@ -92,13 +92,17 @@ const HomeScreen = (props) => {
         </GText>
       </View>
       {/* <Button title="Send Ping" onPress={onSendPress} /> */}
-      <Button
-        title="StartNewGame"
-        onPress={() => {
-          const spg = currentSinglePlayerGame();
-          navigation.navigate("StartNewGame", { currentSinglePlayerGame: spg });
-        }}
-      />
+      <View style={{ margin: 20 }}>
+        <Button
+          title="StartNewGame"
+          onPress={() => {
+            const spg = currentSinglePlayerGame();
+            navigation.navigate("StartNewGame", {
+              currentSinglePlayerGame: spg,
+            });
+          }}
+        />
+      </View>
       {/* <Button
         title="UserProfile"
         onPress={() => navigation.navigate("UserProfile")}
