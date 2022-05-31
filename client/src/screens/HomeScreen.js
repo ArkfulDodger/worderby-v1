@@ -49,22 +49,22 @@ const HomeScreen = (props) => {
     return <GameCard game={game} refresh={fetchData} />;
   };
 
-  const onLogoutPress = () => {
-    // unsubscribe();
+  // const onLogoutPress = () => {
+  //   // unsubscribe();
 
-    fetch(URL + "/logout", {
-      method: "DELETE",
-    })
-      .then((res) => {
-        if (res.ok) {
-          console.log("successful deletion");
-          setUser(null);
-        } else {
-          console.log("could not log out!");
-        }
-      })
-      .catch((error) => alert(error.message));
-  };
+  //   fetch(URL + "/logout", {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         console.log("successful deletion");
+  //         setUser(null);
+  //       } else {
+  //         console.log("could not log out!");
+  //       }
+  //     })
+  //     .catch((error) => alert(error.message));
+  // };
 
   const currentSinglePlayerGame = () => {
     // console.log("curGames:", user.current_games[0]);
@@ -86,7 +86,11 @@ const HomeScreen = (props) => {
         padding: 10,
       }}
     >
-      <Text>Home Games</Text>
+      <View style={{ alignItems: "center", margin: 30 }}>
+        <GText style={{ fontWeight: "bold", fontSize: 20 }}>
+          Current Games + Requests
+        </GText>
+      </View>
       {/* <Button title="Send Ping" onPress={onSendPress} /> */}
       <Button
         title="StartNewGame"
@@ -95,15 +99,15 @@ const HomeScreen = (props) => {
           navigation.navigate("StartNewGame", { currentSinglePlayerGame: spg });
         }}
       />
-      <Button
+      {/* <Button
         title="UserProfile"
         onPress={() => navigation.navigate("UserProfile")}
-      />
-      <Button
+      /> */}
+      {/* <Button
         title="Settings"
         onPress={() => navigation.navigate("Settings")}
-      />
-      <Button title="Logout" onPress={onLogoutPress} />
+      /> */}
+      {/* <Button title="Logout" onPress={onLogoutPress} /> */}
       <FlatList
         data={user.current_games}
         renderItem={renderGameCard}

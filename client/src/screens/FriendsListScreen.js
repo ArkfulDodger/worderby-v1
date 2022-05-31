@@ -4,6 +4,7 @@ import { UrlContext, UserContext } from "../../App";
 import { useNavigation } from "@react-navigation/native";
 import LoadingScreen from "../screens/LoadingScreen";
 import FriendCard from "../components/home/FriendCard";
+import GText from "../components/tools/GText";
 
 const FriendsListScreen = (props) => {
   const URL = useContext(UrlContext);
@@ -41,6 +42,9 @@ const FriendsListScreen = (props) => {
 
   return (
     <View>
+      <View style={{ alignItems: "center", margin: 30 }}>
+        <GText style={{ fontWeight: "bold", fontSize: 20 }}>Friends</GText>
+      </View>
       <FlatList
         data={friends}
         renderItem={renderFriendCard}

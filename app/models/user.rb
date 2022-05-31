@@ -26,4 +26,12 @@ class User < ApplicationRecord
         }
       end
   end
+
+  def highest_scoring_word
+    words.order(:score).last
+  end
+
+  def games_played
+    words.uniq { |x| x[:game_id] }.count
+  end
 end

@@ -32,15 +32,15 @@ function HomeStack() {
             component={GameScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="UserProfile" component={UserProfileScreen} />
+          {/* <Stack.Screen name="UserProfile" component={UserProfileScreen} />
           <Stack.Screen
             name="EditUserProfile"
             component={EditUserProfileScreen}
-          />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-          <Stack.Screen name="BlockList" component={BlockListScreen} />
+          /> */}
+          {/* <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="BlockList" component={BlockListScreen} /> */}
           <Stack.Screen name="FriendsList" component={FriendsListScreen} />
-          <Stack.Screen name="FriendProfile" component={FriendProfileScreen} />
+          {/* <Stack.Screen name="FriendProfile" component={FriendProfileScreen} /> */}
         </Stack.Group>
         <Stack.Group
           screenOptions={{

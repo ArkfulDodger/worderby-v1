@@ -5,6 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HomeScreen from "../screens/HomeScreen";
 import RankingsTabs from "./RankingsTabs";
 import FriendDashScreen from "../screens/FriendDashScreen";
+import FriendsListScreen from "../screens/FriendsListScreen";
+import UserProfileScreen from "../screens/UserProfileScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -12,9 +14,11 @@ const HomeTabsScreen = (props) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Tab.Navigator initialRouteName="Home" tabBarPosition="bottom">
-        <Tab.Screen name="Rankings" component={RankingsTabs} />
+        {/* <Tab.Screen name="Rankings" component={RankingsTabs} /> */}
+        <Tab.Screen name="UserProfile" component={UserProfileScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="FriendDash" component={FriendDashScreen} />
+        <Tab.Screen name="FriendsList" component={FriendsListScreen} />
+        {/* <Tab.Screen name="FriendDash" component={FriendDashScreen} /> */}
       </Tab.Navigator>
     </SafeAreaView>
   );
