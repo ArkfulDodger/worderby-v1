@@ -6,13 +6,13 @@ class TurnChannel < ApplicationCable::Channel
     stream_from "turn_channel_#{params['id']}"
   end
 
-  def turn_played
+  def turn_played(args)
     puts '---------------Channel: Turn Played---------------'
     puts 'params id: ' + params['id'].to_s
 
     ActionCable.server.broadcast(
       "turn_channel_#{params['id']}",
-      { body: 'turn played', player: current_user.id }
+      { body: 'turn played', player: current_user.id, game_id: args['game_id'] }
     )
   end
 
@@ -32,13 +32,17 @@ class TurnChannel < ApplicationCable::Channel
     )
   end
 
-  def rematch_accepted
+  def rematch_accepted(args)
     puts '---------------Channel: Rematch Accepted---------------'
     puts 'params id: ' + params['id'].to_s
 
     ActionCable.server.broadcast(
       "turn_channel_#{params['id']}",
-      { body: 'rematch accepted', player: current_user.id }
+      {
+        body: 'rematch accepted',
+        player: current_user.id,
+        game_id: args['game_id']
+      }
     )
   end
 

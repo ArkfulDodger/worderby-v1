@@ -34,7 +34,6 @@ const GameScreen = ({
   const [game, setGame] = useState(gameData);
   const [rematchOffered, setRematchOffered] = useState(false);
   const [rematchGame, setRematchGame] = useState(null);
-  console.log("REMATCH GAME IS:", rematchGame);
 
   const { is_over: isOver, turn, player1, player2 } = game;
   const mwURL = useMWAPI;
@@ -105,7 +104,7 @@ const GameScreen = ({
       } else if (messageData.type === "confirm_subscription") {
         console.log(Platform.OS + ": " + "Successfully Subscribed");
       } else if (isOtherTurnPlayedMessage(messageData)) {
-        refreshGame();
+        refreshGame(messageData.message.game_id);
         console.log(Platform.OS + ": " + "instigating game refresh");
       } else if (
         isRematchOfferedMessage(messageData) &&
@@ -113,7 +112,10 @@ const GameScreen = ({
       ) {
         getRematchGame(messageData.message.game_id);
       } else if (isRematchAcceptedMessage(messageData)) {
-        enterRematch();
+        console.log(
+          Platform.OS + ": " + "------REMATCH ACCEPTED RECEIVED--------"
+        );
+        enterRematch(messageData.message.game_id);
       }
       // serverMessagesList.push(e.data);
       // setServerMessages([...serverMessagesList]);
@@ -159,12 +161,10 @@ const GameScreen = ({
   };
 
   const isRematchOfferedMessage = (message) => {
-    console.log("assessing rematch offered");
     return message.message.body === "rematch offered";
   };
 
   const isUserRematchChallenger = (message) => {
-    console.log("message player:", message.message.player);
     return message.message.player === user.id;
   };
 
@@ -191,7 +191,7 @@ const GameScreen = ({
         id: getPairingId(),
       }),
       command: "message",
-      data: JSON.stringify({ action: "turn_played" }),
+      data: JSON.stringify({ action: "turn_played", game_id: game.id }),
     };
     ws.current.send(JSON.stringify(message));
     // setMessageText("");
@@ -219,7 +219,10 @@ const GameScreen = ({
         id: getPairingId(),
       }),
       command: "message",
-      data: JSON.stringify({ action: "rematch_accepted" }),
+      data: JSON.stringify({
+        action: "rematch_accepted",
+        game_id: rematchGame.id,
+      }),
     };
     ws.current.send(JSON.stringify(message));
     // setMessageText("");
@@ -274,8 +277,8 @@ const GameScreen = ({
     );
   };
 
-  const refreshGame = () => {
-    fetch(URL + `/games/${game.id}`)
+  const refreshGame = (game_id) => {
+    fetch(URL + `/games/${game_id}`)
       .then((res) => res.json())
       .then((refreshedGameData) => setGame(refreshedGameData))
       .catch((error) => console.log(error.message));
@@ -367,7 +370,7 @@ const GameScreen = ({
     }
   };
 
-  const playBotTurn = (gameData) => {
+  const playBotTurn = (game) => {
     console.log("PLAY BOT TURN CALLED");
     fetch(URL + "/words/bot", {
       method: "POST",
@@ -376,11 +379,11 @@ const GameScreen = ({
         Accept: "application/json",
       },
       body: JSON.stringify({
-        game_id: gameData.id,
-        round_played: gameData.round,
-        turn_played: gameData.turn,
+        game_id: game.id,
+        round_played: game.round,
+        turn_played: game.turn,
         user_id: player1.id === user.id ? player2.id : player1.id,
-        prompt_text: gameData.prompt.text,
+        prompt_text: game.prompt.text,
         is_first_word: false,
       }),
     })
@@ -477,12 +480,20 @@ const GameScreen = ({
       .catch((error) => console.log(error.message));
   };
 
-  const enterRematch = () => {
-    console.log("rematchGame:", rematchGame);
-    const acceptedRematch = { ...rematchGame, is_accepted: true };
-    console.log("acceptedRematch:", acceptedRematch);
-    setAlertMessage("");
-    setGame(acceptedRematch);
+  const enterRematch = (rematch_id) => {
+    console.log(
+      Platform.OS + ": " + "-----using rematch id: " + rematch_id + "-------"
+    );
+    fetch(URL + `/games/${rematch_id}`)
+      .then((res) => res.json())
+      .then((rematchGameData) => {
+        console.log(Platform.OS + ": " + "rematchData: " + rematchGameData);
+        setAlertMessage(``);
+        setRematchOffered(false);
+        setRematchGame(null);
+        setGame(rematchGameData);
+      })
+      .catch((error) => console.log(error.message));
   };
 
   //#endregion
