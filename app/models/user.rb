@@ -3,6 +3,12 @@ class User < ApplicationRecord
   has_many :words
   has_secure_password
 
+  validates :username, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :email, format: { with: /.+@.+\..+/ }
+
   def current_games
     gameobjs =
       Game.where(player1_id: id, is_over: false) +

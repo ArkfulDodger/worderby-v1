@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import EditUserProfileScreen from "./EditUserProfileScreen";
-import { UserContext } from "../../App";
+import { UserContext, UrlContext } from "../../App";
 import GText from "../components/tools/GText";
 
 const UserProfileScreen = (props) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const URL = useContext(UrlContext);
   console.log("user prof user:", user);
   const navigation = useNavigation();
 
@@ -40,6 +41,14 @@ const UserProfileScreen = (props) => {
           </GText>
         </View>
         <View style={{ flexDirection: "row", padding: 20 }}>
+          <GText style={{ fontWeight: "bold" }}>Username: </GText>
+          <GText>{user.username}</GText>
+        </View>
+        <View style={{ flexDirection: "row", padding: 20 }}>
+          <GText style={{ fontWeight: "bold" }}>Email: </GText>
+          <GText>{user.email}</GText>
+        </View>
+        <View style={{ flexDirection: "row", padding: 20 }}>
           <GText style={{ fontWeight: "bold" }}>Games Played: </GText>
           <GText>{user.games_played}</GText>
         </View>
@@ -47,11 +56,19 @@ const UserProfileScreen = (props) => {
           <GText style={{ fontWeight: "bold" }}>Highest Scoring Word</GText>
           <View style={{ flexDirection: "row", margin: 20, marginLeft: 30 }}>
             <GText style={{ fontWeight: "bold" }}>Score: </GText>
-            <GText>{user.highest_scoring_word.score}</GText>
+            <GText>
+              {user.highest_scoring_word
+                ? user.highest_scoring_word.score
+                : "--"}
+            </GText>
           </View>
           <View style={{ flexDirection: "row", marginLeft: 30 }}>
             <GText style={{ fontWeight: "bold" }}>Word: </GText>
-            <GText>{user.highest_scoring_word.text}</GText>
+            <GText>
+              {user.highest_scoring_word
+                ? user.highest_scoring_word.text
+                : "--"}
+            </GText>
           </View>
         </View>
       </View>

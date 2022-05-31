@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   # POST /signup
   def create
+    puts 'creating with: ' + user_params.to_s
     new_user = User.create!(user_params)
     session[:user_id] = new_user.id
     cookies.signed[:user_id] = new_user.id
@@ -37,6 +38,15 @@ class UsersController < ApplicationController
 
   # permissible params to be used by create/update
   def user_params
-    params.permit(:username, :password, :password_confirmation)
+    params.permit(
+      :username,
+      :password,
+      :password_confirmation,
+      :first_name,
+      :last_name,
+      :email,
+      :is_bot,
+      :phone
+    )
   end
 end

@@ -10,7 +10,18 @@ p1 =
     email: 'noahfakeemail@gmail.com',
     phone: '(123) 456-7890'
   )
-p2 = User.create(username: 'Worderbot', password: '1234', is_bot: true)
+puts 'p1 is created as: ' + p1[:id].to_s
+
+p2 =
+  User.create(
+    username: 'Worderbot',
+    first_name: 'Bot',
+    last_name: 'Buddy',
+    password: '1234',
+    email: 'botbot@worderby.com',
+    is_bot: true
+  )
+puts 'p2 is created as: ' + p2[:id].to_s
 p3 =
   User.create(
     username: 'ChettT',
