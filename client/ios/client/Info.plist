@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>EXUpdatesSDKVersion</key>
-  <string>38.0.0</string>
-  <key>EXUpdatesURL</key>
-  <string>https://exp.host/@arkfuldodger/worderby</string>
+	<string>43.0.0</string>
+	<key>EXUpdatesURL</key>
+	<string>https://exp.host/@arkfuldodger/worderby</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

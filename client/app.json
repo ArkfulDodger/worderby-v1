@@ -1,9 +1,8 @@
 {
+  "name": "worderby",
+  "displayName": "worderby",
+  "expo": {
     "name": "worderby",
-    "displayName": "worderby",
-    "expo": {
-        "name": "worderby",
-        "slug": "worderby",
-        "sdkVersion": "38.0.0"
-    }
+    "slug": "worderby"
+  }
 }
