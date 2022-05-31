@@ -3,7 +3,7 @@ puts '🌱 Seeding..... 🌱'
 puts 'Creating users...'
 p1 =
   User.create(
-    username: 'ArkfulDodger',
+    username: 'NoahR',
     password: '1234',
     first_name: 'Noah',
     last_name: 'Reece',
@@ -13,12 +13,30 @@ p1 =
 p2 = User.create(username: 'Worderbot', password: '1234', is_bot: true)
 p3 =
   User.create(
-    username: 'brewchetta',
+    username: 'ChettT',
     password: '1234',
     first_name: 'Chett',
     last_name: 'Tiller',
     email: 'notchettemail@gmail.com',
     phone: '(098) 765-4321'
+  )
+p4 =
+  User.create(
+    username: 'CalebH',
+    password: '1234',
+    first_name: 'Caleb',
+    last_name: 'Hamernick',
+    email: 'notcalebemail@gmail.com',
+    phone: '(111) 111-1111'
+  )
+p5 =
+  User.create(
+    username: 'JasmineE',
+    password: '1234',
+    first_name: 'Jasmine',
+    last_name: 'Elkins',
+    email: 'notjasemail@gmail.com',
+    phone: '(222) 222-2222'
   )
 
 puts 'Creating games...'

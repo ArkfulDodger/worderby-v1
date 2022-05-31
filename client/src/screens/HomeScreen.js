@@ -19,7 +19,7 @@ const HomeScreen = (props) => {
   const { user, setUser } = useContext(UserContext);
   const URL = useContext(UrlContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
     const willFocusSubscription = props.navigation.addListener("focus", () => {
       fetchData();
