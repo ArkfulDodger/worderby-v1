@@ -1,4 +1,9 @@
 {
-  "name": "client",
-  "displayName": "client"
+    "name": "worderby",
+    "displayName": "worderby",
+    "expo": {
+        "name": "worderby",
+        "slug": "worderby",
+        "sdkVersion": "43.0.0"
+    }
 }
