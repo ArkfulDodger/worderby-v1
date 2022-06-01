@@ -3,6 +3,7 @@ import { View, Text, Button, FlatList, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../../App";
 import GText from "../tools/GText";
+import PButton from "../tools/PButton";
 
 const GameCard = ({ game: { item: game }, refresh }) => {
   // console.log("GAMECARD game:", game);
@@ -99,15 +100,15 @@ const GameCard = ({ game: { item: game }, refresh }) => {
         <View style={{ flex: 1 }}>
           <GText style={{ fontWeight: "bold" }}>{opponent.username}</GText>
           {game.is_accepted ? (
-            <>
-              <GText>Round {game.round}</GText>
+            <View style={{ flexDirection: "row" }}>
+              <GText>Round {game.round} - </GText>
               <GText>
                 {isPlayerTurn !== isReadyToContinue
                   ? "Your"
                   : opponent.username + "'s"}{" "}
-                Turn
+                turn
               </GText>
-            </>
+            </View>
           ) : user.id === game.challenger_id ? (
             <GText>has not accepted your challenge yet</GText>
           ) : (
@@ -118,7 +119,17 @@ const GameCard = ({ game: { item: game }, refresh }) => {
         <View
           style={{ width: 100, justifyContent: "center", alignItems: "center" }}
         >
-          <Button title={buttonText} onPress={onGamePress} />
+          <PButton
+            style={{
+              width: 100,
+              justifyContent: "center",
+              alignItems: "center",
+              padding: 5,
+            }}
+            onPress={onGamePress}
+          >
+            {buttonText}
+          </PButton>
         </View>
       </View>
     </View>

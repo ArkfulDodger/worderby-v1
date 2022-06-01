@@ -10,6 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../../App";
 import GText from "../tools/GText";
+import PButton from "../tools/PButton";
 
 const FriendCard = ({ friend: { item: friend }, refresh }) => {
   const [isThinking, setIsThinking] = useState(false);
@@ -28,8 +29,8 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
     ? game.is_accepted
       ? "Continue"
       : game.challenger_id === user.id
-      ? "Cancel Challenge"
-      : "Accept Challenge"
+      ? "Cancel"
+      : "Accept"
     : "Start New";
 
   const continueGame = () => {
@@ -214,7 +215,17 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
           {isThinking ? (
             <ActivityIndicator />
           ) : (
-            <Button title={actionText} onPress={buttonAction} />
+            <PButton
+              onPress={buttonAction}
+              style={{
+                width: 120,
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 5,
+              }}
+            >
+              {actionText}
+            </PButton>
           )}
         </View>
       </View>

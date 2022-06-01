@@ -4,6 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import EditUserProfileScreen from "./EditUserProfileScreen";
 import { UserContext, UrlContext } from "../../App";
 import GText from "../components/tools/GText";
+import PButton from "../components/tools/PButton";
+import WordScore from "../components/game/WordScore";
+import ApMediumText from "../components/tools/ApMediumText";
 
 const UserProfileScreen = (props) => {
   const { user, setUser } = useContext(UserContext);
@@ -31,7 +34,7 @@ const UserProfileScreen = (props) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", margin: 30 }}>
-        <GText style={{ fontWeight: "bold", fontSize: 20 }}>Profile</GText>
+        <ApMediumText style={{ fontSize: 30 }}>Profile</ApMediumText>
       </View>
       <View style={{ flex: 1, padding: 20 }}>
         <View style={{ flexDirection: "row", padding: 20 }}>
@@ -52,9 +55,17 @@ const UserProfileScreen = (props) => {
           <GText style={{ fontWeight: "bold" }}>Games Played: </GText>
           <GText>{user.games_played}</GText>
         </View>
-        <View style={{ padding: 20 }}>
-          <GText style={{ fontWeight: "bold" }}>Highest Scoring Word</GText>
-          <View style={{ flexDirection: "row", margin: 20, marginLeft: 30 }}>
+        <View style={{ flexDirection: "row", padding: 20 }}>
+          <GText style={{ fontWeight: "bold" }}>Highest Scoring Word: </GText>
+        </View>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 10,
+          }}
+        >
+          {/* <View style={{ flexDirection: "row", margin: 20, marginLeft: 30 }}>
             <GText style={{ fontWeight: "bold" }}>Score: </GText>
             <GText>
               {user.highest_scoring_word
@@ -69,15 +80,28 @@ const UserProfileScreen = (props) => {
                 ? user.highest_scoring_word.text
                 : "--"}
             </GText>
+          </View> */}
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <WordScore prompt={user.highest_scoring_word} />
           </View>
         </View>
       </View>
-      <View style={{ marginBottom: 30 }}>
+      <View style={{ marginBottom: 30, alignItems: "center" }}>
         {/* <Button
         title="EditUserProfile"
         onPress={() => navigation.navigate("EditUserProfile")}
       /> */}
-        <Button title="Logout" onPress={onLogoutPress} />
+        <PButton
+          onPress={onLogoutPress}
+          style={{
+            width: 200,
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 5,
+          }}
+        >
+          Logout
+        </PButton>
       </View>
     </View>
   );

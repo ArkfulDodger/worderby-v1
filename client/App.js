@@ -72,6 +72,7 @@ const App = () => {
           <View style={styles.fullScreen}>
             <LinearGradient
               colors={["#FFFFFF", "#FFE2CD"]}
+              // colors={["#FFFFFF", "#FFAD83"]}
               style={styles.fullScreen}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}

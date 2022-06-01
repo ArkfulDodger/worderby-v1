@@ -8,11 +8,15 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../App";
 import GText from "../components/tools/GText";
+import ApMediumText from "../components/tools/ApMediumText";
+import PButton from "../components/tools/PButton";
 import GameCard from "../components/home/GameCard";
+import LinearGradient from "react-native-linear-gradient";
 
 const HomeScreen = (props) => {
   const navigation = useNavigation();
@@ -87,22 +91,19 @@ const HomeScreen = (props) => {
       }}
     >
       <View style={{ alignItems: "center", margin: 30 }}>
-        <GText style={{ fontWeight: "bold", fontSize: 20 }}>
-          Current Games + Requests
-        </GText>
+        <ApMediumText style={{ fontSize: 30 }}>Current Games</ApMediumText>
       </View>
       {/* <Button title="Send Ping" onPress={onSendPress} /> */}
-      <View style={{ margin: 20 }}>
-        <Button
-          title="StartNewGame"
-          onPress={() => {
-            const spg = currentSinglePlayerGame();
-            navigation.navigate("StartNewGame", {
-              currentSinglePlayerGame: spg,
-            });
-          }}
-        />
-      </View>
+      <PButton
+        onPress={() => {
+          const spg = currentSinglePlayerGame();
+          navigation.navigate("StartNewGame", {
+            currentSinglePlayerGame: spg,
+          });
+        }}
+      >
+        Start New Game
+      </PButton>
       {/* <Button
         title="UserProfile"
         onPress={() => navigation.navigate("UserProfile")}
