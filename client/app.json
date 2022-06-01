@@ -1,8 +1,9 @@
 {
-  "name": "worderby",
-  "displayName": "worderby",
-  "expo": {
-    "name": "worderby",
-    "slug": "worderby"
-  }
+    "name": "client",
+    "displayName": "client",
+    "expo": {
+        "name": "worderby",
+        "slug": "worderby",
+        "owner": "arkfuldodger"
+    }
 }
