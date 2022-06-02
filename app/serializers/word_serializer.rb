@@ -7,5 +7,7 @@ class WordSerializer < ActiveModel::Serializer
              :text,
              :prompt_text,
              :score,
-             :p_num
+             :p_num,
+             :is_first_word,
+             :time_penalty
 end
