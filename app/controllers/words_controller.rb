@@ -12,6 +12,14 @@ class WordsController < ApplicationController
     # byebug
 
     game.update(worderbyte: game.worderbyte + new_word.text[new_word.p_num..-1])
+
+    # add to restricted endings only if more than one letter
+    if new_word.p_num > 1
+      game.update(
+        restricted_endings:
+          game.restricted_endings.push(new_word.text[0...new_word.p_num])
+      )
+    end
     if (game.round == game.num_rounds && game.turn == 2) ||
          game.is_single_player
       game.progress
@@ -45,6 +53,15 @@ class WordsController < ApplicationController
     game = new_word.game
     game.score(new_word.score)
     game.update(worderbyte: game.worderbyte + new_word.text[new_word.p_num..-1])
+
+    # add to restricted endings only if more than one letter
+    if new_word.p_num > 1
+      game.update(
+        restricted_endings:
+          game.restricted_endings.push(new_word.text[0...new_word.p_num])
+      )
+    end
+
     game.progress if game.round == game.num_rounds && game.turn == 2
 
     render json: game, status: :created

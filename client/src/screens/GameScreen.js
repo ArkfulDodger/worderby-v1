@@ -16,6 +16,7 @@ import ResultsFrame from "../components/game/frames/ResultsFrame";
 import GameHeader from "../components/game/header/GameHeader";
 import GameMenu from "../components/game/menu/GameMenu";
 import WorderbyteFrame from "../components/game/frames/WorderbyteFrame";
+import RestrictedEndingsFrame from "../components/game/frames/RestrictedEndingsFrame";
 import { UserContext, UrlContext } from "../../App";
 
 const maxTime = 10;
@@ -450,6 +451,19 @@ const GameScreen = ({
       return;
     }
     const word = getWordToSubmit();
+
+    let escape = false;
+    game.restricted_endings.forEach((ending) => {
+      if (word.endsWith(ending)) {
+        setAlertMessage(`-${ending} is out of play! Try again!`);
+        escape = true;
+        return;
+      }
+    });
+    if (escape) {
+      return;
+    }
+
     const valid = await checkWordInDictionary(word);
 
     if (valid) {
@@ -601,6 +615,7 @@ const GameScreen = ({
     >
       <View style={{ flex: 1, position: "relative" }}>
         <GameHeader game={game} user={user} timer={timer} />
+        <RestrictedEndingsFrame game={game} />
         <WorderbyteFrame game={game} />
         <View style={{ flex: 1 }}>
           {isOver ? (

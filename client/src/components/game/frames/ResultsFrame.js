@@ -18,7 +18,7 @@ const ResultsFrame = ({ game, user, alertMessage }) => {
           borderWidth: 2,
           borderColor: "gray",
           margin: 5,
-          flex: 4,
+          flex: 0,
           borderRadius: 10,
           padding: 5,
           backgroundColor: "#FFFFFFAA",
