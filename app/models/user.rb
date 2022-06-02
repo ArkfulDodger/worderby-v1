@@ -32,6 +32,8 @@ class User < ApplicationRecord
             challengee_id: game.challengee_id
           }
         end
+
+      games.reverse
     else
       games = []
     end

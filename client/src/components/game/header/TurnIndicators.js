@@ -23,7 +23,9 @@ const TurnIndicators = ({ isPlayer, game, playerTurn }) => {
     <View
       style={{
         alignItems: "center",
-        padding: 5,
+        justifyContent: "flex-end",
+        height: 70,
+        paddingHorizontal: 5,
       }}
     >
       <Text style={styles.bullets}>{round3}</Text>
@@ -35,7 +37,7 @@ const TurnIndicators = ({ isPlayer, game, playerTurn }) => {
 
 const styles = StyleSheet.create({
   bullets: {
-    fontSize: 10,
+    fontSize: 7,
     padding: 2,
   },
 });

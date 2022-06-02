@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../../App";
 import GText from "../tools/GText";
 import PButton from "../tools/PButton";
+import LinearGradient from "react-native-linear-gradient";
 
 const GameCard = ({ game: { item: game }, refresh }) => {
   // console.log("GAMECARD game:", game);
@@ -27,6 +28,12 @@ const GameCard = ({ game: { item: game }, refresh }) => {
       ? "Accept"
       : "Cancel"
     : "Play";
+
+  const color = !game.is_accepted
+    ? "gray"
+    : isPlayerTurn !== isReadyToContinue
+    ? "#DB00FF"
+    : "#CA7900";
 
   // function isWordPlayedThisRound() {
   //   const round = game.round;
@@ -93,12 +100,57 @@ const GameCard = ({ game: { item: game }, refresh }) => {
   };
 
   return (
-    <View
-      style={{ width: 350, margin: 10, padding: 5, backgroundColor: "white" }}
+    <LinearGradient
+      // colors={["#FFF6F0", "#FFD9BE"]}
+      colors={["#FFF6F0", color]}
+      style={{ borderWidth: 2, borderRadius: 10, margin: 5 }}
     >
-      <View style={{ flexDirection: "row" }}>
-        <View style={{ flex: 1 }}>
-          <GText style={{ fontWeight: "bold" }}>{opponent.username}</GText>
+      <View
+        style={{
+          width: 350,
+          margin: 5,
+          padding: 5,
+          backgroundColor: "#FFFFFFDD",
+          borderRadius: 5,
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderBottomWidth: 1,
+            borderColor: "gray",
+            padding: 5,
+          }}
+        >
+          <GText style={{ fontWeight: "bold", fontSize: 25 }}>
+            {opponent.username}
+          </GText>
+          <View
+            style={{
+              width: 100,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <PButton
+              style={{
+                width: 100,
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 5,
+              }}
+              onPress={onGamePress}
+              color1="#FFFFFF55"
+              color2="#FFF4EB"
+            >
+              {buttonText}
+            </PButton>
+          </View>
+        </View>
+        <View style={{ flex: 1, padding: 5 }}>
           {game.is_accepted ? (
             <View style={{ flexDirection: "row" }}>
               <GText>Round {game.round} - </GText>
@@ -115,24 +167,8 @@ const GameCard = ({ game: { item: game }, refresh }) => {
             <GText>has challenged you to a game</GText>
           )}
         </View>
-        {}
-        <View
-          style={{ width: 100, justifyContent: "center", alignItems: "center" }}
-        >
-          <PButton
-            style={{
-              width: 100,
-              justifyContent: "center",
-              alignItems: "center",
-              padding: 5,
-            }}
-            onPress={onGamePress}
-          >
-            {buttonText}
-          </PButton>
-        </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 

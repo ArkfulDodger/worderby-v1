@@ -28,7 +28,10 @@ export default class PButton extends Component {
   render() {
     return (
       <LinearGradient
-        colors={["#FFF8E8", "#FFE298"]}
+        colors={[
+          this.props.color1 || "#FFF8E8",
+          this.props.color2 || "#FFE298",
+        ]}
         // colors={["#FFFFFF", "#FFAD83"]}
         style={[
           { borderRadius: 10 },
