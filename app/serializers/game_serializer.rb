@@ -12,7 +12,9 @@ class GameSerializer < ActiveModel::Serializer
              :is_word_played_this_turn,
              :challenger_id,
              :challengee_id,
-             :worderbyte
+             :worderbyte,
+             :restricted_endings,
+             :streak
 
   belongs_to :player1
   belongs_to :player2

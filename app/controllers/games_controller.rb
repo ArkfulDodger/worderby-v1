@@ -74,7 +74,9 @@ class GamesController < ApplicationController
       :is_accepted,
       :challenger_id,
       :challengee_id,
-      :worderbyte
+      :worderbyte,
+      :restricted_endings,
+      :steak
     )
   end
 

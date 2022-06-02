@@ -64,7 +64,8 @@ game1 =
     is_single_player: true,
     challenger: p1,
     challengee: p2,
-    is_accepted: true
+    is_accepted: true,
+    streak: 1
   )
 game2 =
   Game.create(
@@ -79,7 +80,8 @@ game2 =
     is_single_player: false,
     challenger: p1,
     challengee: p3,
-    is_accepted: false
+    is_accepted: false,
+    streak: 1
   )
 
 puts 'Creating prompts...'
