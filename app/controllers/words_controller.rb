@@ -17,7 +17,7 @@ class WordsController < ApplicationController
     if new_word.p_num > 1
       game.update(
         restricted_endings:
-          game.restricted_endings.push(new_word.text[0...new_word.p_num])
+          game.restricted_endings.push(new_word.text[0...new_word.p_num]).sort
       )
     end
     if (game.round == game.num_rounds && game.turn == 2) ||
@@ -58,7 +58,7 @@ class WordsController < ApplicationController
     if new_word.p_num > 1
       game.update(
         restricted_endings:
-          game.restricted_endings.push(new_word.text[0...new_word.p_num])
+          game.restricted_endings.push(new_word.text[0...new_word.p_num]).sort
       )
     end
 
@@ -104,7 +104,6 @@ class WordsController < ApplicationController
   def is_word_playable?(word)
     #confirm word doesn't use restricted ending
     game = Game.find(word_params[:game_id])
-    byebug
     if word.end_with?(*game[:restricted_endings])
       puts 'BOT: ' + word + ' uses a restricted ending'
       return false

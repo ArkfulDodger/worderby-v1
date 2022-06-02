@@ -18,7 +18,7 @@ const ResultsFrame = ({ game, user, alertMessage }) => {
           borderWidth: 2,
           borderColor: "gray",
           margin: 5,
-          flex: 0,
+          flex: 1,
           borderRadius: 10,
           padding: 5,
           backgroundColor: "#FFFFFFAA",
@@ -32,7 +32,7 @@ const ResultsFrame = ({ game, user, alertMessage }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
     marginTop: 20,
     marginBottom: 20,
     justifyContent: "center",

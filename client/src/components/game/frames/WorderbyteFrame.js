@@ -13,6 +13,7 @@ const WorderbyteFrame = ({ game }) => {
         justifyContent: "flex-end",
         alignItems: "center",
         borderBottomWidth: 1,
+        borderTopWidth: 1,
         padding: 5,
       }}
     >
