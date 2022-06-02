@@ -14,7 +14,8 @@ const Worderbyte = ({ game, isPlayerTurn }) => {
       if (
         !isPlayerTurn &&
         word.round_played === game.round &&
-        word.user_id !== user.id
+        word.user_id !== user.id &&
+        !game.is_over
       ) {
         return;
       }

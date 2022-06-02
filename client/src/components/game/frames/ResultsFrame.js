@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import WinnerMessage from "../WinnerMessage";
 import AlertMessage from "../AlertMessage";
 import WordResults from "./WordResults";
 
-const ResultsFrame = ({ game, user, alertMessage }) => {
+const ResultsFrame = ({
+  game,
+  user,
+  alertMessage,
+  readWorderbyte,
+  stopReading,
+}) => {
+  useEffect(() => {
+    readWorderbyte();
+
+    return () => stopReading();
+  }, []);
+
   return (
     <>
       <View>

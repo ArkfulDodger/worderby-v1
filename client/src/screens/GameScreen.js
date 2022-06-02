@@ -19,9 +19,16 @@ import WorderbyteFrame from "../components/game/frames/WorderbyteFrame";
 import RestrictedEndingsFrame from "../components/game/frames/RestrictedEndingsFrame";
 import { UserContext, UrlContext } from "../../App";
 import { Header } from "@react-navigation/stack";
-// import Tts from "react-native-tts";
+import Tts from "react-native-tts";
 
 const maxTime = 10;
+Tts.setDefaultLanguage("en-GB");
+Platform.OS === "ios" &&
+  Tts.setDefaultVoice("com.apple.ttsbundle.Daniel-compact");
+Tts.addEventListener("tts-start", (event) => console.log("start", event));
+Tts.addEventListener("tts-progress", (event) => console.log("progress", event));
+Tts.addEventListener("tts-finish", (event) => console.log("finish", event));
+Tts.addEventListener("tts-cancel", (event) => console.log("cancel", event));
 
 const GameScreen = ({
   route: {
@@ -45,8 +52,9 @@ const GameScreen = ({
   const [timerActive, setTimerActive] = useState(false);
   const [currentTimeout, setCurrentTimeout] = useState(null);
   const [backDisabled, setBackDisabled] = useState(false);
+  const [muted, setMuted] = useState(false);
 
-  const { is_over: isOver, turn, player1, player2 } = game;
+  const { is_over: isOver, turn, player1, player2, worderbyte, words } = game;
   const mwURL = useMWAPI;
 
   const isOdd = (num) => !!(num % 2);
@@ -135,8 +143,6 @@ const GameScreen = ({
     setTimeout(() => {
       subscribe();
     }, 500);
-
-    // readWorderbyte();
 
     return () => unsubscribe();
   }, []);
@@ -302,9 +308,38 @@ const GameScreen = ({
 
   // #endregion
 
-  // const readWorderbyte = () => {
-  //   Tts.speak("Hello, world!");
-  // };
+  const readWorderbyte = () => {
+    const arr = [];
+
+    words.forEach((word) => {
+      if (
+        !isPlayerTurn &&
+        word.round_played === game.round &&
+        word.user_id !== user.id
+      ) {
+        return;
+      }
+
+      const bit = word.p_num ? word.text.slice(word.p_num) : word.text;
+      arr.push(bit);
+    });
+
+    const permissibleWorderbyte = arr.join("");
+
+    if (muted) {
+      return;
+    }
+
+    if (game.is_over) {
+      Tts.speak(worderbyte);
+    } else {
+      Tts.speak(permissibleWorderbyte);
+    }
+  };
+
+  const stopReading = () => {
+    Tts.stop();
+  };
 
   //#region Game Actions
   const getWordToSubmit = () => {
@@ -635,10 +670,20 @@ const GameScreen = ({
           isPlayerTurn={isPlayerTurn}
           isReadyToContinue={isReadyToContinue}
         />
-        <WorderbyteFrame game={game} isPlayerTurn={isPlayerTurn} />
+        <WorderbyteFrame
+          game={game}
+          isPlayerTurn={isPlayerTurn}
+          readWorderbyte={readWorderbyte}
+        />
         <View style={{ flex: 1 }}>
           {isOver ? (
-            <ResultsFrame game={game} user={user} alertMessage={alertMessage} />
+            <ResultsFrame
+              game={game}
+              user={user}
+              alertMessage={alertMessage}
+              readWorderbyte={readWorderbyte}
+              stopReading={stopReading}
+            />
           ) : isPlayerTurn && !isReadyToContinue ? (
             <PlayerTurnFrame
               game={game}
@@ -652,6 +697,8 @@ const GameScreen = ({
               setTimerActive={setTimerActive}
               setBackDisabled={setBackDisabled}
               startTimer={startTimer}
+              readWorderbyte={readWorderbyte}
+              stopReading={stopReading}
             />
           ) : (
             <OpponentTurnFrame
@@ -660,6 +707,8 @@ const GameScreen = ({
               isPlayerTurn={isPlayerTurn}
               isReadyToContinue={isReadyToContinue}
               playBotTurn={playBotTurn}
+              readWorderbyte={readWorderbyte}
+              stopReading={stopReading}
             />
           )}
         </View>

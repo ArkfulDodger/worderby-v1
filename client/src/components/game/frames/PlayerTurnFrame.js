@@ -24,6 +24,8 @@ const PlayerTurnFrame = ({
   setTimer,
   setBackDisabled,
   startTimer,
+  readWorderbyte,
+  stopReading,
 }) => {
   const { prompt } = game;
   const [keyboardVisible, setKeyboardVisible] = useState(false);
@@ -31,6 +33,8 @@ const PlayerTurnFrame = ({
 
   // set default selected prompt letters to all available on turn start
   useEffect(() => {
+    readWorderbyte();
+
     setPlayerInput("");
     setPNum(prompt.text.length - 1);
     startTimer();
@@ -57,6 +61,7 @@ const PlayerTurnFrame = ({
 
     return () => {
       setBackDisabled(false);
+      stopReading();
       keyboardDidHideListener.remove();
       keyboardDidShowListener.remove();
     };

@@ -11,6 +11,8 @@ const OpponentTurnFrame = ({
   isPlayerTurn,
   isReadyToContinue,
   playBotTurn,
+  readWorderbyte,
+  stopReading,
 }) => {
   const { player1, player2, prompt } = game;
   const opponent = player1.id === user.id ? player2 : player1;
@@ -21,12 +23,17 @@ const OpponentTurnFrame = ({
   // TODO: fix this so it actually looks for word by round/turn, not just last in array
 
   useEffect(() => {
+    readWorderbyte();
+
     if (game.is_single_player && !isPlayerTurn && !isReadyToContinue) {
       const botTimeout = setTimeout(() => {
         playBotTurn(game);
       }, 1000);
 
-      return () => clearTimeout(botTimeout);
+      return () => {
+        stopReading();
+        clearTimeout(botTimeout);
+      };
     }
   }, []);
 

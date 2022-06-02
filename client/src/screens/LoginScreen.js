@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Title from "../components/Title";
 import LoginForm from "../components/forms/LoginForm";
+import NativeSpeech from "../components/NativeSpeech";
 
 const LoginScreen = (props) => {
   return (
     <View style={styles.centered}>
       {/* <Title /> */}
       <LoginForm />
+      <NativeSpeech />
     </View>
   );
 };
