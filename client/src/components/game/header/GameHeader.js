@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import HeaderPlayerInfo from "./HeaderPlayerInfo";
 import CounterContainer from "./CounterContainer";
+import TurnIndicators from "./TurnIndicators";
 
 const GameHeader = ({ game, user, timer }) => {
   const {
@@ -38,11 +39,22 @@ const GameHeader = ({ game, user, timer }) => {
           <View
             style={{
               flex: 1,
+              flexDirection: "row",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "flex-end",
             }}
           >
+            <TurnIndicators
+              game={game}
+              isPlayer={true}
+              playerTurn={game.player1.id === user.id ? 1 : 2}
+            />
             <CounterContainer timer={timer} />
+            <TurnIndicators
+              game={game}
+              isPlayer={false}
+              playerTurn={game.player1.id === user.id ? 2 : 1}
+            />
           </View>
           <View
             style={{
