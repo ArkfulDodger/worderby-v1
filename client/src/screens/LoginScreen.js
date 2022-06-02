@@ -9,7 +9,6 @@ const LoginScreen = (props) => {
     <View style={styles.centered}>
       {/* <Title /> */}
       <LoginForm />
-      <NativeSpeech />
     </View>
   );
 };
