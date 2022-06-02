@@ -81,7 +81,6 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
   };
 
   const issueChallenge = () => {
-    console.log("issuing challenge");
     setIsThinking(true);
 
     fetch(URL + "/games", {

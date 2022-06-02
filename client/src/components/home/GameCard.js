@@ -58,7 +58,6 @@ const GameCard = ({ game: { item: game }, refresh }) => {
     })
       .then((res) => res.json())
       .then((updatedGame) => {
-        console.log("updatedGame:", updatedGame);
         navigation.navigate("Game", { gameData: updatedGame });
       })
       .catch((error) => console.log(error.message));
