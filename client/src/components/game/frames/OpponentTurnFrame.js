@@ -21,7 +21,6 @@ const OpponentTurnFrame = ({
 
   useEffect(() => {
     if (game.is_single_player && !isPlayerTurn && !isReadyToContinue) {
-      console.log("Bot would play here!");
       const botTimeout = setTimeout(() => {
         playBotTurn(game);
       }, 1000);

@@ -123,7 +123,7 @@ const GameScreen = ({
         // console.log(
         //   Platform.OS + ": " + "------REMATCH ACCEPTED RECEIVED--------"
         // );
-        enterRematch(messageData.message.game_id);
+        getAndEnterRematch(messageData.message.game_id);
       }
       // serverMessagesList.push(e.data);
       // setServerMessages([...serverMessagesList]);
@@ -458,7 +458,6 @@ const GameScreen = ({
   };
 
   const playBotTurn = (game) => {
-    console.log("PLAY BOT TURN CALLED");
     fetch(URL + "/words/bot", {
       method: "POST",
       headers: {
@@ -476,7 +475,6 @@ const GameScreen = ({
     })
       .then((res) => res.json())
       .then((updatedGameData) => {
-        console.log(Platform.OS + ": " + "BOT GAME DATA RETURNED");
         setGame(updatedGameData);
         setAlertMessage("");
       })
@@ -541,10 +539,14 @@ const GameScreen = ({
     })
       .then((res) => res.json())
       .then((newGameData) => {
-        setRematchGame(newGameData);
-        setRematchOffered(true);
-        submitRematchOfferedMessage(newGameData.id);
-        setAlertMessage(`Waiting for ${opponent.username}'s response`);
+        if (game.is_single_player) {
+          enterRematch(newGameData);
+        } else {
+          setRematchGame(newGameData);
+          setRematchOffered(true);
+          submitRematchOfferedMessage(newGameData.id);
+          setAlertMessage(`Waiting for ${opponent.username}'s response`);
+        }
       })
       .catch((error) => console.log(error.message));
   };
@@ -567,20 +569,20 @@ const GameScreen = ({
       .catch((error) => console.log(error.message));
   };
 
-  const enterRematch = (rematch_id) => {
-    console.log(
-      Platform.OS + ": " + "-----using rematch id: " + rematch_id + "-------"
-    );
+  const getAndEnterRematch = (rematch_id) => {
     fetch(URL + `/games/${rematch_id}`)
       .then((res) => res.json())
       .then((rematchGameData) => {
-        console.log(Platform.OS + ": " + "rematchData: " + rematchGameData);
-        setAlertMessage(``);
-        setRematchOffered(false);
-        setRematchGame(null);
-        setGame(rematchGameData);
+        enterRematch(rematchGameData);
       })
       .catch((error) => console.log(error.message));
+  };
+
+  const enterRematch = (rematchGameData) => {
+    setAlertMessage(``);
+    setRematchOffered(false);
+    setRematchGame(null);
+    setGame(rematchGameData);
   };
 
   //#endregion
