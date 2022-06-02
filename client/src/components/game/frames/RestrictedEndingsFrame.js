@@ -1,20 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import GText from "../../tools/GText";
 import uuid from "react-native-uuid";
 
 const maxHeight = 80;
-const RestrictedEndingsFrame = ({ game }) => {
+const RestrictedEndingsFrame = ({ game, isPlayerTurn, isReadyToContinue }) => {
   const [frameHeight, setFrameHeight] = useState(0);
+  // const prevGame = useRef(game);
+  const usePrev = !isPlayerTurn && isReadyToContinue;
 
   const { restricted_endings } = game;
-  const renderedEndings = restricted_endings.map((ending) => {
-    return (
-      <GText key={uuid.v4()} style={styles.text}>
-        -{ending}
-      </GText>
-    );
-  });
+  const renderedEndings = restricted_endings
+    .filter((ending) => {
+      let mostRecentWord = game.words[game.words.length - 1];
+      let mostRecentSteal = mostRecentWord.text.slice(0, mostRecentWord.p_num);
+
+      return !usePrev || ending !== mostRecentSteal;
+    })
+    .map((ending) => {
+      return (
+        <GText key={uuid.v4()} style={styles.text}>
+          -{ending}
+        </GText>
+      );
+    });
+
+  // useEffect(() => {
+  //   prevGame.current = game;
+  // }, [game]);
 
   const restrictedView = (
     <View

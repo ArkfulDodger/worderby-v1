@@ -617,7 +617,11 @@ const GameScreen = ({
     >
       <View style={{ flex: 1, position: "relative" }}>
         <GameHeader game={game} user={user} timer={timer} />
-        <RestrictedEndingsFrame game={game} />
+        <RestrictedEndingsFrame
+          game={game}
+          isPlayerTurn={isPlayerTurn}
+          isReadyToContinue={isReadyToContinue}
+        />
         <WorderbyteFrame game={game} isPlayerTurn={isPlayerTurn} />
         <View style={{ flex: 1 }}>
           {isOver ? (
