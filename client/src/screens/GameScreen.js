@@ -724,6 +724,9 @@ const GameScreen = ({
             rematchOffered={rematchOffered}
             rematchGame={rematchGame}
             onAcceptRematch={onAcceptRematch}
+            muted={muted}
+            setMuted={setMuted}
+            backDisabled={backDisabled}
           />
         </View>
       </View>
