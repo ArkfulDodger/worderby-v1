@@ -103,7 +103,13 @@ const StartNewGameScreen = ({
               : "Single Player"}
           </PButton>
           <PButton onPress={openFriendsList}>Challenge a Friend</PButton>
-          <PButton onPress={() => navigation.goBack()}>Close</PButton>
+          <PButton
+            onPress={() => navigation.goBack()}
+            color1="#FFFFFF55"
+            color2="#CCCCCCCC"
+          >
+            Close
+          </PButton>
         </View>
       </LinearGradient>
     </View>

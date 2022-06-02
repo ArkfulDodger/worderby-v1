@@ -7,12 +7,8 @@ const TurnIndicators = ({ isPlayer, game, playerTurn }) => {
   //"⚫️🟢🔴⭕🔘🟣🟠"
   const filled = isPlayer ? "⚫️" : "⚫️";
   const empty = "•";
-  console.log("game", game);
 
   const round3 = game.round === 3 && game.turn >= playerTurn ? filled : empty;
-  console.log("game round:", game.round);
-  console.log("game turn:", game.turn);
-  console.log("playerTurn:", playerTurn);
   const round2 =
     game.round > 2 || (game.round === 2 && game.turn >= playerTurn)
       ? filled

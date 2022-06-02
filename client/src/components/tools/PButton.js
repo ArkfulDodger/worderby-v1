@@ -43,7 +43,14 @@ export default class PButton extends Component {
         end={{ x: 0, y: 1 }}
       >
         <Pressable {...this.props} style={this.style}>
-          <GText style={{ fontWeight: "bold" }}>{this.props.children}</GText>
+          <GText
+            style={{
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            {this.props.children}
+          </GText>
         </Pressable>
       </LinearGradient>
     );

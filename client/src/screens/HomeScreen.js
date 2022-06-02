@@ -129,7 +129,9 @@ const HomeScreen = (props) => {
             padding: 0,
           }}
         >
-          <GText style={{ fontWeight: "bold", fontSize: 40 }}>+</GText>
+          <GText style={{ fontWeight: "bold", fontSize: 40, lineHeight: 46 }}>
+            +
+          </GText>
         </PButton>
       </View>
     </>

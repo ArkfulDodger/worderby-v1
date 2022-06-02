@@ -46,10 +46,6 @@ const GameCard = ({ game: { item: game }, refresh }) => {
   // }
 
   const acceptChallenge = () => {
-    console.log("accept challenge fired");
-    console.log("game:", game);
-    console.log("game id:", game.id);
-
     fetch(URL + `/games/${game.id}`, {
       method: "PATCH",
       headers: {
