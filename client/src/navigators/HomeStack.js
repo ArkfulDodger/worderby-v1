@@ -39,7 +39,7 @@ function HomeStack() {
           /> */}
           {/* <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="BlockList" component={BlockListScreen} /> */}
-          <Stack.Screen name="FriendsList" component={FriendsListScreen} />
+          <Stack.Screen name="Friends" component={FriendsListScreen} />
           {/* <Stack.Screen name="FriendProfile" component={FriendProfileScreen} /> */}
         </Stack.Group>
         <Stack.Group

@@ -71,7 +71,7 @@ const StartNewGameScreen = ({
   const openFriendsList = () => {
     navigation.goBack();
     setTimeout(
-      () => navigation.navigate("HomeTabs", { screen: "FriendsList" }),
+      () => navigation.navigate("HomeTabs", { screen: "Friends" }),
       200
     );
   };

@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { UserContext, UrlContext } from "../../../App";
 import GText from "../tools/GText";
 import PButton from "../tools/PButton";
+import LinearGradient from "react-native-linear-gradient";
 
 const FriendCard = ({ friend: { item: friend }, refresh }) => {
   const [isThinking, setIsThinking] = useState(false);
@@ -201,14 +202,32 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
   // };
 
   return (
-    <View style={{ flex: 1, margin: 10, padding: 5, backgroundColor: "white" }}>
-      <View style={{ flexDirection: "row" }}>
+    <LinearGradient
+      colors={["#FFF6F0", "#FFD9BE"]}
+      // colors={["#FFF6F0", color]}
+      style={{ borderWidth: 2, borderRadius: 10, margin: 5, padding: 5 }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#FFFFFF88",
+          padding: 5,
+          borderRadius: 5,
+        }}
+      >
         <View style={{ flex: 1 }}>
-          <GText style={{ fontWeight: "bold" }}>{friend.username}</GText>
+          <GText style={{ fontWeight: "bold", fontSize: 20 }}>
+            {friend.username}
+          </GText>
         </View>
         {}
         <View
-          style={{ width: 150, justifyContent: "center", alignItems: "center" }}
+          style={{
+            width: 150,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           {isThinking ? (
             <ActivityIndicator />
@@ -221,13 +240,15 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
                 alignItems: "center",
                 padding: 5,
               }}
+              color1="#FFFFFF55"
+              color2="#FFF4EB"
             >
               {actionText}
             </PButton>
           )}
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 

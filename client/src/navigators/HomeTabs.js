@@ -15,9 +15,9 @@ const HomeTabsScreen = (props) => {
     <SafeAreaView style={{ flex: 1 }}>
       <Tab.Navigator initialRouteName="Home" tabBarPosition="bottom">
         {/* <Tab.Screen name="Rankings" component={RankingsTabs} /> */}
-        <Tab.Screen name="UserProfile" component={UserProfileScreen} />
+        <Tab.Screen name="User Profile" component={UserProfileScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="FriendsList" component={FriendsListScreen} />
+        <Tab.Screen name="Friends" component={FriendsListScreen} />
         {/* <Tab.Screen name="FriendDash" component={FriendDashScreen} /> */}
       </Tab.Navigator>
     </SafeAreaView>

@@ -386,6 +386,7 @@ const GameScreen = ({
         setGame(updatedGameData);
         setTimer(maxTime);
         submitWordPlayedMessage();
+        setAlertMessage("");
         // if (game.is_single_player) {
         //   setTimeout(() => {
         //     playBotTurn(updatedGameData);

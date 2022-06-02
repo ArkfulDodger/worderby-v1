@@ -82,43 +82,57 @@ const HomeScreen = (props) => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        // padding: 10,
-      }}
-    >
-      <View style={{ alignItems: "center", margin: 30 }}>
-        <ApMediumText style={{ fontSize: 30 }}>Current Games</ApMediumText>
-      </View>
-      {/* <Button title="Send Ping" onPress={onSendPress} /> */}
-      <PButton
-        onPress={() => {
-          const spg = currentSinglePlayerGame();
-          navigation.navigate("StartNewGame", {
-            currentSinglePlayerGame: spg,
-          });
+    <>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          // padding: 10,
         }}
       >
-        Start New Game
-      </PButton>
-      {/* <Button
+        <View style={{ alignItems: "center", margin: 30 }}>
+          <ApMediumText style={{ fontSize: 30 }}>Current Games</ApMediumText>
+        </View>
+        {/* <Button title="Send Ping" onPress={onSendPress} /> */}
+
+        {/* <Button
         title="UserProfile"
         onPress={() => navigation.navigate("UserProfile")}
       /> */}
-      {/* <Button
+        {/* <Button
         title="Settings"
         onPress={() => navigation.navigate("Settings")}
       /> */}
-      {/* <Button title="Logout" onPress={onLogoutPress} /> */}
-      <FlatList
-        data={user.current_games}
-        renderItem={renderGameCard}
-        keyExtractor={(game) => game.id}
-      />
-    </View>
+        {/* <Button title="Logout" onPress={onLogoutPress} /> */}
+        <FlatList
+          data={user.current_games}
+          renderItem={renderGameCard}
+          keyExtractor={(game) => game.id}
+        />
+      </View>
+      <View style={styles.floatButton}>
+        <PButton
+          onPress={() => {
+            const spg = currentSinglePlayerGame();
+            navigation.navigate("StartNewGame", {
+              currentSinglePlayerGame: spg,
+            });
+          }}
+          style={{
+            height: 60,
+            width: 60,
+            borderRadius: 10,
+            borderWidth: 4,
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 0,
+          }}
+        >
+          <GText style={{ fontWeight: "bold", fontSize: 40 }}>+</GText>
+        </PButton>
+      </View>
+    </>
   );
 };
 
@@ -128,6 +142,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ecf0f1",
     paddingTop: 30,
     padding: 8,
+  },
+  floatButton: {
+    position: "absolute",
+    right: 40,
+    bottom: 85,
   },
 });
 

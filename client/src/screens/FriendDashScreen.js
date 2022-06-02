@@ -12,7 +12,7 @@ const FriendDashScreen = (props) => {
       <Text>Friend Dashboard</Text>
       <Button
         title="FriendsList"
-        onPress={() => navigation.navigate("FriendsList")}
+        onPress={() => navigation.navigate("Friends")}
       />
       <Button
         title="FriendProfile"

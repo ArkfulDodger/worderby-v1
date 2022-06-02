@@ -35,29 +35,31 @@ const UserProfileScreen = (props) => {
       <View style={{ alignItems: "center", margin: 30 }}>
         <ApMediumText style={{ fontSize: 30 }}>Profile</ApMediumText>
       </View>
-      <View style={{ flex: 1, padding: 20 }}>
-        <View style={{ flexDirection: "row", padding: 20 }}>
-          <GText style={{ fontWeight: "bold" }}>Name: </GText>
-          <GText>
+      <View style={{ flex: 1, padding: 15 }}>
+        <View style={{ flexDirection: "row", padding: 15 }}>
+          <GText style={{ fontWeight: "bold", fontSize: 20 }}>Name: </GText>
+          <GText style={{ fontSize: 20 }}>
             {user.first_name} {user.last_name}
           </GText>
         </View>
-        <View style={{ flexDirection: "row", padding: 20 }}>
-          <GText style={{ fontWeight: "bold" }}>Username: </GText>
-          <GText>{user.username}</GText>
+        <View style={{ flexDirection: "row", padding: 15 }}>
+          <GText style={{ fontWeight: "bold", fontSize: 20 }}>Username: </GText>
+          <GText style={{ fontSize: 20 }}>{user.username}</GText>
         </View>
-        <View style={{ flexDirection: "row", padding: 20 }}>
-          <GText style={{ fontWeight: "bold" }}>Email: </GText>
-          <GText>{user.email}</GText>
+        <View style={{ flexDirection: "row", padding: 15 }}>
+          <GText style={{ fontWeight: "bold", fontSize: 20 }}>Email: </GText>
+          <GText style={{ fontSize: 20 }}>{user.email}</GText>
         </View>
-        <View style={{ flexDirection: "row", padding: 20 }}>
-          <GText style={{ fontWeight: "bold" }}>Games Played: </GText>
-          <GText>{user.games_played}</GText>
+        <View style={{ flexDirection: "row", padding: 15 }}>
+          <GText style={{ fontWeight: "bold", fontSize: 20 }}>
+            Games Played:{" "}
+          </GText>
+          <GText style={{ fontSize: 20 }}>{user.games_played}</GText>
         </View>
         {user.highest_scoring_word ? (
           <>
-            <View style={{ flexDirection: "row", padding: 20 }}>
-              <GText style={{ fontWeight: "bold" }}>
+            <View style={{ flexDirection: "row", padding: 15 }}>
+              <GText style={{ fontWeight: "bold", fontSize: 20 }}>
                 Highest Scoring Word:{" "}
               </GText>
             </View>
