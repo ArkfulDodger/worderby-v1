@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import NumText from "../../tools/NumText";
 
 const Counter = ({ timer }) => {
@@ -13,7 +13,17 @@ const Counter = ({ timer }) => {
     }
   }, [timer]);
 
-  return <NumText style={{ color: color, fontSize: 60 }}>{timer}</NumText>;
+  return (
+    <NumText
+      style={{
+        color: color,
+        fontSize: 60,
+        lineHeight: Platform.OS !== "ios" ? 80 : 85,
+      }}
+    >
+      {timer}
+    </NumText>
+  );
 };
 
 export default Counter;
