@@ -57,11 +57,11 @@ class Game < ApplicationRecord
     words.last.round_played == round && words.last.turn_played == turn
   end
 
-  def score(word_score)
+  def score(word_score, word_penalty = 0)
     if turn == 1
-      update(player1_score: player1_score + word_score)
+      update(player1_score: player1_score + word_score + word_penalty)
     else
-      update(player2_score: player2_score + word_score)
+      update(player2_score: player2_score + word_score + word_penalty)
     end
   end
 

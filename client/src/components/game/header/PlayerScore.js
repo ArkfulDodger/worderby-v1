@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import NumText from "../../tools/NumText";
 
-const PlayerScore = ({ isPlayer, score }) => {
+const PlayerScore = ({ isPlayer, score, timer }) => {
   return (
     <View style={{ height: 40, alignItems: "flex-end" }}>
       <NumText
@@ -16,7 +16,7 @@ const PlayerScore = ({ isPlayer, score }) => {
           // backgroundColor: "red",
         }}
       >
-        {score}
+        {isPlayer && timer < 0 ? score + timer : score}
       </NumText>
     </View>
   );

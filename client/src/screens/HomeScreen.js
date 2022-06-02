@@ -33,7 +33,7 @@ const HomeScreen = (props) => {
   }, []);
 
   const fetchData = () => {
-    console.log("HOME DATA FETCH CALLED -------------------------");
+    // console.log("HOME DATA FETCH CALLED -------------------------");
 
     fetch(`${URL}/me`)
       .then((r) => {

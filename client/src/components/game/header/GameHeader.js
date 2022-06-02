@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import HeaderPlayerInfo from "./HeaderPlayerInfo";
+import CounterContainer from "./CounterContainer";
 
-const GameHeader = ({ game, user }) => {
+const GameHeader = ({ game, user, timer }) => {
   const {
     player1,
     player2,
@@ -20,16 +21,42 @@ const GameHeader = ({ game, user }) => {
     <LinearGradient colors={["#FFF6F0", "#FFD9BE"]}>
       <SafeAreaView>
         <View style={styles.header}>
-          <HeaderPlayerInfo
-            isPlayer={true}
-            name={player.username}
-            score={playerScore}
-          />
-          <HeaderPlayerInfo
-            isPlayer={false}
-            name={opponent.username}
-            score={opponentScore}
-          />
+          <View
+            style={{
+              flex: 1,
+              alignItems: "flex-start",
+              justifyContent: "flex-end",
+            }}
+          >
+            <HeaderPlayerInfo
+              isPlayer={true}
+              name={player.username}
+              score={playerScore}
+              timer={timer}
+            />
+          </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CounterContainer timer={timer} />
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+            }}
+          >
+            <HeaderPlayerInfo
+              isPlayer={false}
+              name={opponent.username}
+              score={opponentScore}
+            />
+          </View>
         </View>
       </SafeAreaView>
     </LinearGradient>

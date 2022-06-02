@@ -7,7 +7,11 @@ class WordsController < ApplicationController
   def create
     new_word = Word.create!(word_params)
     game = new_word.game
-    game.score(new_word.score)
+    game.score(new_word.score, new_word.time_penalty || 0)
+
+    # byebug
+
+    game.update(worderbyte: game.worderbyte + new_word.text[new_word.p_num..-1])
     if (game.round == game.num_rounds && game.turn == 2) ||
          game.is_single_player
       game.progress
@@ -40,6 +44,7 @@ class WordsController < ApplicationController
       )
     game = new_word.game
     game.score(new_word.score)
+    game.update(worderbyte: game.worderbyte + new_word.text[new_word.p_num..-1])
     game.progress if game.round == game.num_rounds && game.turn == 2
 
     render json: game, status: :created
@@ -58,7 +63,8 @@ class WordsController < ApplicationController
       :prompt_text,
       :p_num,
       :score,
-      :is_first_word
+      :is_first_word,
+      :time_penalty
     )
   end
 

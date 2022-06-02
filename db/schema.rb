@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_30_190246) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_01_220820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_190246) do
     t.boolean "is_accepted"
     t.integer "challenger_id"
     t.integer "challengee_id"
+    t.string "worderbyte"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_190246) do
     t.datetime "updated_at", null: false
     t.boolean "is_first_word"
     t.integer "p_num"
+    t.integer "time_penalty"
   end
 
 end

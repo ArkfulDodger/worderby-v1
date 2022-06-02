@@ -11,7 +11,8 @@ class GameSerializer < ActiveModel::Serializer
              :is_single_player,
              :is_word_played_this_turn,
              :challenger_id,
-             :challengee_id
+             :challengee_id,
+             :worderbyte
 
   belongs_to :player1
   belongs_to :player2

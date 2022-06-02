@@ -15,7 +15,7 @@ const OpponentTurnFrame = ({
   const opponent = player1.id === user.id ? player2 : player1;
   const player = player1.id === user.id ? player1 : player2;
   const playersWords = game.words.filter((word) => word.user_id === user.id);
-  console.log("playersWords:", playersWords);
+  // console.log("playersWords:", playersWords);
   const playerMostRecentWord = playersWords[playersWords.length - 1];
   // TODO: fix this so it actually looks for word by round/turn, not just last in array
 

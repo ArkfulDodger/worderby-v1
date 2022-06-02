@@ -16,6 +16,7 @@ export default class NumText extends Component {
     ];
     if (props.style) {
       if (Array.isArray(props.style)) {
+        console.log("numstyle color:", this.style.color);
         this.style = this.style.concat(props.style);
       } else {
         this.style.push(props.style);

@@ -11,7 +11,6 @@ import ApMediumText from "../components/tools/ApMediumText";
 const UserProfileScreen = (props) => {
   const { user, setUser } = useContext(UserContext);
   const URL = useContext(UrlContext);
-  console.log("user prof user:", user);
   const navigation = useNavigation();
 
   const onLogoutPress = () => {
@@ -55,36 +54,26 @@ const UserProfileScreen = (props) => {
           <GText style={{ fontWeight: "bold" }}>Games Played: </GText>
           <GText>{user.games_played}</GText>
         </View>
-        <View style={{ flexDirection: "row", padding: 20 }}>
-          <GText style={{ fontWeight: "bold" }}>Highest Scoring Word: </GText>
-        </View>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            padding: 10,
-          }}
-        >
-          {/* <View style={{ flexDirection: "row", margin: 20, marginLeft: 30 }}>
-            <GText style={{ fontWeight: "bold" }}>Score: </GText>
-            <GText>
-              {user.highest_scoring_word
-                ? user.highest_scoring_word.score
-                : "--"}
-            </GText>
-          </View>
-          <View style={{ flexDirection: "row", marginLeft: 30 }}>
-            <GText style={{ fontWeight: "bold" }}>Word: </GText>
-            <GText>
-              {user.highest_scoring_word
-                ? user.highest_scoring_word.text
-                : "--"}
-            </GText>
-          </View> */}
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <WordScore prompt={user.highest_scoring_word} />
-          </View>
-        </View>
+        {user.highest_scoring_word ? (
+          <>
+            <View style={{ flexDirection: "row", padding: 20 }}>
+              <GText style={{ fontWeight: "bold" }}>
+                Highest Scoring Word:{" "}
+              </GText>
+            </View>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 10,
+              }}
+            >
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
+                <WordScore prompt={user.highest_scoring_word} />
+              </View>
+            </View>
+          </>
+        ) : null}
       </View>
       <View style={{ marginBottom: 30, alignItems: "center" }}>
         {/* <Button

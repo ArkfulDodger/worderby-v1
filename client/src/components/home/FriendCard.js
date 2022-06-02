@@ -22,9 +22,6 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
     (game) => game.player1.id === user.id || game.player2.id === user.id
   );
 
-  console.log(friend.username + "'s current game: " + game);
-  console.log("FriendCard friend:", friend);
-
   const actionText = game
     ? game.is_accepted
       ? "Continue"

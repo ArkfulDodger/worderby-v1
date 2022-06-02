@@ -87,5 +87,7 @@ rand_word_1 = Randword.get_random_word
 rand_word_2 = Randword.get_random_word
 prompt1 = Word.create(game: game1, text: rand_word_1, is_first_word: true)
 prompt2 = Word.create(game: game2, text: rand_word_2, is_first_word: true)
+game1.update(worderbyte: rand_word_1)
+game2.update(worderbyte: rand_word_2)
 
 puts '🌱 ..... All Done Seeding! 🌱'

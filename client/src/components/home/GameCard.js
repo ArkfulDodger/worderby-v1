@@ -77,7 +77,7 @@ const GameCard = ({ game: { item: game }, refresh }) => {
     fetch(URL + `/games/${game.id}`)
       .then((res) => res.json())
       .then((gameData) => {
-        console.log("got game data");
+        // console.log("got game data");
         navigation.navigate("Game", { gameData: gameData });
       })
       .catch((error) => console.log(error.message));

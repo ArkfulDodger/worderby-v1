@@ -15,12 +15,16 @@ import OpponentTurnFrame from "../components/game/frames/OpponentTurnFrame";
 import ResultsFrame from "../components/game/frames/ResultsFrame";
 import GameHeader from "../components/game/header/GameHeader";
 import GameMenu from "../components/game/menu/GameMenu";
+import WorderbyteFrame from "../components/game/frames/WorderbyteFrame";
 import { UserContext, UrlContext } from "../../App";
+
+const maxTime = 10;
 
 const GameScreen = ({
   route: {
     params: { gameData },
   },
+  navigation,
 }) => {
   // console.log("gameData:", gameData);
   // context variables
@@ -34,6 +38,10 @@ const GameScreen = ({
   const [game, setGame] = useState(gameData);
   const [rematchOffered, setRematchOffered] = useState(false);
   const [rematchGame, setRematchGame] = useState(null);
+  const [timer, setTimer] = useState(maxTime);
+  const [timerActive, setTimerActive] = useState(false);
+  const [currentTimeout, setCurrentTimeout] = useState(null);
+  const [backDisabled, setBackDisabled] = useState(false);
 
   const { is_over: isOver, turn, player1, player2 } = game;
   const mwURL = useMWAPI;
@@ -100,21 +108,21 @@ const GameScreen = ({
       if (isPing(messageData)) {
         // console.log("received ping");
       } else if (messageData.type === "welcome") {
-        console.log(Platform.OS + ": " + "Successfully Connected");
+        // console.log(Platform.OS + ": " + "Successfully Connected");
       } else if (messageData.type === "confirm_subscription") {
-        console.log(Platform.OS + ": " + "Successfully Subscribed");
+        // console.log(Platform.OS + ": " + "Successfully Subscribed");
       } else if (isOtherTurnPlayedMessage(messageData)) {
         refreshGame(messageData.message.game_id);
-        console.log(Platform.OS + ": " + "instigating game refresh");
+        // console.log(Platform.OS + ": " + "instigating game refresh");
       } else if (
         isRematchOfferedMessage(messageData) &&
         !isUserRematchChallenger(messageData)
       ) {
         getRematchGame(messageData.message.game_id);
       } else if (isRematchAcceptedMessage(messageData)) {
-        console.log(
-          Platform.OS + ": " + "------REMATCH ACCEPTED RECEIVED--------"
-        );
+        // console.log(
+        //   Platform.OS + ": " + "------REMATCH ACCEPTED RECEIVED--------"
+        // );
         enterRematch(messageData.message.game_id);
       }
       // serverMessagesList.push(e.data);
@@ -128,13 +136,40 @@ const GameScreen = ({
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    console.log(Platform.OS + ": " + "GAME UPDATED:", game);
-  }, [game]);
+  // useEffect(() => {
+  //   console.log(Platform.OS + ": " + "GAME UPDATED:", game);
+  // }, [game]);
+
+  // useEffect(() => {
+  //   console.log(Platform.OS + ": " + "USER UPDATED:", user);
+  // }, [user]);
 
   useEffect(() => {
-    console.log(Platform.OS + ": " + "USER UPDATED:", user);
-  }, [user]);
+    // console.log("---------------- Timer Use Effect Called");
+
+    let nextCount;
+
+    if (timerActive) {
+      nextCount = setTimeout(countDown, 1100);
+      setCurrentTimeout(nextCount);
+    }
+
+    return () => clearTimeout(nextCount);
+  }, [timer, timerActive]);
+
+  useEffect(
+    () =>
+      navigation.addListener("beforeRemove", (e) => {
+        if (!backDisabled) {
+          // If we don't have unsaved changes, then we don't need to do anything
+          return;
+        }
+
+        // Prevent default behavior of leaving the screen
+        e.preventDefault();
+      }),
+    [navigation, backDisabled]
+  );
 
   const isPing = (message) => {
     return message.type === "ping";
@@ -230,7 +265,7 @@ const GameScreen = ({
   };
 
   const subscribe = () => {
-    console.log("Subscribing...");
+    // console.log("Subscribing...");
     // console.log("game:", game);
     const subscription = {
       command: "subscribe",
@@ -244,8 +279,8 @@ const GameScreen = ({
   };
 
   const unsubscribe = () => {
-    console.log(Platform.OS + ": " + "Unsubscribing...");
-    console.log(Platform.OS + ": " + "ws:", ws);
+    // console.log(Platform.OS + ": " + "Unsubscribing...");
+    // console.log(Platform.OS + ": " + "ws:", ws);
 
     debugger;
 
@@ -324,6 +359,7 @@ const GameScreen = ({
   };
 
   const playWord = (word) => {
+    stopTimer();
     setAlertMessage("Success! Playing word...");
     fetch(URL + "/words", {
       method: "POST",
@@ -341,11 +377,13 @@ const GameScreen = ({
         p_num: pNum,
         score: getWordScore(),
         is_first_word: false,
+        time_penalty: timer < 0 ? timer : 0,
       }),
     })
       .then((res) => res.json())
       .then((updatedGameData) => {
         setGame(updatedGameData);
+        setTimer(maxTime);
         submitWordPlayedMessage();
         // if (game.is_single_player) {
         //   setTimeout(() => {
@@ -355,6 +393,55 @@ const GameScreen = ({
       })
       .catch((error) => console.log(error.message));
   };
+
+  const countDown = () => {
+    const newTime = timer - 1;
+    setTimer(newTime);
+
+    if (newTime === -1) {
+      setAlertMessage("Losing Points! Submit Soon!");
+    }
+
+    // if (newTime < 0) {
+    //   decrementScore();
+    // }
+  };
+
+  const startTimer = () => {
+    setTimer(maxTime);
+    setTimerActive(true);
+  };
+
+  const stopTimer = () => {
+    setTimerActive(false);
+    if (currentTimeout) {
+      clearTimeout(currentTimeout);
+      setCurrentTimeout(null);
+    }
+  };
+
+  // const decrementScore = () => {
+  //   fetch(URL + `/games/${game.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       player1_score:
+  //         game.player1.id === user.id
+  //           ? game.player1_score - 1
+  //           : game.player1_score,
+  //       player2_score:
+  //         game.player2.id === user.id
+  //           ? game.player2_score - 1
+  //           : game.player2_score,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setGame(data))
+  //     .catch((error) => console.log(error.message));
+  // };
 
   const onWordSubmit = async () => {
     setAlertMessage("");
@@ -511,7 +598,8 @@ const GameScreen = ({
       style={{ flex: 1 }}
     >
       <View style={{ flex: 1, position: "relative" }}>
-        <GameHeader game={game} user={user} />
+        <GameHeader game={game} user={user} timer={timer} />
+        <WorderbyteFrame game={game} />
         <View style={{ flex: 1 }}>
           {isOver ? (
             <ResultsFrame game={game} user={user} alertMessage={alertMessage} />
@@ -525,6 +613,9 @@ const GameScreen = ({
               setPNum={setPNum}
               alertMessage={alertMessage}
               setAlertMessage={setAlertMessage}
+              setTimerActive={setTimerActive}
+              setBackDisabled={setBackDisabled}
+              startTimer={startTimer}
             />
           ) : (
             <OpponentTurnFrame

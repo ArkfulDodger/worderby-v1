@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, setTimerActive } from "react";
 import {
   View,
   Text,
@@ -20,6 +20,10 @@ const PlayerTurnFrame = ({
   setPlayerInput,
   alertMessage,
   setAlertMessage,
+  setTimerActive,
+  setTimer,
+  setBackDisabled,
+  startTimer,
 }) => {
   const { prompt } = game;
 
@@ -27,6 +31,10 @@ const PlayerTurnFrame = ({
   useEffect(() => {
     setPlayerInput("");
     setPNum(prompt.text.length - 1);
+    startTimer();
+    setBackDisabled(true);
+
+    return () => setBackDisabled(false);
   }, []);
 
   return (
