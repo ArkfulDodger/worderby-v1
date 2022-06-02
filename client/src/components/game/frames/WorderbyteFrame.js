@@ -3,7 +3,7 @@ import { View } from "react-native";
 import GText from "../../tools/GText";
 import Worderbyte from "../Worderbyte";
 
-const WorderbyteFrame = ({ game }) => {
+const WorderbyteFrame = ({ game, isPlayerTurn }) => {
   const { worderbyte } = game;
 
   return (
@@ -17,7 +17,7 @@ const WorderbyteFrame = ({ game }) => {
         padding: 5,
       }}
     >
-      <Worderbyte game={game} />
+      <Worderbyte game={game} isPlayerTurn={isPlayerTurn} />
     </View>
   );
 };

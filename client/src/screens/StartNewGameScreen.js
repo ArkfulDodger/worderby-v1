@@ -4,6 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import GText from "../components/tools/GText";
 import { useNavigation } from "@react-navigation/native";
 import { UrlContext, UserContext } from "../../App";
+import PButton from "../components/tools/PButton";
 
 const StartNewGameScreen = ({
   route: {
@@ -57,6 +58,7 @@ const StartNewGameScreen = ({
         is_accepted: true,
         challenger_id: user.id,
         challengee_id: null,
+        streak: 1,
       }),
     })
       .then((res) => res.json())
@@ -95,16 +97,13 @@ const StartNewGameScreen = ({
             padding: 10,
           }}
         >
-          <Button
-            title={
-              !!currentSinglePlayerGame
-                ? "Continue Single Player"
-                : "Single Player"
-            }
-            onPress={onSinglePlayerPress}
-          />
-          <Button title="Challenge a Friend" onPress={openFriendsList} />
-          <Button title="Close" onPress={() => navigation.goBack()} />
+          <PButton onPress={onSinglePlayerPress}>
+            {!!currentSinglePlayerGame
+              ? "Continue Single Player"
+              : "Single Player"}
+          </PButton>
+          <PButton onPress={openFriendsList}>Challenge a Friend</PButton>
+          <PButton onPress={() => navigation.goBack()}>Close</PButton>
         </View>
       </LinearGradient>
     </View>

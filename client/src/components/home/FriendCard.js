@@ -102,6 +102,7 @@ const FriendCard = ({ friend: { item: friend }, refresh }) => {
         is_accepted: false,
         challenger_id: user.id,
         challengee_id: friend.id,
+        streak: 1,
       }),
     })
       .then((res) => res.json())
