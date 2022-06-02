@@ -18,6 +18,7 @@ import GameMenu from "../components/game/menu/GameMenu";
 import WorderbyteFrame from "../components/game/frames/WorderbyteFrame";
 import RestrictedEndingsFrame from "../components/game/frames/RestrictedEndingsFrame";
 import { UserContext, UrlContext } from "../../App";
+import { Header } from "@react-navigation/stack";
 // import Tts from "react-native-tts";
 
 const maxTime = 10;
@@ -614,6 +615,10 @@ const GameScreen = ({
   if (isLoading) {
     return <LoadingScreen />;
   }
+
+  // useEffect(() => {
+  //   console.log("-----------------status bar height:", StatusBar.currentHeight);
+  // });
 
   return (
     <KeyboardAvoidingView

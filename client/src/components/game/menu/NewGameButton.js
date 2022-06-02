@@ -16,7 +16,7 @@ const NewGameButton = ({
       disabled={rematchOffered && rematchGame.challenger_id === user.id}
       onPress={rematchOffered ? onAcceptRematch : onNewGame}
       style={{
-        // width: 120,
+        width: 120,
         justifyContent: "center",
         alignItems: "center",
         padding: 5,

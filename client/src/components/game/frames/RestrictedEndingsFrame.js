@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Keyboard, Platform } from "react-native";
 import GText from "../../tools/GText";
 import uuid from "react-native-uuid";
 
-const maxHeight = 80;
+// const maxHeight = 80;
 const RestrictedEndingsFrame = ({ game, isPlayerTurn, isReadyToContinue }) => {
+  const [maxHeight, setMaxHeight] = useState(80);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
   const [frameHeight, setFrameHeight] = useState(0);
   // const prevGame = useRef(game);
   const usePrev = !isPlayerTurn && isReadyToContinue;
@@ -24,6 +27,32 @@ const RestrictedEndingsFrame = ({ game, isPlayerTurn, isReadyToContinue }) => {
         </GText>
       );
     });
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+        if (Platform.OS !== "ios") {
+          setMaxHeight(40);
+        }
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+        if (Platform.OS !== "ios") {
+          setMaxHeight(80);
+        }
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   // useEffect(() => {
   //   prevGame.current = game;

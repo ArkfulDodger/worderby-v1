@@ -26,6 +26,8 @@ const PlayerTurnFrame = ({
   startTimer,
 }) => {
   const { prompt } = game;
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [flexVal, setFlexVal] = useState(1);
 
   // set default selected prompt letters to all available on turn start
   useEffect(() => {
@@ -34,12 +36,35 @@ const PlayerTurnFrame = ({
     startTimer();
     setBackDisabled(true);
 
-    return () => setBackDisabled(false);
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+        if (Platform.OS !== "ios") {
+          setFlexVal(0);
+        }
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+        if (Platform.OS !== "ios") {
+          setFlexVal(1);
+        }
+      }
+    );
+
+    return () => {
+      setBackDisabled(false);
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
   }, []);
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: flexVal }}>
         <AlertMessage alertMessage={alertMessage} />
       </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
