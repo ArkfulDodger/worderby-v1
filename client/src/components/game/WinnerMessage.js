@@ -22,9 +22,11 @@ const WinnerMessage = ({ game, user }) => {
           >
             {isPlayerWinner ? "You win!" : winner.username}
           </ApMediumText>
-          <ApMediumText style={{ fontSize: 43 }}>
-            {isPlayerWinner ? "" : "wins!"}
-          </ApMediumText>
+          {!isPlayerWinner && (
+            <ApMediumText style={{ fontSize: 43 }}>
+              {isPlayerWinner ? "" : "wins!"}
+            </ApMediumText>
+          )}
         </>
       )}
     </View>
@@ -34,9 +36,7 @@ const WinnerMessage = ({ game, user }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-  },
-  margin: {
-    margin: 10,
+    // backgroundColor: "red",
   },
 });
 

@@ -6,10 +6,10 @@ const AlertMessage = ({ alertMessage }) => {
   return (
     <View
       style={{
-        flex: 1,
+        // flex: 1,
         alignItems: "center",
         justifyContent: "flex-start",
-        padding: 15,
+        paddingVertical: 5,
       }}
     >
       <GText>{alertMessage}</GText>

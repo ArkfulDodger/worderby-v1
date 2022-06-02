@@ -46,7 +46,7 @@ const OpponentTurnFrame = ({
           <WordScore prompt={playerMostRecentWord} />
         )}
       </View>
-      {/* <WordResults game={game} /> */}
+      <WordResults game={game} />
     </View>
   );
 };

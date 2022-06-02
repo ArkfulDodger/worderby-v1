@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import ApMediumText from "../tools/ApMediumText";
 import ApExtraLightText from "../tools/ApExtraLightText";
 import NumText from "../tools/NumText";
@@ -12,8 +12,14 @@ const WordRecord = ({ word: { item: word } }) => {
   const isUserWord = user_id === user.id;
 
   return (
-    <View style={{ marginVertical: 3 }}>
-      <View style={{ flexDirection: isUserWord ? "row" : "row-reverse" }}>
+    <View style={{ marginVertical: Platform.OS === "ios" ? 3 : 1 }}>
+      <View
+        style={{
+          flexDirection: isUserWord ? "row" : "row-reverse",
+          alignItems: "center",
+          // backgroundColor: "blue",
+        }}
+      >
         {is_first_word ? (
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -57,11 +63,12 @@ const WordRecord = ({ word: { item: word } }) => {
                 style={{
                   color: isUserWord ? "#9A00B4" : "#9D5F01",
                   fontSize: 30,
+                  lineHeight: 30,
                 }}
               >
                 {text.slice(0, p_num)}
               </ApMediumText>
-              <ApExtraLightText style={{ fontSize: 30 }}>
+              <ApExtraLightText style={{ fontSize: 30, lineHeight: 30 }}>
                 {text.slice(p_num)}
               </ApExtraLightText>
             </View>

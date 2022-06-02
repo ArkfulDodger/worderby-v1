@@ -7,13 +7,23 @@ import WordResults from "./WordResults";
 const ResultsFrame = ({ game, user, alertMessage }) => {
   return (
     <>
-      <View style={{}}>
+      <View>
         <AlertMessage alertMessage={alertMessage} />
       </View>
       <View style={styles.container}>
         <WinnerMessage game={game} user={user} />
       </View>
-      <View style={{ flex: 1 }}>
+      <View
+        style={{
+          borderWidth: 2,
+          borderColor: "gray",
+          margin: 5,
+          flex: 4,
+          borderRadius: 10,
+          padding: 5,
+          backgroundColor: "#FFFFFFAA",
+        }}
+      >
         <WordResults game={game} />
       </View>
     </>
@@ -22,7 +32,7 @@ const ResultsFrame = ({ game, user, alertMessage }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     marginTop: 20,
     marginBottom: 20,
     justifyContent: "center",
