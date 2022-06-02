@@ -7,7 +7,7 @@ import WordResults from "./WordResults";
 const ResultsFrame = ({ game, user, alertMessage }) => {
   return (
     <>
-      <View style={{ flex: 1 }}>
+      <View style={{}}>
         <AlertMessage alertMessage={alertMessage} />
       </View>
       <View style={styles.container}>
@@ -22,7 +22,9 @@ const ResultsFrame = ({ game, user, alertMessage }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    marginTop: 20,
+    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
   },

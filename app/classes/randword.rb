@@ -27,7 +27,7 @@ class Randword
   private
 
   def self.is_word_entry?(data)
-    !!data[0]['meta']
+    data.length > 0 && !!data[0]['meta']
   end
 
   def self.is_word_in_stems?(data, word)

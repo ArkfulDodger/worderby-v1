@@ -19,23 +19,33 @@ const WordRecord = ({ word: { item: word } }) => {
         </View>
       ) : (
         <>
-          <NumText
+          <View
             style={{
-              margin: 10,
-              fontSize: 30,
-              color:
-                score < 0
-                  ? "red"
-                  : score === 0
-                  ? "black"
-                  : isUserWord
-                  ? "#DB00FF"
-                  : "#CA7900",
+              height: 30,
+              backgroundColor: "red",
+              alignItems: "flex-end",
             }}
           >
-            {score > 0 && "+"}
-            {score}
-          </NumText>
+            <NumText
+              style={{
+                lineHeight: 30,
+                paddingBottom: 10,
+                fontSize: 30,
+                // transform: [{ translateY: 10 }],
+                color:
+                  score < 0
+                    ? "red"
+                    : score === 0
+                    ? "black"
+                    : isUserWord
+                    ? "#DB00FF"
+                    : "#CA7900",
+              }}
+            >
+              {score > 0 && "+"}
+              {score}
+            </NumText>
+          </View>
           <View style={{ flexDirection: "row" }}>
             <ApMediumText
               style={{
