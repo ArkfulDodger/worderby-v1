@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import OpponentActivityMessage from "../OpponentActivityMessage";
 import WordScore from "../WordScore";
 import FirstWordMessage from "../FirstWordMessage";
+import WordResults from "./WordResults";
 
 const OpponentTurnFrame = ({
   game,
@@ -45,6 +46,7 @@ const OpponentTurnFrame = ({
           <WordScore prompt={playerMostRecentWord} />
         )}
       </View>
+      {/* <WordResults game={game} /> */}
     </View>
   );
 };
