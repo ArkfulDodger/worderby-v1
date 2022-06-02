@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
-const TurnIndicators = (isPlayer, game, playerTurn) => {
+const TurnIndicators = ({ isPlayer, game, playerTurn }) => {
   //"⚫️🟢🔴⭕🔘🟣🟠"
-  const filled = isPlayer ? "🟣" : "🟠";
-  const empty = "🔘";
+  const filled = isPlayer ? "⚫️" : "⚫️";
+  const empty = "•";
+  console.log("game", game);
 
   const round3 = game.round === 3 && game.turn >= playerTurn ? filled : empty;
+  console.log("game round:", game.round);
+  console.log("game turn:", game.turn);
+  console.log("playerTurn:", playerTurn);
   const round2 =
     game.round > 2 || (game.round === 2 && game.turn >= playerTurn)
       ? filled
@@ -16,7 +22,7 @@ const TurnIndicators = (isPlayer, game, playerTurn) => {
   return (
     <View
       style={{
-        alignItems: "space-between",
+        alignItems: "center",
         padding: 5,
       }}
     >
@@ -29,7 +35,7 @@ const TurnIndicators = (isPlayer, game, playerTurn) => {
 
 const styles = StyleSheet.create({
   bullets: {
-    fontSize: 15,
+    fontSize: 10,
     padding: 2,
   },
 });
