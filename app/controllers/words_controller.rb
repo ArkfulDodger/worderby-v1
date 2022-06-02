@@ -104,8 +104,9 @@ class WordsController < ApplicationController
   def is_word_playable?(word)
     #confirm word doesn't use restricted ending
     game = Game.find(word_params[:game_id])
-    if word.end_with?(*game.restricted_endings)
-      puts 'BOT: ' + word[:word] + ' uses a restricted ending'
+    byebug
+    if word.end_with?(*game[:restricted_endings])
+      puts 'BOT: ' + word + ' uses a restricted ending'
       return false
     end
 
@@ -120,7 +121,6 @@ class WordsController < ApplicationController
 
       is_word_entry?(data) && is_word_in_stems?(data, word)
     else
-      puts 'BOT: ' + word[:word] + ' is not in the dictionary'
       return false
     end
   end
@@ -132,6 +132,7 @@ class WordsController < ApplicationController
     puts 'BOT: Attempting to play ' + word[:word] + '...'
 
     if is_word_playable?(word[:word])
+      puts 'BOT: ' + word[:word] + ' is not playable'
       return wordObj = { p_num: p_num, text: word[:word] }
     else
       pw[num].delete_at(word_i)

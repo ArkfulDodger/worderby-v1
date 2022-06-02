@@ -549,6 +549,8 @@ const GameScreen = ({
         is_accepted: game.is_single_player ? true : false,
         challenger_id: user.id,
         challengee_id: opponent.id,
+        streak: game.streak + 1,
+        restricted_endings: game.restricted_endings,
       }),
     })
       .then((res) => res.json())

@@ -62,6 +62,7 @@ class GamesController < ApplicationController
   # permissible params to be used by create/update
   def game_params
     params.permit(
+      :streak,
       :player1_id,
       :player2_id,
       :is_over,
@@ -75,8 +76,7 @@ class GamesController < ApplicationController
       :challenger_id,
       :challengee_id,
       :worderbyte,
-      :restricted_endings,
-      :steak
+      restricted_endings: []
     )
   end
 
