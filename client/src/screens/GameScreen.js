@@ -18,6 +18,7 @@ import GameMenu from "../components/game/menu/GameMenu";
 import WorderbyteFrame from "../components/game/frames/WorderbyteFrame";
 import RestrictedEndingsFrame from "../components/game/frames/RestrictedEndingsFrame";
 import { UserContext, UrlContext } from "../../App";
+// import Tts from "react-native-tts";
 
 const maxTime = 10;
 
@@ -133,6 +134,8 @@ const GameScreen = ({
     setTimeout(() => {
       subscribe();
     }, 500);
+
+    // readWorderbyte();
 
     return () => unsubscribe();
   }, []);
@@ -297,6 +300,10 @@ const GameScreen = ({
   };
 
   // #endregion
+
+  // const readWorderbyte = () => {
+  //   Tts.speak("Hello, world!");
+  // };
 
   //#region Game Actions
   const getWordToSubmit = () => {

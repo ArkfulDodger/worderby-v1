@@ -21,6 +21,7 @@ import GameScreen from "./src/screens/GameScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import AuthStack from "./src/navigators/AuthStack";
 import HomeStack from "./src/navigators/HomeStack";
+// import Tts from "react-native-tts";
 
 export const UserContext = React.createContext();
 export const EmulatorContext = React.createContext();
