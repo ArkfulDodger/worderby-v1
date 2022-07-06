@@ -27,7 +27,10 @@ class GamesController < ApplicationController
 
     new_game = Game.create!(used_params)
     if new_game
-      rand_word = Randword.get_random_word
+      rand_word =
+        used_params[:is_single_player] ? Randword.get_random_word : 'word'
+
+      # rand_word = Randword.get_random_word
       new_game.words.create!(text: rand_word, is_first_word: true)
       new_game.update(worderbyte: rand_word)
       render json: new_game, status: :created
