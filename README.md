@@ -1,4 +1,6 @@
-
+<p align="center">
+  <img width="700" alt="Worderby app mockup, showing logo screen and game screen" src="images/WorderbyImg.png">
+</p>
 
 # Worderby
 
