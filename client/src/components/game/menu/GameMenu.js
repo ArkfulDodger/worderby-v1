@@ -26,7 +26,15 @@ const GameMenu = ({
   return (
     <SafeAreaView style={styles.menuArea}>
       <View style={styles.menu}>
-        <View style={styles.buttonContainer}>
+        <View
+          style={{
+            flex: 1,
+            marginHorizontal: 10,
+            alignItems: "center",
+            width: 120,
+            opacity: backDisabled ? 0.4 : 1,
+          }}
+        >
           <PButton
             style={{
               width: 90,
@@ -43,7 +51,20 @@ const GameMenu = ({
             Home
           </PButton>
         </View>
-        <View style={styles.buttonContainer}>
+        <View
+          style={{
+            flex: 1,
+            marginHorizontal: 10,
+            alignItems: "center",
+            width: 120,
+            opacity:
+              game.is_over ||
+              (isPlayerTurn && !isReadyToContinue) ||
+              (!isPlayerTurn && isReadyToContinue)
+                ? 1
+                : 0.4,
+          }}
+        >
           {game.is_over ? (
             <NewGameButton
               onNewGame={onNewGame}
@@ -86,8 +107,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     marginHorizontal: 10,
-    // justifyContent: "center",
     alignItems: "center",
+    width: 120,
   },
   menu: {
     backgroundColor: "#FFD1A6",
@@ -98,6 +119,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 0,
+  },
+  inactive: {
+    opacity: 0.4,
   },
 });
 
