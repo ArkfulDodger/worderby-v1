@@ -1,8 +1,7 @@
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MjrI8v3S0LU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<p align="center">
+<a href="https://youtu.be/MjrI8v3S0LU"><p align="center">
   <img width="700" alt="Worderby app mockup, showing logo screen and game screen" src="images/WorderbyImg.png">
-</p>
+</p></a>
+<h1>Click Image for Demo Video</h1>
 
 # Worderby
 
