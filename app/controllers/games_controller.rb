@@ -28,7 +28,11 @@ class GamesController < ApplicationController
     new_game = Game.create!(used_params)
     if new_game
       rand_word =
-        used_params[:is_single_player] ? Randword.get_random_word : 'word'
+        if (used_params[:is_single_player] || used_params[:streak] > 1)
+          Randword.get_random_word
+        else
+          'word'
+        end
 
       # rand_word = Randword.get_random_word
       new_game.words.create!(text: rand_word, is_first_word: true)
