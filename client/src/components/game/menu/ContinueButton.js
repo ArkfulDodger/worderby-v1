@@ -14,6 +14,7 @@ const ContinueButton = ({
       onPress={onContinueGame}
       disabled={!isButtonActive}
       style={{
+        width: 120,
         justifyContent: "center",
         alignItems: "center",
         padding: 5,

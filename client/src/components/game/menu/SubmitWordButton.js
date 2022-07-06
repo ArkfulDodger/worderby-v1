@@ -12,7 +12,7 @@ const SubmitWordButton = ({ game, onWordSubmit }) => {
     <PButton
       onPress={onWordSubmit}
       style={{
-        // width: 120,
+        width: 120,
         justifyContent: "center",
         alignItems: "center",
         padding: 5,
